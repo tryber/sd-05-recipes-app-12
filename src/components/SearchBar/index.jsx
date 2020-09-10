@@ -1,26 +1,39 @@
-import React, { useContext } from 'react';
-import { RecipesContext } from '../../context/RecipesContext';
+import React, { useState } from 'react';
 
 const SearchBar = () => {
-  const {ingredient, name, firstLetter, setFirstLetter ,setName ,setIngredient } = useContext(RecipesContext);
+  const [ingredient, setIngredient] = useState('');
+  const [name, setName] = useState('');
+  const [firstLetter, setFirstLetter] = useState('');
+  const [search, setSearch] = useState('name');
+  const [filteredText, setfilteredText] = useState('');
 
-  const handleChange = (event) => {
-    const { id } = event.target;
-    if(id === 'ingredient') {
-      setIngredient(id);
-    }else if (id === 'name') {
-      setName(id);
+  async function handleClick(search) {
+    if (search === 'ingredient') {
+      const response =  await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${filteredText}`);
+      const data = await response.json();
+      console.log(data)
+      setIngredient(search);
+    }else if (search === 'name') {
+      const response =  await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${filteredText}`);
+      const data = await response.json();
+      console.log(data)
+      setName(search);
     } else {
-      setFirstLetter(id);
+      const response =  await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${filteredText}`);
+      const data = await response.json();
+      console.log(data)
+      setFirstLetter(search);
     }
   }
 
+  console.log(search);
+
   return (
     <div>
-      <input type="text" data-testid="search-input" />
+      <input type="text" data-testid="search-input" onChange={(e) => setfilteredText(e.target.value)}/>
       <label htmlFor="ingredient">
         Ingredient
-        <input type="radio" id="ingredient" value={ingredient} name="radioInput" data-testid="ingredient-search-radio" onClick={(event) => handleChange(event)} />
+        <input type="radio" id="ingredient" value={ingredient} name="radioInput" data-testid="ingredient-search-radio" onClick={(e) => setSearch(e.target.id)} />
       </label>
       <label htmlFor="name">
         Name
@@ -29,14 +42,14 @@ const SearchBar = () => {
           id="name"
           name="radioInput"
           value={name} data-testid="name-search-radio"
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => setSearch(e.target.id)}
         />
       </label>
       <label htmlFor="firstLetter">
         First Letter
-        <input type="radio" id="firstLetter" value={firstLetter} name="radioInput" data-testid="first-letter-search-radio" onChange={(e) => handleChange(e)} />
+        <input type="radio" id="firstLetter" value={firstLetter} name="radioInput" data-testid="first-letter-search-radio" onChange={(e) => setSearch(e.target.id)} />
       </label>
-      <button>Buscar</button>
+      <button type="button" onClick={() => handleClick(search)}>Buscar</button>
     </div>
   );
 };
