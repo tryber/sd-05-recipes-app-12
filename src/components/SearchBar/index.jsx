@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { RecipesContext } from '../../context/RecipesContext';
 
 const SearchBar = () => {
   const [ingredient, setIngredient] = useState('');
@@ -6,22 +7,23 @@ const SearchBar = () => {
   const [firstLetter, setFirstLetter] = useState('');
   const [search, setSearch] = useState('name');
   const [filteredText, setfilteredText] = useState('');
+  const { setData } = useContext(RecipesContext);
 
   async function handleClick(search) {
     if (search === 'ingredient') {
       const response =  await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${filteredText}`);
       const data = await response.json();
-      console.log(data)
+      setData(data);
       setIngredient(search);
     }else if (search === 'name') {
       const response =  await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${filteredText}`);
       const data = await response.json();
-      console.log(data)
+      setData(data);
       setName(search);
     } else {
       const response =  await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${filteredText}`);
       const data = await response.json();
-      console.log(data)
+      setData(data);
       setFirstLetter(search);
     }
   }

@@ -6,6 +6,7 @@ export const Provider = ({children}) => {
   const [ingredient, setIngredient] = useState('');
   const [name, setName] = useState('');
   const [firstLetter, setFirstLetter] = useState('');
+  const [data, setData] = useState([]);
 
   const context = {
     ingredient,
@@ -14,6 +15,8 @@ export const Provider = ({children}) => {
     setName,
     firstLetter,
     setFirstLetter,
+    data,
+    setData,
   }
 
   return (
