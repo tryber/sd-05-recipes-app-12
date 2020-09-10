@@ -8,6 +8,6 @@ const Routes = () => (
     <Route exact path="/" component={Login} />
     <Route path="/comidas" component={Comidas} />
   </Switch>
-)
+);
 
 export default Routes;
