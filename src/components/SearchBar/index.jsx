@@ -13,6 +13,7 @@ const SearchBar = () => {
     if (search === 'ingredient') {
       const response =  await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${filteredText}`);
       const data = await response.json();
+      console.log(data);
       setData(data);
       setIngredient(search);
     }else if (search === 'name') {
