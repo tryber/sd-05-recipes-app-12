@@ -6,52 +6,44 @@ const SearchBar = () => {
   const [name, setName] = useState('');
   const [firstLetter, setFirstLetter] = useState('');
   const [search, setSearch] = useState('name');
-  const [filteredText, setfilteredText] = useState('');
-  const { setData } = useContext(RecipesContext);
-
-  async function handleClick(search) {
-    if (search === 'ingredient') {
-      const response =  await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${filteredText}`);
-      const data = await response.json();
-      console.log(data);
-      setData(data);
-      setIngredient(search);
-    }else if (search === 'name') {
-      const response =  await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${filteredText}`);
+  const [filteredText, setText] = useState('');
+  const { setData, toggle } = useContext(RecipesContext);
+  async function handleClick(searchs) {
+    if (searchs === 'ingredient') {
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${filteredText}`);
       const data = await response.json();
       setData(data);
-      setName(search);
+      setIngredient(searchs);
+    } else if (searchs === 'name') {
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${filteredText}`);
+      const data = await response.json();
+      setData(data);
+      setName(searchs);
     } else {
-      const response =  await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${filteredText}`);
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${filteredText}`);
       const data = await response.json();
       setData(data);
-      setFirstLetter(search);
+      setFirstLetter(searchs);
     }
   }
-
-  console.log(search);
-
   return (
-    <div>
-      <input type="text" data-testid="search-input" onChange={(e) => setfilteredText(e.target.value)}/>
-      <label htmlFor="ingredient">
-        Ingredient
-        <input type="radio" id="ingredient" value={ingredient} name="radioInput" data-testid="ingredient-search-radio" onClick={(e) => setSearch(e.target.id)} />
-      </label>
-      <label htmlFor="name">
-        Name
-        <input
-          type="radio"
-          id="name"
-          name="radioInput"
-          value={name} data-testid="name-search-radio"
-          onChange={(e) => setSearch(e.target.id)}
-        />
-      </label>
-      <label htmlFor="firstLetter">
-        First Letter
-        <input type="radio" id="firstLetter" value={firstLetter} name="radioInput" data-testid="first-letter-search-radio" onChange={(e) => setSearch(e.target.id)} />
-      </label>
+    <div style={{ display: toggle }} >
+      <input type="text" data-testid="search-input" onChange={(e) => setText(e.target.value)} />
+      <label htmlFor="ingredient">Ingredient</label>
+      <input
+        type="radio" id="ingredient" value={ingredient} name="radioInput"
+        data-testid="ingredient-search-radio" onClick={(e) => setSearch(e.target.id)}
+      />
+      <label htmlFor="name">Name</label>
+      <input
+        type="radio" id="name" name="radioInput" value={name} data-testid="name-search-radio"
+        onChange={(e) => setSearch(e.target.id)}
+      />
+      <label htmlFor="firstLetter">First Letter</label>
+      <input
+        type="radio" id="firstLetter" value={firstLetter} name="radioInput"
+        data-testid="first-letter-search-radio" onChange={(e) => setSearch(e.target.id)}
+      />
       <button type="button" onClick={() => handleClick(search)}>Buscar</button>
     </div>
   );
