@@ -27,9 +27,7 @@ const SearchBar = () => {
       setFirstLetter(search);
     }
   }
-
-  console.log(search);
-
+  
   return (
     <div>
       <input type="text" data-testid="search-input" onChange={(e) => setfilteredText(e.target.value)}/>

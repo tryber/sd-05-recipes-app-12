@@ -6,7 +6,9 @@ import { RecipesContext } from '../../context/RecipesContext';
 
 const Comidas = () => {
   const { data } = useContext(RecipesContext);
-  console.log(`Esse é o data ${JSON.stringify(data)}`);
+  if (data.meals !== undefined) {
+    data.meals.map((meal) => console.log(meal));
+  }
   return (
     <div>
       <Header />
