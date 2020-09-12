@@ -18,13 +18,13 @@ const Header = () => {
           <h1>{title}</h1>
           <img src={searchIcon} alt="user" />
         </div>
-      : 
-      <div>
-      <Link to="/profile">
-        <img src={profileIcon} alt="user" />
-      </Link>
-      <h1>{title}</h1>
-      </div>
+      :
+        <div>
+        <Link to="/profile">
+          <img src={profileIcon} alt="user" />
+        </Link>
+        <h1>{title}</h1>
+        </div>
       }
     </div>
   );
