@@ -20,10 +20,10 @@ const Header = () => {
         </div>
       :
         <div>
-        <Link to="/profile">
-          <img src={profileIcon} alt="user" />
-        </Link>
-        <h1>{title}</h1>
+          <Link to="/profile">
+            <img src={profileIcon} alt="user" />
+          </Link>
+          <h1>{title}</h1>
         </div>
       }
     </div>

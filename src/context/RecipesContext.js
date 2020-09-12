@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export const RecipesContext = createContext();
 
-export const Provider = ( {children} ) => {
+export const Provider = ({ children }) => {
   const [ingredient, setIngredient] = useState('');
   const [name, setName] = useState('');
   const [firstLetter, setFirstLetter] = useState('');
@@ -29,4 +29,4 @@ export const Provider = ( {children} ) => {
 
 Provider.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};

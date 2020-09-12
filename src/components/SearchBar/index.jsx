@@ -9,24 +9,18 @@ const SearchBar = () => {
   const [filteredText, setText] = useState('');
   const { setData } = useContext(RecipesContext);
   async function handleClick(searchs) {
-    if (searchs === "ingredient") {
-      const response = await fetch(
-        `https://www.themealdb.com/api/json/v1/1/filter.php?i=${filteredText}`
-      );
+    if (searchs === 'ingredient') {
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${filteredText}`);
       const data = await response.json();
       setData(data);
       setIngredient(searchs);
-    } else if (searchs === "name") {
-      const response = await fetch(
-        `https://www.themealdb.com/api/json/v1/1/search.php?s=${filteredText}`
-      );
+    } else if (searchs === 'name') {
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${filteredText}`);
       const data = await response.json();
       setData(data);
       setName(searchs);
     } else {
-      const response = await fetch(
-        `https://www.themealdb.com/api/json/v1/1/search.php?f=${filteredText}`
-      );
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${filteredText}`);
       const data = await response.json();
       setData(data);
       setFirstLetter(searchs);
@@ -46,10 +40,10 @@ const SearchBar = () => {
         onChange={(e) => setSearch(e.target.id)}
       />
       <label htmlFor="firstLetter">First Letter</label>
-        <input
-          type="radio" id="firstLetter" value={firstLetter} name="radioInput"
-          data-testid="first-letter-search-radio" onChange={(e) => setSearch(e.target.id)}
-        />
+      <input
+        type="radio" id="firstLetter" value={firstLetter} name="radioInput"
+        data-testid="first-letter-search-radio" onChange={(e) => setSearch(e.target.id)}
+      />
       <button type="button" onClick={() => handleClick(search)}>Buscar</button>
     </div>
   );
