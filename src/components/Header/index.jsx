@@ -19,22 +19,22 @@ const Header = () => {
   };
   return (
     <div>
-      {(pathName === '/explorar/comidas/area' || pathName === '/comidas' || pathName === ' /bebidas') ?
+      {(pathName === '/explorar/comidas/area' || pathName === '/comidas' || pathName === '/bebidas' ) ?
         <div>
-          <Link to="/profile">
-            <img src={profileIcon} alt="user" />
+          <Link to="/perfil">
+            <input data-testid="profile-top-btn" type="image" src={profileIcon} alt="user" />
           </Link>
-          <h1>{title}</h1>
+          <h1 data-testid="page-title" >{title}</h1>
           <button type="button" onClick={() => handleClick()}>
-            <img src={searchIcon} alt="user" />
+            <input data-testid="search-top-btn" type="image" src={searchIcon} alt="user" />
           </button>
         </div>
       :
         <div>
-          <Link to="/profile">
-            <img src={profileIcon} alt="user" />
+          <Link to="/perfil">
+            <input data-testid="profile-top-btn" type="image" src={profileIcon} alt="user" />
           </Link>
-          <h1>{title}</h1>
+          <h1 data-testid="page-title" >{title}</h1>
         </div>
       }
     </div>

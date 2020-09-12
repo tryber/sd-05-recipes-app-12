@@ -27,8 +27,8 @@ const SearchBar = () => {
     }
   }
   return (
-    <div style={{ display: toggle }} >
-      <input type="text" data-testid="search-input" onChange={(e) => setText(e.target.value)} />
+    <div data-testid="search-input" style={{ display: toggle }} >
+      <input type="text" onChange={(e) => setText(e.target.value)} />
       <label htmlFor="ingredient">Ingredient</label>
       <input
         type="radio" id="ingredient" value={ingredient} name="radioInput"
@@ -44,7 +44,7 @@ const SearchBar = () => {
         type="radio" id="firstLetter" value={firstLetter} name="radioInput"
         data-testid="first-letter-search-radio" onChange={(e) => setSearch(e.target.id)}
       />
-      <button type="button" onClick={() => handleClick(search)}>Buscar</button>
+      <button type="button" data-testid="exec-search-btn" onClick={() => handleClick(search)}>Buscar</button>
     </div>
   );
 };

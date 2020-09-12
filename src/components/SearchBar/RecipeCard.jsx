@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 // import index from './index';
 import { RecipesContext } from '../../context/RecipesContext';
 
-
 const RecipeCard = () => {
   const { data } = useContext(RecipesContext);
   console.log(data);
@@ -11,14 +10,17 @@ const RecipeCard = () => {
     const test = data.meals.slice(0, 12);
     return (
       <div>
-        {
-          test.map((meal) =>
-            <div>
-              <div>{meal.strMeal}</div>
-              <img src={meal.strMealThumb} alt={meal.strMeal} width="200px" />
-            </div>,
-          )
-        }
+        {test.map((meal, index) => (
+          <div>
+            <img
+              data-testid={`${index}-card-img`}
+              src={meal.strMealThumb}
+              alt={meal.strMeal}
+              width="200px"
+            />
+            <div data-testid={`${index}-card-name`}>{meal.strMeal}</div>
+          </div>
+        ))}
       </div>
     );
   }
