@@ -8,7 +8,7 @@ export const Provider = ({ children }) => {
   const [name, setName] = useState('');
   const [firstLetter, setFirstLetter] = useState('');
   const [data, setData] = useState([]);
-
+  const [toggle, setToggle] = useState('none');
   const context = {
     ingredient,
     setIngredient,
@@ -18,6 +18,8 @@ export const Provider = ({ children }) => {
     setFirstLetter,
     data,
     setData,
+    toggle,
+    setToggle,
   };
 
   return (

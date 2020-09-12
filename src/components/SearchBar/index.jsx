@@ -7,7 +7,7 @@ const SearchBar = () => {
   const [firstLetter, setFirstLetter] = useState('');
   const [search, setSearch] = useState('name');
   const [filteredText, setText] = useState('');
-  const { setData } = useContext(RecipesContext);
+  const { setData, toggle } = useContext(RecipesContext);
   async function handleClick(searchs) {
     if (searchs === 'ingredient') {
       const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${filteredText}`);
@@ -27,7 +27,7 @@ const SearchBar = () => {
     }
   }
   return (
-    <div>
+    <div style={{ display: toggle }} >
       <input type="text" data-testid="search-input" onChange={(e) => setText(e.target.value)} />
       <label htmlFor="ingredient">Ingredient</label>
       <input

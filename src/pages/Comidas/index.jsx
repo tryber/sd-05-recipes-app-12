@@ -1,20 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
-import { RecipesContext } from '../../context/RecipesContext';
+import RecipeCard from '../../components/SearchBar/RecipeCard';
 
-
-const Comidas = () => {
-  const { data } = useContext(RecipesContext);
-  if (data.meals !== undefined) {
-    data.meals.map((meal) => console.log(meal));
-  }
+function Comidas() {
   return (
     <div>
       <Header />
       <SearchBar />
+      <RecipeCard />
     </div>
   );
-};
+}
 
 export default Comidas;
