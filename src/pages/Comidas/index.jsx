@@ -13,5 +13,5 @@ export function Comidas() {
   );
 }
 
-export const DetalhesComida=()=><div><RecipeCard /></div>
-export const DetalhesComidaProgress=()=><div>Oi</div>
+export const DetalhesComida = () => (<div><RecipeCard /></div>);
+export const DetalhesComidaProgress = () => <div>Oi</div>;
