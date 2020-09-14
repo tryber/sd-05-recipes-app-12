@@ -44,7 +44,7 @@ const SearchBar = () => {
         type="radio" id="firstLetter" value={firstLetter} name="radioInput"
         data-testid="first-letter-search-radio" onChange={(e) => setSearch(e.target.id)}
       />
-      <button type="button" onClick={() => handleClick(search)}>Buscar</button>
+      <button type="button" data-testid="exec-search-btn" onClick={() => handleClick(search)}>Buscar</button>
     </div>
   );
 };

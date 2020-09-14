@@ -12,10 +12,10 @@ const RecipeCard = () => {
     return (
       <div>
         {
-          test.map((meal) =>
-            <div>
-              <div>{meal.strMeal}</div>
-              <img src={meal.strMealThumb} alt={meal.strMeal} width="200px" />
+          test.map((meal, index) =>
+            <div key={meal.idMeal}>
+              <img data-testid={`${index}-card-img`} src={meal.strMealThumb} alt={meal.strMeal} width="200px" />
+              <div data-testid={`${index}-card-name`}>{meal.strMeal}</div>
             </div>,
           )
         }
