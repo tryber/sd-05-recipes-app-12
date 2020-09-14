@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
-import RecipeCard from '../../components/SearchBar/RecipeCard';
+import RecipeCard from '../../components/RecipeCard';
 
 export function Comidas() {
   return (
@@ -13,5 +13,5 @@ export function Comidas() {
   );
 }
 
-export const DetalhesComida = () => (<div><RecipeCard /></div>);
+export const DetalhesComida = () => (<h1>Olá</h1>);
 export const DetalhesComidaProgress = () => <div>Oi</div>;
