@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Login from './pages/Login';
+import MainPage from './pages/MainPage';
 import {
-  Comidas,
   DetalhesComida,
   DetalhesComidaProgress,
 } from './pages/Comidas';
@@ -28,8 +28,8 @@ const Routes = () => (
   <Switch>
     <Route exact path="/" component={Login} />
     <Route path="/perfil" component={Perfil} />
-    <Route path="/comidas" component={Comidas} />
-    <Route path="/comidas/:id" component={DetalhesComida} />
+    <Route path="/comidas" component={MainPage} />
+    <Route path="/comidas/:id/" component={DetalhesComida} />
     <Route path="/comidas/:id/progress" component={DetalhesComidaProgress} />
     <Route path="/bebidas" component={Bebidas} />
     <Route path="/bebidas/:id" component={DetalhesBebida} />
