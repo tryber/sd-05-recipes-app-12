@@ -15,7 +15,7 @@ const Perfil = () => {
       <Link to="/receitas-favoritas">
         <button data-testid="profile-favorite-btn">Receitas Favoritas</button>
       </Link>
-      <Link to="/" onClick={()=>{window.localStorage.clear()}}>
+      <Link to="/" onClick={() => { window.localStorage.clear(); }}>
         <button data-testid="profile-logout-btn">Sair</button>
       </Link>
     </div>
