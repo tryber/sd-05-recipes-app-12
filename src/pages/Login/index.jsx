@@ -11,7 +11,7 @@ const Login = () => {
   const Verify = () => !(regExTest && pass.length > 6);
 
   const setToken = () => {
-    const storeEmail = { email: `${email}` };
+    const storeEmail = { email };
     localStorage.setItem('user', JSON.stringify(storeEmail));
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
