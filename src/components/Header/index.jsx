@@ -5,9 +5,6 @@ import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 import { RecipesContext } from '../../context/RecipesContext';
 
-const linkPerfil = ()=>(<Link to="/perfil">
-<input data-testid="profile-top-btn" type="image" src={profileIcon} alt="user" />
-</Link>);
 
 const Header = () => {
   const url = useHistory();
@@ -23,17 +20,21 @@ const Header = () => {
   };
   return (
     <div>
-      {(pathName==='/explorar/comidas/area'||pathName==='/comidas'||pathName==='/bebidas') ?
+      {(pathName === '/explorar/comidas/area' || pathName === '/comidas' || pathName === '/bebidas') ?
         <div>
-          <linkPerfil />
+          <Link to="/perfil">
+            <input data-testid="profile-top-btn" type="image" src={profileIcon} alt="user" />
+          </Link>
           <h1 data-testid="page-title" >{title}</h1>
-          <button type="button" onClick={() => handleClick()}>
+          <button type="button" src={searchIcon} onClick={() => handleClick()}>
             <input data-testid="search-top-btn" type="image" src={searchIcon} alt="user" />
           </button>
         </div>
       :
         <div>
-          <linkPerfil />
+          <Link to="/perfil">
+            <input data-testid="profile-top-btn" type="image" src={profileIcon} alt="user" />
+          </Link>
           <h1 data-testid="page-title" >{title}</h1>
         </div>
       }
