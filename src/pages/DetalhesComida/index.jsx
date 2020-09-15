@@ -28,7 +28,6 @@ const DetalhesComida = () => {
   }, [setDataDetail, id, pathName]);
   if (dataDetail.length === 0) return <h1>loading...</h1>;
   const filtersKey = Object.keys(dataDetail.meals[0]).filter((key) => key.includes('strIngredient') && dataDetail.meals[0][key] !== null && dataDetail.meals[0][key] !== '');
-
   return (
     <div>
       <img
