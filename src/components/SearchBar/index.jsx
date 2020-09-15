@@ -28,9 +28,11 @@ const SearchBar = () => {
   const [search, setSearch] = useState('name');
   const [filteredText, setText] = useState('');
   const { setData, toggle } = useContext(RecipesContext);
+
+  if (!toggle) {
   return (
-    <div data-testid="search-input" style={{ display: toggle }} >
-      <input type="text" onChange={(e) => setText(e.target.value)} />
+    <div >
+      <input data-testid="search-input" type="text" onChange={(e) => setText(e.target.value)} />
       <label htmlFor="ingredient">Ingredient</label>
       <input
         type="radio" id="ingredient" value={ingredient} name="radioInput"
@@ -54,6 +56,9 @@ const SearchBar = () => {
       </button>
     </div>
   );
+  } else {
+    return <p>Categories</p>
+  }  
 };
 
 export default SearchBar;
