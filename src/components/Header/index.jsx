@@ -34,7 +34,8 @@ const Header = () => {
           <button
             data-testid="search-top-btn"
             type="button" src={searchIcon} onClick={() => handleClick()}>
-            <img src={searchIcon} alt="user" />
+            <img src={searchIcon} alt="user"
+          />
           </button>
         </div>
       :
