@@ -1,12 +1,9 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-// import index from './index';
 import { RecipesContext } from '../../context/RecipesContext';
 
 const RecipeCard = () => {
   const { data } = useContext(RecipesContext);
-  console.log(data);
-
   if (data.meals !== undefined) {
     const test = data.meals.slice(0, 12);
     return (
