@@ -19,10 +19,10 @@ const Header = () => {
   const title = headerTitle(pathName);
   const { toggle, setToggle } = useContext(RecipesContext);
   const handleClick = () => {
-    if (toggle === 'none') {
-      setToggle('block');
+    if (toggle === false) {
+      setToggle(true);
     } else {
-      setToggle('none');
+      setToggle(false);
     }
   };
   return (
@@ -31,8 +31,11 @@ const Header = () => {
         <div>
           <ProfileContainer />
           <h1 data-testid="page-title" >{title}</h1>
-          <button type="button" src={searchIcon} onClick={() => handleClick()}>
-            <input data-testid="search-top-btn" type="image" src={searchIcon} alt="user" />
+          <button
+            data-testid="search-top-btn"
+            type="button" src={searchIcon} onClick={() => handleClick()}
+          >
+            <img src={searchIcon} alt="user" />
           </button>
         </div>
       :
