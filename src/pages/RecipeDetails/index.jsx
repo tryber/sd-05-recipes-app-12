@@ -41,6 +41,8 @@ const DetalhesComida = () => {
       {filtersKey.map((filter, index) => (
         <p data-testid={`${index}-ingredient-name-and-measure`}>{dataDetail.meals[0][filter]} - {dataDetail.meals[0][`strMeasure${index + 1}`]}</p>
       ))}
+      <h1>Instructions</h1>
+      <p data-testid="instructions">{dataDetail.meals[0].strInstructions}</p>
     </div>
   )
 }
