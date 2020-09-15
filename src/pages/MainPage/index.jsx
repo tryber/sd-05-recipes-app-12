@@ -3,7 +3,7 @@ import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
 import RecipeCard from '../../components/RecipeCard';
 
-const MainPage = () => {
+function MainPage() {
   return (
     <div>
       <Header />
@@ -11,6 +11,6 @@ const MainPage = () => {
       <RecipeCard />
     </div>
   );
-}
+};
 
 export default MainPage;

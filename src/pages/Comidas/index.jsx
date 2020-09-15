@@ -13,5 +13,5 @@ export function Comidas() {
   );
 }
 
-export const DetalhesComida = () => (<div><h1>OLá Felipinho Lindu!!!! s2 muchas gracias </h1></div>);
+export const DetalhesComida = () => (<div></div>);
 export const DetalhesComidaProgress = () => <div>Oi</div>;
