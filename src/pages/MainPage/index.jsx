@@ -11,6 +11,6 @@ function MainPage() {
       <RecipeCard />
     </div>
   );
-};
+}
 
 export default MainPage;

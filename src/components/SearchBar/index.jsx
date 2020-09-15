@@ -1,33 +1,33 @@
 import React, { useState, useContext } from 'react';
 import { RecipesContext } from '../../context/RecipesContext';
 
+async function C(searchs, filteredText, setData) {
+  if (searchs === 'ingredient') {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${filteredText}`);
+    const data = await response.json();
+    setData(data);
+  }
+  if (searchs === 'name') {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${filteredText}`);
+    const data = await response.json();
+    setData(data);
+  }
+  if (searchs === 'firstLetter') {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${filteredText}`);
+    const data = await response.json();
+    setData(data);
+  }
+}
+
+// Criar Função para Bebidas
+
 const SearchBar = () => {
-  const [ingredient, setIngredient] = useState('');
-  const [name, setName] = useState('');
-  const [firstLetter, setFirstLetter] = useState('');
+  const [ingredient] = useState('');
+  const [name,] = useState('');
+  const [firstLetter] = useState('');
   const [search, setSearch] = useState('name');
   const [filteredText, setText] = useState('');
   const { setData, toggle } = useContext(RecipesContext);
-  async function C(searchs) {
-    if (searchs === 'ingredient') {
-      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${filteredText}`);
-      const data = await response.json();
-      setData(data);
-      setIngredient(searchs);
-    } 
-    if (searchs === 'name') {
-      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${filteredText}`);
-      const data = await response.json();
-      setData(data);
-      setName(searchs);
-    }
-    if (searchs === 'firstLetter') {
-      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${filteredText}`);
-      const data = await response.json();
-      setData(data);
-      setFirstLetter(searchs);
-    }
-  }
   return (
     <div data-testid="search-input" style={{ display: toggle }} >
       <input type="text" onChange={(e) => setText(e.target.value)} />
@@ -46,7 +46,7 @@ const SearchBar = () => {
         type="radio" id="firstLetter" value={firstLetter} name="radioInput"
         data-testid="first-letter-search-radio" onChange={(e) => setSearch(e.target.id)}
       />
-      <button type="button" data-testid="exec-search-btn" onClick={() => handleClick(search)}>Buscar</button>
+      <button type="button" data-testid="exec-search-btn" onClick={() => C(search, filteredText, setData)}>Buscar</button>
     </div>
   );
 };
