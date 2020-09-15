@@ -5,7 +5,7 @@ import MainPage from './pages/MainPage';
 import {
   DetalhesComidaProgress,
 } from './pages/Comidas';
-import DetalhesComida from './pages/RecipeDetails';
+import DetalhesComida from './pages/DetalhesComida';
 import Perfil from './pages/Profile';
 import {
   Bebidas,
