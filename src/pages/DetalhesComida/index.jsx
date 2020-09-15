@@ -9,8 +9,6 @@ const DetalhesComida = () => {
   const history = useHistory();
   const pathName = history.location.pathname;
   const { id } = useParams();
-  console.log(dataDetail);
-
   useEffect(() => {
     async function verify() {
       if (pathName === `/comidas/${id}`) {

@@ -1,13 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 // import index from './index';
 import { RecipesContext } from '../../context/RecipesContext';
 
 const RecipeCard = () => {
-  const { data } = useContext(RecipesContext);
-  console.log(data.meals);
-  if(data.meals === undefined) return <h1>Ainda não fez nenhuma Busca</h1>
-  
+  const { data, setData } = useContext(RecipesContext);
+  useEffect(() => {
+    async function apiFetch() {
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+      const datas = await response.json();
+      setData(datas);
+    }
+    apiFetch();
+  }, [setData]);
+  if(data.meals === undefined) return <h1>Loading...</h1>
   const test = data.meals.slice(0, 12);
   return (
     <div>

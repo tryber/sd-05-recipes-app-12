@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import { RecipesContext } from '../../context/RecipesContext';
-import Inputs from '../Inputs';
 
 async function C(searchs, filteredText, setData) {
   if (searchs === 'ingredient') {
