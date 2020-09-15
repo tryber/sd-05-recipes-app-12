@@ -7,14 +7,14 @@ const RecipeCard = () => {
 
   useEffect(() => {
     async function apiFetch() {
-      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=`);
-      const data = await response.json();
-      setData(data);
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+      const datas = await response.json();
+      setData(datas);
     }
     apiFetch();
   }, [setData]);
-  
-  if(data.meals === undefined) return <h1>Loading...</h1>
+
+  if (data.meals === undefined) return <h1>Loading...</h1>;
   const test = data.meals.slice(0, 12);
   return (
     <div>
