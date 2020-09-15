@@ -13,5 +13,4 @@ export function Comidas() {
   );
 }
 
-export const DetalhesComida = () => (<div><h1>Olá</h1></div>);
 export const DetalhesComidaProgress = () => <div>Oi</div>;

@@ -8,7 +8,9 @@ const Perfil = () => {
   return (
     <div>
       <Header />
-      <h2 data-testid="profile-email">{title.email}</h2>
+      { (title) &&
+        <h2 data-testid="profile-email">{title}</h2>
+      }
       <Link to="/receitas-feitas">
         <button data-testid="profile-done-btn">Receitas Feitas</button>
       </Link>

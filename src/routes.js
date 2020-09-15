@@ -3,9 +3,9 @@ import { Switch, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import MainPage from './pages/MainPage';
 import {
-  DetalhesComida,
   DetalhesComidaProgress,
 } from './pages/Comidas';
+import DetalhesComida from './pages/DetalhesComida';
 import Perfil from './pages/Profile';
 import {
   Bebidas,
