@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 // import index from './index';
 import { RecipesContext } from '../../context/RecipesContext';
 
@@ -11,15 +12,17 @@ const RecipeCard = () => {
     return (
       <div>
         {test.map((meal, index) => (
-          <div>
-            <img
-              data-testid={`${index}-card-img`}
-              src={meal.strMealThumb}
-              alt={meal.strMeal}
-              width="200px"
-            />
-            <div data-testid={`${index}-card-name`}>{meal.strMeal}</div>
-          </div>
+          <Link to={`/comidas/${meal.idMeal}`}>
+            <div>
+              <img
+                data-testid={`${index}-card-img`}
+                src={meal.strMealThumb}
+                alt={meal.strMeal}
+                width="200px"
+              />
+              <div data-testid={`${index}-card-name`}>{meal.strMeal}</div>
+            </div>
+          </Link>
         ))}
       </div>
     );
