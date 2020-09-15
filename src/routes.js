@@ -6,10 +6,10 @@ import {
   DetalhesComidaProgress,
 } from './pages/Comidas';
 import DetalhesComida from './pages/DetalhesComida';
+import DetalhesBebida from './pages/DetalhesBebida';
 import Perfil from './pages/Profile';
 import {
   Bebidas,
-  DetalhesBebida,
   DetalhesBebidaProgress,
 } from './pages/Bebidas';
 import {
