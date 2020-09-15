@@ -23,7 +23,7 @@ async function C(searchs, filteredText, setData) {
 
 const SearchBar = () => {
   const [ingredient] = useState('');
-  const [name,] = useState('');
+  const [name] = useState('');
   const [firstLetter] = useState('');
   const [search, setSearch] = useState('name');
   const [filteredText, setText] = useState('');
@@ -46,7 +46,12 @@ const SearchBar = () => {
         type="radio" id="firstLetter" value={firstLetter} name="radioInput"
         data-testid="first-letter-search-radio" onChange={(e) => setSearch(e.target.id)}
       />
-      <button type="button" data-testid="exec-search-btn" onClick={() => C(search, filteredText, setData)}>Buscar</button>
+      <button
+        type="button"
+        data-testid="exec-search-btn" onClick={() => C(search, filteredText, setData)}
+      >
+      Buscar
+      </button>
     </div>
   );
 };
