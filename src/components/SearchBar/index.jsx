@@ -5,19 +5,19 @@ async function C(searchs, filteredText, setData) {
   if (searchs === 'ingredient') {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${filteredText}`);
     const data = await response.json();
-    console.log(data)
+    console.log(data);
     setData(data);
   }
   if (searchs === 'name') {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${filteredText}`);
     const data = await response.json();
-    console.log(data)
+    console.log(data);
     setData(data);
   }
   if (searchs === 'firstLetter') {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${filteredText}`);
     const data = await response.json();
-    console.log(data)
+    console.log(data);
     setData(data);
   }
 }
