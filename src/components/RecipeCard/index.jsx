@@ -8,8 +8,8 @@ const RecipeCard = () => {
   useEffect(() => {
     async function apiFetch() {
       const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-      const data = await response.json();
-      setData(data);
+      const datas = await response.json();
+      setData(datas);
     }
     apiFetch();
   }, [setData]);
