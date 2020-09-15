@@ -1,9 +1,9 @@
 import React from 'react';
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
-import RecipeCard from '../../components/RecipeCard/';
+import RecipeCard from '../../components/RecipeCard';
 
-export function Comidas() {
+function MainPage() {
   return (
     <div>
       <Header />
@@ -13,5 +13,4 @@ export function Comidas() {
   );
 }
 
-export const DetalhesComida = () => (<div><h1>Olá</h1></div>);
-export const DetalhesComidaProgress = () => <div>Oi</div>;
+export default MainPage;
