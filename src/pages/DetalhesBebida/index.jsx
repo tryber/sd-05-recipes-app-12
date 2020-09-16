@@ -14,14 +14,14 @@ const DetalhesBebida = () => {
   useEffect(() => {
     async function verify() {
       if (pathName === `/comidas/${id}`) {
-        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
-        const data = await response.json();
-        setDataDetail(data);
+        const responses = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+        const datas = await responses.json();
+        setDataDetail(datas);
       }
       if (pathName === `/bebidas/${id}`) {
-        const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
-        const data = await response.json();
-        setDataDetail(data);
+        const responses = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+        const datas = await responses.json();
+        setDataDetail(datas);
       }
     }
     verify();
