@@ -61,7 +61,7 @@ const DetalhesComida = () => {
       <p data-testid="instructions">{dataDetail.strInstructions}</p>
       <h1>Vídeos</h1>
       <iframe
-        data-testid="video" width="200px" src={dataDetail.strYoutube &&
+        data-testid="video" title={dataDetail.strYoutube} width="200px" src={dataDetail.strYoutube &&
         dataDetail.strYoutube.replace('watch?v=', 'embed/')}
         frameBorder="0" allow="autoplay" allowFullScreen="true"
       />
