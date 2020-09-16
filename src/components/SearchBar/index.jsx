@@ -19,6 +19,34 @@ async function C(searchs, filteredText, setData) {
   }
 }
 
+function Inputs(setText, setSearch, C, search, filteredText, setData) {
+  return (
+    <div >
+    <input data-testid="search-input" type="text" onChange={(e) => setText(e.target.value)} />
+    <label htmlFor="ingredient">Ingredient</label>
+    <input
+      type="radio" id="ingredient" name="radioInput"
+      data-testid="ingredient-search-radio" onClick={(e) => setSearch(e.target.id)}
+    />
+    <label htmlFor="name">Name</label>
+    <input
+      type="radio" id="name" name="radioInput" data-testid="name-search-radio"
+      onChange={(e) => setSearch(e.target.id)}
+    />
+    <label htmlFor="firstLetter">First Letter</label>
+    <input
+      type="radio" id="firstLetter" name="radioInput"
+      data-testid="first-letter-search-radio" onChange={(e) => setSearch(e.target.id)}
+    />
+    <button 
+      type="button" data-testid="exec-search-btn" onClick={() => C(search, filteredText, setData)}
+    >
+    Buscar
+    </button>
+  </div>
+  );
+}
+
 async function updateCategory(catFilter, setData) {
   if (catFilter === 'All') {
     const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
@@ -33,9 +61,6 @@ async function updateCategory(catFilter, setData) {
 
 // Criar Função para Bebidas
 const SearchBar = () => {
-  const [ingredient] = useState('');
-  const [name] = useState('');
-  const [firstLetter] = useState('');
   const [search, setSearch] = useState('name');
   const [filteredText, setText] = useState('');
   const { setData, toggle, categories, setCategories } = useContext(RecipesContext);
@@ -52,48 +77,23 @@ const SearchBar = () => {
 
   if (!toggle) {
     return (
-      <div >
-        <input data-testid="search-input" type="text" onChange={(e) => setText(e.target.value)} />
-        <label htmlFor="ingredient">Ingredient</label>
-        <input
-          type="radio" id="ingredient" value={ingredient} name="radioInput"
-          data-testid="ingredient-search-radio" onClick={(e) => setSearch(e.target.id)}
-        />
-        <label htmlFor="name">Name</label>
-        <input
-          type="radio" id="name" name="radioInput" value={name} data-testid="name-search-radio"
-          onChange={(e) => setSearch(e.target.id)}
-        />
-        <label htmlFor="firstLetter">First Letter</label>
-        <input
-          type="radio" id="firstLetter" value={firstLetter} name="radioInput"
-          data-testid="first-letter-search-radio" onChange={(e) => setSearch(e.target.id)}
-        />
-        <button
-          type="button"
-          data-testid="exec-search-btn" onClick={() => C(search, filteredText, setData)}
-        >
-        Buscar
-        </button>
-      </div>
+      Inputs(setText, setSearch, C, search, filteredText, setData)
     );
   }
   return (
     <div>
-      <button
-        value="All"
-        data-testid="All-category-filter"
+      <button 
+        value="All" data-testid="All-category-filter"
         onClick={(e) => updateCategory(e.target.value, setData)}
       >
       All
       </button>
       {(categories !== undefined) && categories.map((category) => (
         <button
-          data-testid={`${category.strCategory}-category-filter`}
-          value={Object.values(category)}
+          data-testid={`${category.strCategory}-category-filter`} value={Object.values(category)}
           onClick={(e) => updateCategory(e.target.value, setData)}
         >
-        {category.strCategory}
+          {category.strCategory}
         </button>
       ))}
     </div>

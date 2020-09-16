@@ -14,7 +14,13 @@ const RecipeCard = () => {
     apiFetch();
   }, [setData]);
   if (data.meals === undefined) return <h1>Loading...</h1>;
-  const test = data.meals.slice(0, 12);
+  let test;
+  if (data.meals === null) {
+    alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    test = [];
+  } else {
+    test = data.meals.slice(0, 12);
+  }
   return (
     <div>
       {test.map((meal, index) => (
