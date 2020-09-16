@@ -8,6 +8,7 @@ export const Provider = ({ children }) => {
   const [name, setName] = useState('');
   const [firstLetter, setFirstLetter] = useState('');
   const [data, setData] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [dataDetail, setDataDetail] = useState([]);
   const [toggle, setToggle] = useState(true);
   const [ meal, setMeal ] = useState([]);
@@ -18,6 +19,8 @@ export const Provider = ({ children }) => {
     setName,
     firstLetter,
     setFirstLetter,
+    categories,
+    setCategories,
     data,
     setData,
     dataDetail,
