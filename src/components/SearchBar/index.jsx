@@ -40,7 +40,8 @@ function Inputs({ setText, setSearch, HC, search, filteredText, setData }) {
         data-testid="first-letter-search-radio" onChange={(e) => setSearch(e.target.id)}
       />
       <button
-        type="button" data-testid="exec-search-btn" onClick={() => HC(search, filteredText, setData)}
+        type="button"
+        data-testid="exec-search-btn" onClick={() => HC(search, filteredText, setData)}
       >
       Buscar
       </button>
@@ -105,10 +106,19 @@ const SearchBar = () => {
 export default SearchBar;
 
 SearchBar.propTypes = {
-  setData: PropTypes.array.isRequired,
-  filteredText: PropTypes.string.isRequired,
-  search: PropTypes.string.isRequired,
-  HC: PropTypes.func.isRequired,
-  setSearch: PropTypes.func.isRequired,
-  setText: PropTypes.func.isRequired,
+  setData: PropTypes.arrayOf(PropTypes.object),
+  filteredText: PropTypes.string,
+  search: PropTypes.string,
+  HC: PropTypes.func,
+  setSearch: PropTypes.func,
+  setText: PropTypes.func,
+};
+
+Inputs.propTypes = {
+  setData: PropTypes.arrayOf(PropTypes.object),
+  filteredText: PropTypes.string,
+  search: PropTypes.string,
+  HC: PropTypes.func,
+  setSearch: PropTypes.func,
+  setText: PropTypes.func,
 };
