@@ -14,34 +14,35 @@ const DetalhesComidaProgress = () => {
       if (pathName === `/comidas/${id}`) {
         const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
         const data = await response.json();
-        setDataDetail(data);
+        setDataDetail(data.meals[0]);
       }
       if (pathName === `/bebidas/${id}`) {
         const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
         const data = await response.json();
-        setDataDetail(data);
+        setDataDetail(data.meals[0]);
       }
     }
     verify();
   }, [setDataDetail, id, pathName]);
+  console.log(dataDetail)
   if (dataDetail.length === 0) return <h1>loading...</h1>;
-  const filtersKey = Object.keys(dataDetail.meals[0]).filter((key) => key.includes('strIngredient') && dataDetail.meals[0][key] !== '');
+  const filtersKey = Object.keys(dataDetail).filter((key) => key.includes('strIngredient') && dataDetail[key] !== '');
   return (
     <div>
       <img
-        data-testid="recipe-photo" src={dataDetail.meals[0].strMealThumb}
-        width="200px" height="150px" alt={dataDetail.meals[0].strMeal}
+        data-testid="recipe-photo" src={dataDetail.strMealThumb}
+        width="200px" height="150px" alt={dataDetail.strMeal}
       />
-      <h1 data-testid="recipe-title">{dataDetail.meals[0].strMeal}</h1>
-      <span data-testid="recipe-category">{dataDetail.meals[0].strCategory}</span>
+      <h1 data-testid="recipe-title">{dataDetail.strMeal}</h1>
+      <span data-testid="recipe-category">{dataDetail.strCategory}</span>
       <img src={shareIcon} data-testid="share-btn" alt="Share Icon" />
       <img src={whiteHeartIcon} data-testid="favorite-btn" alt="White Heart Icon" />
       <h1>Ingredients</h1>
       {filtersKey.map((filter, index) => (
-        <p data-testid={`${index}-ingredient-name-and-measure`}>{dataDetail.meals[0][filter]} - {dataDetail.meals[0][`strMeasure${index + 1}`]}</p>
+        <p data-testid={`${index}-ingredient-name-and-measure`}>{dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}</p>
       ))}
       <h1>Instructions</h1>
-      <p data-testid="instructions">{dataDetail.meals[0].strInstructions}</p>
+      <p data-testid="instructions">{dataDetail.strInstructions}</p>
       <button data-testid="finish-recipe-btn" type="button">Finalizar Receita</button>
     </div>
   );

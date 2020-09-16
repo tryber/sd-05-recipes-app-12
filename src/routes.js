@@ -4,10 +4,10 @@ import Login from './pages/Login';
 import MainPage from './pages/MainPage';
 import DetalhesComidaProgress from './pages/DetalhesComidaProgress';
 import DetalhesComida from './pages/DetalhesComida';
+import DetalhesBebida from './pages/DetalhesBebida';
 import Perfil from './pages/Profile';
 import {
   Bebidas,
-  DetalhesBebida,
   DetalhesBebidaProgress,
 } from './pages/Bebidas';
 import {
