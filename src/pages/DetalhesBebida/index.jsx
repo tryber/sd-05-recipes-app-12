@@ -21,34 +21,34 @@ const DetalhesBebida = () => {
       if (pathName === `/bebidas/${id}`) {
         const responses = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
         const datas = await responses.json();
-        setDataDetail(datas);
+        setDataDetail(datas.drinks[0]);
       }
     }
     verify();
   }, [setDataDetail, id, pathName]);
   if (dataDetail.length === 0) return <h1>loading...</h1>;
-  const filtersKey = Object.keys(dataDetail.drinks[0]).filter(
-    (key) => key.includes('strIngredient') && dataDetail.drinks[0][key] !== null && dataDetail.drinks[0][key] !== '');
+  const filtersKey = Object.keys(dataDetail).filter(
+    (keys) => keys.includes('strIngredient') && dataDetail[keys] !== null && dataDetail[keys] !== '');
 
   return (
     <div>
       <img
-        data-testid="recipe-photo" src={dataDetail.drinks[0].strDrinkThumb}
-        width="200px" height="150px" alt={dataDetail.drinks[0].strDrink}
+        data-testid="recipe-photo" src={dataDetail.strDrinkThumb}
+        width="200px" height="150px" alt={dataDetail.strDrink}
       />
-      <h1 data-testid="recipe-title">{dataDetail.drinks[0].strDrink}</h1>
-      <span data-testid="recipe-category"> {dataDetail.drinks[0].strCategory} </span>
+      <h1 data-testid="recipe-title">{dataDetail.strDrink}</h1>
+      <span data-testid="recipe-category"> {dataDetail.strCategory} </span>
       <img src={shareIcon} data-testid="share-btn" alt="Share Icon" />
       <img src={whiteHeartIcon} data-testid="share-btn" alt="White Heart Icon" />
       <h1>Ingredients</h1>
       {filtersKey.map((filter, index) => (
         <p data-testid={`${index}-ingredient-name-and-measure`}>
-          {dataDetail.drinks[0][filter]} -{' '} {dataDetail.drinks[0][`strMeasure${index + 1}`]}{' '}
-          <img src={`https://www.thecocktaildb.com/images/ingredients/${dataDetail.drinks[0][filter].toLowerCase()}-Small.png`} alt={dataDetail.drinks[0][filter]} />
+          {dataDetail[filter]} -{' '} {dataDetail[`strMeasure${index + 1}`]}{' '}
+          <img src={`https://www.thecocktaildb.com/images/ingredients/${dataDetail[filter].toLowerCase()}-Small.png`} alt={dataDetail[filter]} />
         </p>
       ))}
       <h1>Instructions</h1>
-      <p data-testid="instructions">{dataDetail.drinks[0].strInstructions}</p>
+      <p data-testid="instructions">{dataDetail.strInstructions}</p>
     </div>
   );
 };

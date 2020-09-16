@@ -4,7 +4,6 @@ import { RecipesContext } from '../../context/RecipesContext';
 
 const RecipeCard = () => {
   const { data, setData } = useContext(RecipesContext);
-
   useEffect(() => {
     async function apiFetch() {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
@@ -13,14 +12,19 @@ const RecipeCard = () => {
     }
     apiFetch();
   }, [setData]);
-
   if (data.drinks === undefined) return <h1>Loading...</h1>;
-  const test = data.drinks.slice(0, 12);
+  let test;
+  if (data.drinks === null) {
+    alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    test = [];
+  } else {
+    test = data.drinks.slice(0, 12);
+  }
   return (
     <div>
       {test.map((drink, index) => (
-        <Link to={`/bebidas/${drink.idDrink}`}>
-          <div data-testid={`${index}-recipe-card`}>
+        <Link to={`/comidas/${drink.idDrink}`}>
+          <div data-testid={`${index}-recipe-card`} key={drink.idDrink}>
             <img
               data-testid={`${index}-card-img`}
               src={drink.strDrinkThumb}

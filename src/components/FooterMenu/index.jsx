@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { drinkIcon, exploreIcon, mealIcon } from '../images';
+import drinkIcon from '../../images/drinkIcon.svg';
+import exploreIcon from '../../images/exploreIcon.svg';
+import mealIcon from '../../images/mealIcon.svg';
 
-const BottomMenu = () => (
+const Footer = () => (
   <footer className="footer" data-testid="footer" >
     <Link className="btn" to="/bebidas">
       <img src={drinkIcon} alt="drink-icon" data-testid="drinks-bottom-btn" />
@@ -16,4 +18,4 @@ const BottomMenu = () => (
   </footer>
 );
 
-export default BottomMenu;
+export default Footer;
