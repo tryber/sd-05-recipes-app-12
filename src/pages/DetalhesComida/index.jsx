@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, Link } from 'react-router-dom';
 import { RecipesContext } from '../../context/RecipesContext';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
@@ -9,8 +9,6 @@ const DetalhesComida = () => {
   const history = useHistory();
   const pathName = history.location.pathname;
   const { id } = useParams();
-  console.log(dataDetail);
-
   useEffect(() => {
     async function verify() {
       if (pathName === `/comidas/${id}`) {
@@ -44,6 +42,10 @@ const DetalhesComida = () => {
       ))}
       <h1>Instructions</h1>
       <p data-testid="instructions">{dataDetail.meals[0].strInstructions}</p>
+      <h1>Vídeos</h1>
+      <Link>
+        <video width="320" height="240" controls />
+      </Link>
     </div>
   );
 };

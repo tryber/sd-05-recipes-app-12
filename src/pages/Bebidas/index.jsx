@@ -3,7 +3,7 @@ import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
 import DrinkCard from '../../components/DrinkCard';
 
-export const Bebidas = () => (
+const Bebidas = () => (
   <div>
     <Header />
     <SearchBar />
@@ -11,6 +11,4 @@ export const Bebidas = () => (
   </div>
 );
 
-export const DetalhesBebidaProgress = () => <div>oi</div>;
-
-// id 15997
+export default Bebidas;
