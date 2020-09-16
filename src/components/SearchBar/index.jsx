@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import { RecipesContext } from '../../context/RecipesContext';
 
 async function C(searchs, filteredText, setData) {
-  
   if (searchs === 'ingredient') {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${filteredText}`);
     const data = await response.json();
@@ -17,19 +16,19 @@ async function C(searchs, filteredText, setData) {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${filteredText}`);
     const data = await response.json();
     setData(data);
-  };
+  }
 }
 
 async function updateCategory(catFilter, setData) {
-  if(catFilter === 'All') {
-    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=`);
+  if (catFilter === 'All') {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
     const data = await response.json();
     setData(data);
   } else {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${catFilter}`);
     const data = await response.json();
     setData(data);
-  };
+  }
 }
 
 // Criar Função para Bebidas
@@ -40,7 +39,7 @@ const SearchBar = () => {
   const [search, setSearch] = useState('name');
   const [filteredText, setText] = useState('');
   const { setData, toggle, categories, setCategories } = useContext(RecipesContext);
-  
+
   useEffect(() => {
     async function getCategories() {
       const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
@@ -50,7 +49,7 @@ const SearchBar = () => {
     }
     getCategories();
   }, [setCategories]);
-  
+
   if (!toggle) {
     return (
       <div >
@@ -81,11 +80,23 @@ const SearchBar = () => {
   }
   return (
     <div>
-      <button value="All" data-testid="All-category-filter" onClick={(e) => updateCategory(e.target.value, setData)}>All</button>
-      {(categories !== undefined) && categories.map((category) =>(
-        <button data-testid={`${category.strCategory}-category-filter`} value={Object.values(category)} onClick={(e) => updateCategory(e.target.value, setData)}>{category.strCategory}</button>
+      <button
+        value="All"
+        data-testid="All-category-filter"
+        onClick={(e) => updateCategory(e.target.value, setData)}
+      >
+      All
+      </button>
+      {(categories !== undefined) && categories.map((category) => (
+        <button
+          data-testid={`${category.strCategory}-category-filter`}
+          value={Object.values(category)}
+          onClick={(e) => updateCategory(e.target.value, setData)}
+        >
+        {category.strCategory}
+        </button>
       ))}
-    </div>  
+    </div>
   );
 };
 
