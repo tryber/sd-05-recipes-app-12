@@ -41,7 +41,7 @@ const DetalhesComida = () => {
         <p data-testid={`${index}-ingredient-name-and-measure`}>{dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]} <img src={`https://www.themealdb.com/images/ingredients/${dataDetail[filter].toLowerCase()}-Small.png`} alt={dataDetail[filter]} /></p>
       ))}
       <h1>Instructions</h1>
-      <p data-testid="instructions">{dataDetail.strInstructions}</p> 
+      <p data-testid="instructions">{dataDetail.strInstructions}</p>
       <h1>Vídeos</h1>
       <Link>
         <iframe
