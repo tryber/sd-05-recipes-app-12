@@ -74,7 +74,7 @@ const DetalhesComida = () => {
        ))}     
       <Link to={`/comidas/${id}/progress`}>
         <input type="button" data-testid="start-recipe-btn" value="Iniciar Receitas" />           
-      </Link>  
+      </Link>
     </div>
   );
 };
