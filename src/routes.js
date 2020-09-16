@@ -8,7 +8,7 @@ import {
 import DetalhesComida from './pages/DetalhesComida';
 import DetalhesBebida from './pages/DetalhesBebida';
 import Perfil from './pages/Profile';
-import  Bebidas from './pages/Bebidas';
+import Bebidas from './pages/Bebidas';
 import {
   NotFound,
   Explorar,

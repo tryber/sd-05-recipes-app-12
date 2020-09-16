@@ -105,20 +105,11 @@ const SearchBar = () => {
 
 export default SearchBar;
 
-SearchBar.propTypes = {
-  setData: PropTypes.arrayOf(PropTypes.object),
-  filteredText: PropTypes.string,
-  search: PropTypes.string,
-  HC: PropTypes.func,
-  setSearch: PropTypes.func,
-  setText: PropTypes.func,
-};
-
 Inputs.propTypes = {
-  setData: PropTypes.arrayOf(PropTypes.object),
-  filteredText: PropTypes.string,
-  search: PropTypes.string,
-  HC: PropTypes.func,
-  setSearch: PropTypes.func,
-  setText: PropTypes.func,
+  setData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  filteredText: PropTypes.string.isRequired,
+  search: PropTypes.string.isRequired,
+  HC: PropTypes.func.isRequired,
+  setSearch: PropTypes.func.isRequired,
+  setText: PropTypes.func.isRequired,
 };
