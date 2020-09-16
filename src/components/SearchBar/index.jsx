@@ -19,8 +19,6 @@ async function C(searchs, filteredText, setData) {
   }
 }
 
-
-
 function Inputs({setText, setSearch, C, search, filteredText, setData}) {
   return (
     <div >
@@ -78,7 +76,7 @@ const SearchBar = () => {
   }, [setCategories]);
 
   if (!toggle) {
-    const params = {setText, setSearch, C, search, filteredText, setData}
+    const params = {setText, setSearch, C, search, filteredText, setData};
     return (
       Inputs(params)
     );
