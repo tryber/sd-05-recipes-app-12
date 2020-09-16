@@ -7,7 +7,7 @@ export const Bebidas = () => (
   </div>
 );
 export const DetalhesBebida = () => <div>Oi</div>;
-export const DetalhesBebidaProgress = () => <div>oi</div>;
+export const DetalhesBebidaProgress = () => <div>oi tela de DetalhesBebidaProgress</div>;
 
 
 // id 15997

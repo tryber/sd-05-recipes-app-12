@@ -12,5 +12,3 @@ export function Comidas() {
     </div>
   );
 }
-
-export const DetalhesComidaProgress = () => <div>Oi</div>;
