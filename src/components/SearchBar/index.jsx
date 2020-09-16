@@ -1,37 +1,56 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { RecipesContext } from '../../context/RecipesContext';
 
 async function C(searchs, filteredText, setData) {
+  
   if (searchs === 'ingredient') {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${filteredText}`);
     const data = await response.json();
-    console.log(data);
     setData(data);
   }
   if (searchs === 'name') {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${filteredText}`);
     const data = await response.json();
-    console.log(data);
     setData(data);
   }
   if (searchs === 'firstLetter') {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${filteredText}`);
     const data = await response.json();
-    console.log(data);
     setData(data);
   }
 }
 
-// Criar Função para Bebidas
+async function updateCategory(catFilter, setData) {
+  if(catFilter === 'All') {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=`);
+    const data = await response.json();
+    setData(data);
+  } else {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${catFilter}`);
+    const data = await response.json();
+    setData(data);
+  };
+}
 
+// Criar Função para Bebidas
 const SearchBar = () => {
   const [ingredient] = useState('');
   const [name] = useState('');
   const [firstLetter] = useState('');
   const [search, setSearch] = useState('name');
   const [filteredText, setText] = useState('');
-  const { setData, toggle } = useContext(RecipesContext);
-
+  const { setData, toggle, categories, setCategories } = useContext(RecipesContext);
+  
+  useEffect(() => {
+    async function getCategories() {
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+      const data = await response.json();
+      const cat = data.meals.slice(0, 5);
+      setCategories(cat);
+    }
+    getCategories();
+  }, [setCategories]);
+  
   if (!toggle) {
     return (
       <div >
@@ -60,7 +79,14 @@ const SearchBar = () => {
       </div>
     );
   }
-  return <p>Categories</p>;
+  return (
+    <div>
+      <button value="All" data-testid="All-category-filter" onClick={(e) => updateCategory(e.target.value, setData)}>All</button>
+      {(categories !== undefined) && categories.map((category) =>(
+        <button data-testid={`${category.strCategory}-category-filter`} value={Object.values(category)} onClick={(e) => updateCategory(e.target.value, setData)}>{category.strCategory}</button>
+      ))}
+    </div>  
+  );
 };
 
 export default SearchBar;

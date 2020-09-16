@@ -9,5 +9,4 @@ export const Bebidas = () => (
 export const DetalhesBebida = () => <div>Oi</div>;
 export const DetalhesBebidaProgress = () => <div>oi</div>;
 
-
 // id 15997
