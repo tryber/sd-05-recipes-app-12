@@ -19,7 +19,9 @@ async function C(searchs, filteredText, setData) {
   }
 }
 
-function Inputs(setText, setSearch, search, filteredText, setData) {
+
+
+function Inputs({setText, setSearch, C, search, filteredText, setData}) {
   return (
     <div >
       <input data-testid="search-input" type="text" onChange={(e) => setText(e.target.value)} />
@@ -76,8 +78,9 @@ const SearchBar = () => {
   }, [setCategories]);
 
   if (!toggle) {
+    const params = {setText, setSearch, C, search, filteredText, setData}
     return (
-      Inputs(setText, setSearch, C, search, filteredText, setData)
+      Inputs(params)
     );
   }
   return (

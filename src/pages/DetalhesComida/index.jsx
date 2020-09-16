@@ -25,8 +25,7 @@ const DetalhesComida = () => {
     verify();
   }, [setDataDetail, id, pathName]);
   if (dataDetail.length === 0) return <h1>loading...</h1>;
-  const filtersKey = Object.keys(dataDetail.meals[0]).filter((key) => key.includes('strIngredient') && dataDetail.meals[0][key] !== '');
-
+  const filtersKey = Object.keys(dataDetail.meals[0]).filter((key) => key.includes('strIngredient') && dataDetail.meals[0][key] !== null && dataDetail.meals[0][key] !== '');
   return (
     <div>
       <img
@@ -39,7 +38,7 @@ const DetalhesComida = () => {
       <img src={whiteHeartIcon} data-testid="share-btn" alt="White Heart Icon" />
       <h1>Ingredients</h1>
       {filtersKey.map((filter, index) => (
-        <p data-testid={`${index}-ingredient-name-and-measure`}>{dataDetail.meals[0][filter]} - {dataDetail.meals[0][`strMeasure${index + 1}`]}</p>
+        <p data-testid={`${index}-ingredient-name-and-measure`}>{dataDetail.meals[0][filter]} - {dataDetail.meals[0][`strMeasure${index + 1}`]} <img src={`https://www.themealdb.com/images/ingredients/${dataDetail.meals[0][filter].toLowerCase()}-Small.png`} alt={dataDetail.meals[0][filter]} /></p>
       ))}
       <h1>Instructions</h1>
       <p data-testid="instructions">{dataDetail.meals[0].strInstructions}</p>
