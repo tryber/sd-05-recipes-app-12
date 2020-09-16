@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { RecipesContext } from '../../context/RecipesContext';
 
 async function C(searchs, filteredText, setData) {
@@ -19,7 +20,7 @@ async function C(searchs, filteredText, setData) {
   }
 }
 
-function Inputs({setText, setSearch, C, search, filteredText, setData}) {
+function Inputs({ setText, setSearch, HC, search, filteredText, setData }) {
   return (
     <div >
       <input data-testid="search-input" type="text" onChange={(e) => setText(e.target.value)} />
@@ -39,7 +40,7 @@ function Inputs({setText, setSearch, C, search, filteredText, setData}) {
         data-testid="first-letter-search-radio" onChange={(e) => setSearch(e.target.id)}
       />
       <button
-        type="button" data-testid="exec-search-btn" onClick={() => C(search, filteredText, setData)}
+        type="button" data-testid="exec-search-btn" onClick={() => HC(search, filteredText, setData)}
       >
       Buscar
       </button>
@@ -76,7 +77,7 @@ const SearchBar = () => {
   }, [setCategories]);
 
   if (!toggle) {
-    const params = {setText, setSearch, C, search, filteredText, setData};
+    const params = { setText, setSearch, C, search, filteredText, setData };
     return (
       Inputs(params)
     );
@@ -102,3 +103,12 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
+
+SearchBar.propTypes = {
+  setData: PropTypes.array.isRequired,
+  filteredText: PropTypes.string.isRequired,
+  search: PropTypes.string.isRequired,
+  HC: PropTypes.func.isRequired,
+  setSearch: PropTypes.func.isRequired,
+  setText: PropTypes.func.isRequired,
+};
