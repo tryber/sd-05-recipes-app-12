@@ -17,7 +17,7 @@ async function C(searchs, filteredText, setData) {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${filteredText}`);
     const data = await response.json();
     setData(data);
-  }
+  };
 }
 
 async function updateCategory(catFilter, setData) {
