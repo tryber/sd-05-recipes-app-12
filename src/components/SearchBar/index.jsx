@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { RecipesContext } from '../../context/RecipesContext';
 
-async function C(searchs, filteredText, setData) {
+async function FHC(searchs, filteredText, setData) {
   if (searchs === 'ingredient') {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${filteredText}`);
     const data = await response.json();
@@ -20,7 +20,7 @@ async function C(searchs, filteredText, setData) {
   }
 }
 
-function Inputs({ setText, setSearch, HC, search, filteredText, setData }) {
+function Inputs({ setText, setSearch, search, filteredText, setData }) {
   return (
     <div >
       <input data-testid="search-input" type="text" onChange={(e) => setText(e.target.value)} />
@@ -41,7 +41,7 @@ function Inputs({ setText, setSearch, HC, search, filteredText, setData }) {
       />
       <button
         type="button"
-        data-testid="exec-search-btn" onClick={() => HC(search, filteredText, setData)}
+        data-testid="exec-search-btn" onClick={() => FHC(search, filteredText, setData)}
       >
       Buscar
       </button>
@@ -78,7 +78,7 @@ const SearchBar = () => {
   }, [setCategories]);
 
   if (!toggle) {
-    const params = { setText, setSearch, C, search, filteredText, setData };
+    const params = { setText, setSearch, FHC, search, filteredText, setData };
     return (
       Inputs(params)
     );
@@ -109,7 +109,6 @@ Inputs.propTypes = {
   setData: PropTypes.arrayOf(PropTypes.object).isRequired,
   filteredText: PropTypes.string.isRequired,
   search: PropTypes.string.isRequired,
-  HC: PropTypes.func.isRequired,
   setSearch: PropTypes.func.isRequired,
   setText: PropTypes.func.isRequired,
 };

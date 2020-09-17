@@ -2,9 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import MainPage from './pages/MainPage';
-import {
-  DetalhesComidaProgress,
-} from './pages/Comidas';
+import DetalhesComidaProgress from './pages/DetalhesComidaProgress';
 import DetalhesComida from './pages/DetalhesComida';
 import DetalhesBebida from './pages/DetalhesBebida';
 import Perfil from './pages/Profile';

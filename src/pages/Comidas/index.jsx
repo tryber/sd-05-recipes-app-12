@@ -3,7 +3,7 @@ import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
 import RecipeCard from '../../components/RecipeCard/';
 
-export function Comidas() {
+function Comidas() {
   return (
     <div>
       <Header />
@@ -13,4 +13,4 @@ export function Comidas() {
   );
 }
 
-export const DetalhesComidaProgress = () => <div>Oi</div>;
+export default Comidas;
