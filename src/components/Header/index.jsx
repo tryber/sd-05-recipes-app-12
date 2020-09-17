@@ -16,11 +16,11 @@ function ProfileContainer() {
 const Header = () => {
   const url = useHistory();
   const pathName = url.location.pathname;
-  console.log(pathName);
   const title = headerTitle(pathName);
-  const { toggle, setToggle } = useContext(RecipesContext);
+  const { toggle, setToggle, setTitle } = useContext(RecipesContext);
   const handleClick = () => {
     if (toggle === false) {
+      setTitle(title);
       setToggle(true);
     } else {
       setToggle(false);
