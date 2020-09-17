@@ -59,7 +59,8 @@ const DetalhesComida = () => {
     recommended(pathName, setMeal);
   }, [pathName, setMeal]);
   if (dataDetail.length === 0) return <h1>loading...</h1>;
-  const filtersKey = Object.keys(dataDetail).filter((key) => key.includes('strIngredient') && dataDetail[key] !== '');
+  const filtersKey = Object.keys(dataDetail).filter(
+    (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
   const rec = meal.slice(0, 6);
   const params = { id, dataDetail, rec, filtersKey };
   return (

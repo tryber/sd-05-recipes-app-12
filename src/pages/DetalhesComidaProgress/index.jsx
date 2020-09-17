@@ -24,8 +24,10 @@ const DetalhesComidaProgress = () => {
     }
     verify();
   }, [setDataDetail, id, pathName]);
+
   if (dataDetail.length === 0) return <h1>loading...</h1>;
-  const filtersKeyOutra = Object.keys(dataDetail).filter((key) => key.includes('strIngredient') && dataDetail[key] !== '');
+  const filtersKeyOutra = Object.keys(dataDetail).filter(
+    (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
   return (
     <div>
       <img

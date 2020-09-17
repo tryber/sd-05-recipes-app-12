@@ -20,7 +20,7 @@ async function FHC(searchs, filteredText, setData) {
   }
 }
 
-function Inputs({ setText, setSearch, FHC, search, filteredText, setData }) {
+function Inputs({ setText, setSearch, search, filteredText, setData }) {
   return (
     <div >
       <input data-testid="search-input" type="text" onChange={(e) => setText(e.target.value)} />
@@ -109,7 +109,6 @@ Inputs.propTypes = {
   setData: PropTypes.arrayOf(PropTypes.object).isRequired,
   filteredText: PropTypes.string.isRequired,
   search: PropTypes.string.isRequired,
-  FHC: PropTypes.func.isRequired,
   setSearch: PropTypes.func.isRequired,
   setText: PropTypes.func.isRequired,
 };
