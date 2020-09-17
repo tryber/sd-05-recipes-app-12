@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { RecipesContext } from '../../context/RecipesContext';
 
-const RecipeCard = () => {
+const DrinkCard = () => {
   const { data, setData } = useContext(RecipesContext);
   useEffect(() => {
     async function apiFetch() {
@@ -23,7 +23,7 @@ const RecipeCard = () => {
   return (
     <div>
       {test.map((drink, index) => (
-        <Link to={`/comidas/${drink.idDrink}`}>
+        <Link to={`/bebidas/${drink.idDrink}`}>
           <div data-testid={`${index}-recipe-card`} key={drink.idDrink}>
             <img
               data-testid={`${index}-card-img`}
@@ -39,4 +39,4 @@ const RecipeCard = () => {
   );
 };
 
-export default RecipeCard;
+export default DrinkCard;

@@ -4,7 +4,7 @@ import { RecipesContext } from '../../context/RecipesContext';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 
-const DetalhesComidaProgress = () => {
+const DetalhesBebidaProgress = () => {
   const { dataDetail, setDataDetail } = useContext(RecipesContext);
   const history = useHistory();
   const pathName = history.location.pathname;
@@ -30,10 +30,10 @@ const DetalhesComidaProgress = () => {
   return (
     <div>
       <img
-        data-testid="recipe-photo" src={dataDetail.strMealThumb}
-        width="200px" height="150px" alt={dataDetail.strMeal}
+        data-testid="recipe-photo" src={dataDetail.strDrinkThumb}
+        width="200px" height="150px" alt={dataDetail.strDrink}
       />
-      <h1 data-testid="recipe-title">{dataDetail.strMeal}</h1>
+      <h1 data-testid="recipe-title">{dataDetail.strDrink}</h1>
       <span data-testid="recipe-category">{dataDetail.strCategory}</span>
       <img src={shareIcon} data-testid="share-btn" alt="Share Icon" />
       <img src={whiteHeartIcon} data-testid="favorite-btn" alt="White Heart Icon" />
@@ -50,4 +50,4 @@ const DetalhesComidaProgress = () => {
     </div>
   );
 };
-export default DetalhesComidaProgress;
+export default DetalhesBebidaProgress;
