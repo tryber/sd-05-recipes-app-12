@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { RecipesContext } from '../../context/RecipesContext';
 
-async function HC(searchs, filteredText, setData) {
+async function FHC(searchs, filteredText, setData) {
   if (searchs === 'ingredient') {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${filteredText}`);
     const data = await response.json();
@@ -78,7 +78,7 @@ const SearchBar = () => {
   }, [setCategories]);
 
   if (!toggle) {
-    const params = { setText, setSearch, HC, search, filteredText, setData };
+    const params = { setText, setSearch, FHC, search, filteredText, setData };
     return (
       Inputs(params)
     );

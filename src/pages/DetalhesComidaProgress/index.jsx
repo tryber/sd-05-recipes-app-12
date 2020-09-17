@@ -10,19 +10,19 @@ const DetalhesComidaProgress = () => {
   const pathName = history.location.pathname;
   const { id } = useParams();
   useEffect(() => {
-    async function verifyOutra() {
+    async function verify() {
       if (pathName === `/comidas/${id}`) {
-        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
-        const data = await response.json();
-        setDataDetail(data.meals[0]);
+        const responses = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+        const datas = await responses.json();
+        setDataDetail(datas.meals[0]);
       }
       if (pathName === `/bebidas/${id}`) {
-        const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
-        const data = await response.json();
-        setDataDetail(data.meals[0]);
+        const responses = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+        const datas = await responses.json();
+        setDataDetail(datas.meals[0]);
       }
     }
-    verifyOutra();
+    verify();
   }, [setDataDetail, id, pathName]);
   if (dataDetail.length === 0) return <h1>loading...</h1>;
   const filtersKeyOutra = Object.keys(dataDetail).filter((key) => key.includes('strIngredient') && dataDetail[key] !== '');
