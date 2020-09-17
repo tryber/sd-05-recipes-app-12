@@ -7,7 +7,7 @@ import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import { verify, recommended } from '../../utils/utilities';
 // O aluno Felipe Vieira auxiliou na solução da tag iframe
 
-function Input({ id, dataDetail, rec, filtersKey }) {
+function Inputs({ id, dataDetail, rec, filtersKey }) {
   return (
     <div>
       <img
@@ -56,7 +56,7 @@ const DetalhesBebida = () => {
     verify(pathName, id, setDataDetail);
   }, [setDataDetail, id, pathName]);
   useEffect(() => {
-    recommended(pathName, setDrink);
+    recommended(pathName, null, setDrink);
   }, [pathName, setDrink]);
   if (dataDetail.length === 0) return <h1>loading...</h1>;
   const filtersKey = Object.keys(dataDetail).filter(
@@ -64,12 +64,12 @@ const DetalhesBebida = () => {
   const rec = drink.slice(0, 6);
   const params = { id, dataDetail, rec, filtersKey };
   return (
-    Input(params)
+    Inputs(params)
   );
 };
 export default DetalhesBebida;
 
-Input.propTypes = {
+Inputs.propTypes = {
   dataDetail: PropTypes.arrayOf(PropTypes.object).isRequired,
   id: PropTypes.string.isRequired,
   rec: PropTypes.arrayOf(PropTypes.object).isRequired,

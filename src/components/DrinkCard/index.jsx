@@ -23,7 +23,7 @@ const RecipeCard = () => {
   return (
     <div>
       {test.map((drink, index) => (
-        <Link to={`/comidas/${drink.idDrink}`}>
+        <Link to={`/bebidas/${drink.idDrink}`}>
           <div data-testid={`${index}-recipe-card`} key={drink.idDrink}>
             <img
               data-testid={`${index}-card-img`}
