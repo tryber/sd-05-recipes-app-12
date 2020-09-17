@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import MainPage from './pages/MainPage';
 import DetalhesComidaProgress from './pages/DetalhesComidaProgress';
+import DetalhesBebidaProgress from './pages/DetalhesBebidaProgress';
 import DetalhesComida from './pages/DetalhesComida';
 import DetalhesBebida from './pages/DetalhesBebida';
 import Perfil from './pages/Profile';
@@ -26,7 +27,7 @@ const Routes = () => (
     <Route path="/comidas/:id/progress" component={DetalhesComidaProgress} />
     <Route path="/comidas/:id/" component={DetalhesComida} />
     <Route path="/comidas" component={MainPage} />
-    {/* <Route path="/bebidas/:id/progress" component={DetalhesBebidaProgress} /> */}
+    <Route path="/bebidas/:id/progress" component={DetalhesBebidaProgress} />
     <Route path="/bebidas/:id" component={DetalhesBebida} />
     <Route path="/bebidas" component={Bebidas} />
     <Route

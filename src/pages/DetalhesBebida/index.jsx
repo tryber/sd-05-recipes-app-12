@@ -24,23 +24,17 @@ function Inputs({ id, dataDetail, rec, filtersKey }) {
       ))}
       <h1>Instructions</h1>
       <p data-testid="instructions">{dataDetail.strInstructions}</p>
-      <h1>Vídeos</h1>
-      <iframe
-        data-testid="video" title={dataDetail.strYoutube} width="200px"
-        src={dataDetail.strYoutube && dataDetail.strYoutube.replace('watch?v=', 'embed/')}
-        frameBorder="0" allow="autoplay" allowFullScreen="true"
-      />
       <h1>Recomendadas</h1>
       {rec.map((recommend, index) => (
         <div style={index < 2 ? { display: 'block' } : { display: 'none' }}>
           <img
-            data-testid={`${index}-recomendation-card`} src={recommend.strDrinkThumb}
-            width="200px" alt={recommend.strDrink}
+            data-testid={`${index}-recomendation-card`} src={recommend.strMealThumb}
+            width="200px" alt={recommend.strMeal}
           />
-          <p data-testid={`${index}-recomendation-title`}>{recommend.strDrink}</p>
+          <p data-testid={`${index}-recomendation-title`}>{recommend.strMeal}</p>
         </div>
       ))}
-      <Link to={`/comidas/${id}/progress`}>
+      <Link to={`/bebidas/${id}/progress`}>
         <input type="button" data-testid="start-recipe-btn" value="Iniciar Receitas" />
       </Link>
     </div>
@@ -62,6 +56,7 @@ const DetalhesBebida = () => {
   const filtersKey = Object.keys(dataDetail).filter(
     (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
   const rec = drink.slice(0, 6);
+
   const params = { id, dataDetail, rec, filtersKey };
   return (
     Inputs(params)
