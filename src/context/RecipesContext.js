@@ -11,7 +11,7 @@ export const Provider = ({ children }) => {
   const [categories, setCategories] = useState([]);
   const [dataDetail, setDataDetail] = useState([]);
   const [toggle, setToggle] = useState(true);
-  const [ meal, setMeal ] = useState([]);
+  const [meal, setMeal] = useState([]);
   const context = {
     ingredient,
     setIngredient,

@@ -24,7 +24,6 @@ const DetalhesComidaProgress = () => {
     }
     verify();
   }, [setDataDetail, id, pathName]);
-  console.log(dataDetail)
   if (dataDetail.length === 0) return <h1>loading...</h1>;
   const filtersKey = Object.keys(dataDetail).filter((key) => key.includes('strIngredient') && dataDetail[key] !== '');
   return (

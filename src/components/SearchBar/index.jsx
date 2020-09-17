@@ -20,7 +20,7 @@ async function HC(searchs, filteredText, setData) {
   }
 }
 
-function Inputs({ setText, setSearch, HC, search, filteredText, setData }) {
+function Inputs({ setText, setSearch, FHC, search, filteredText, setData }) {
   return (
     <div >
       <input data-testid="search-input" type="text" onChange={(e) => setText(e.target.value)} />
@@ -41,7 +41,7 @@ function Inputs({ setText, setSearch, HC, search, filteredText, setData }) {
       />
       <button
         type="button"
-        data-testid="exec-search-btn" onClick={() => HC(search, filteredText, setData)}
+        data-testid="exec-search-btn" onClick={() => FHC(search, filteredText, setData)}
       >
       Buscar
       </button>
