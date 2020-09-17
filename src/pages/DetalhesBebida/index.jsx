@@ -1,35 +1,12 @@
 import React, { useContext, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { useHistory, useParams, Link } from 'react-router-dom';
 import { RecipesContext } from '../../context/RecipesContext';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import { verify, recommended } from '../../utils/utilities';
 
-const DetalhesBebida = () => {
-  const { dataDetail, setDataDetail } = useContext(RecipesContext);
-  const history = useHistory();
-  const pathName = history.location.pathname;
-  const { id } = useParams();
-  console.log(dataDetail);
-
-  useEffect(() => {
-    async function verify() {
-      if (pathName === `/comidas/${id}`) {
-        const responses = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
-        const datas = await responses.json();
-        setDataDetail(datas);
-      }
-      if (pathName === `/bebidas/${id}`) {
-        const responses = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
-        const datas = await responses.json();
-        setDataDetail(datas.drinks[0]);
-      }
-    }
-    verify();
-  }, [setDataDetail, id, pathName]);
-  if (dataDetail.length === 0) return <h1>loading...</h1>;
-  const filtersKey = Object.keys(dataDetail).filter(
-    (keys) => keys.includes('strIngredient') && dataDetail[keys] !== null && dataDetail[keys] !== '');
-
+function Inputs({ id, dataDetail, rec, filtersKey }) {
   return (
     <div>
       <img
@@ -37,19 +14,57 @@ const DetalhesBebida = () => {
         width="200px" height="150px" alt={dataDetail.strDrink}
       />
       <h1 data-testid="recipe-title">{dataDetail.strDrink}</h1>
-      <span data-testid="recipe-category"> {dataDetail.strCategory} </span>
+      <span data-testid="recipe-category">{dataDetail.strCategory}</span>
       <img src={shareIcon} data-testid="share-btn" alt="Share Icon" />
-      <img src={whiteHeartIcon} data-testid="share-btn" alt="White Heart Icon" />
+      <img src={whiteHeartIcon} data-testid="favorite-btn" alt="White Heart Icon" />
       <h1>Ingredients</h1>
       {filtersKey.map((filter, index) => (
-        <p data-testid={`${index}-ingredient-name-and-measure`}>
-          {dataDetail[filter]} -{' '} {dataDetail[`strMeasure${index + 1}`]}{' '}
-          <img src={`https://www.thecocktaildb.com/images/ingredients/${dataDetail[filter].toLowerCase()}-Small.png`} alt={dataDetail[filter]} />
-        </p>
+        <p data-testid={`${index}-ingredient-name-and-measure`}>{dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}</p>
       ))}
       <h1>Instructions</h1>
       <p data-testid="instructions">{dataDetail.strInstructions}</p>
+      <h1>Recomendadas</h1>
+      {rec.map((recommend, index) => (
+        <div style={index < 2 ? { display: 'block' } : { display: 'none' }}>
+          <img
+            data-testid={`${index}-recomendation-card`} src={recommend.strMealThumb}
+            width="200px" alt={recommend.strMeal}
+          />
+          <p data-testid={`${index}-recomendation-title`}>{recommend.strMeal}</p>
+        </div>
+      ))}
+      <Link to={`/bebidas/${id}/progress`}>
+        <input type="button" data-testid="start-recipe-btn" value="Iniciar Receitas" />
+      </Link>
     </div>
+  );
+}
+
+const DetalhesBebida = () => {
+  const { dataDetail, setDataDetail, ddrink, setDdrink } = useContext(RecipesContext);
+  const history = useHistory();
+  const pathName = history.location.pathname;
+  const { id } = useParams();
+  useEffect(() => {
+    verify(pathName, id, setDataDetail);
+  }, [setDataDetail, id, pathName]);
+  useEffect(() => {
+    recommended(pathName, null, setDdrink);
+  }, [pathName, setDdrink]);
+  if (dataDetail.length === 0) return <h1>loading...</h1>;
+  const filtersKey = Object.keys(dataDetail).filter(
+    (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
+  const rec = ddrink.slice(0, 6);
+  const params = { id, dataDetail, rec, filtersKey };
+  return (
+    Inputs(params)
   );
 };
 export default DetalhesBebida;
+
+Inputs.propTypes = {
+  dataDetail: PropTypes.arrayOf(PropTypes.object).isRequired,
+  id: PropTypes.string.isRequired,
+  rec: PropTypes.arrayOf(PropTypes.object).isRequired,
+  filtersKey: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
