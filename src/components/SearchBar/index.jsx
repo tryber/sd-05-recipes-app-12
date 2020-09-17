@@ -109,7 +109,7 @@ Inputs.propTypes = {
   setData: PropTypes.arrayOf(PropTypes.object).isRequired,
   filteredText: PropTypes.string.isRequired,
   search: PropTypes.string.isRequired,
-  HC: PropTypes.func.isRequired,
+  FHC: PropTypes.func.isRequired,
   setSearch: PropTypes.func.isRequired,
   setText: PropTypes.func.isRequired,
 };

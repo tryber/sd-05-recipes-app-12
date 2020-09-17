@@ -10,7 +10,7 @@ const DetalhesComidaProgress = () => {
   const pathName = history.location.pathname;
   const { id } = useParams();
   useEffect(() => {
-    async function verify() {
+    async function verifyOutra() {
       if (pathName === `/comidas/${id}`) {
         const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
         const data = await response.json();
@@ -22,10 +22,10 @@ const DetalhesComidaProgress = () => {
         setDataDetail(data.meals[0]);
       }
     }
-    verify();
+    verifyOutra();
   }, [setDataDetail, id, pathName]);
   if (dataDetail.length === 0) return <h1>loading...</h1>;
-  const filtersKey = Object.keys(dataDetail).filter((key) => key.includes('strIngredient') && dataDetail[key] !== '');
+  const filtersKeyOutra = Object.keys(dataDetail).filter((key) => key.includes('strIngredient') && dataDetail[key] !== '');
   return (
     <div>
       <img
@@ -37,7 +37,7 @@ const DetalhesComidaProgress = () => {
       <img src={shareIcon} data-testid="share-btn" alt="Share Icon" />
       <img src={whiteHeartIcon} data-testid="favorite-btn" alt="White Heart Icon" />
       <h1>Ingredients</h1>
-      {filtersKey.map((filter, index) => (
+      {filtersKeyOutra.map((filter, index) => (
         <p data-testid={`${index}-ingredient-name-and-measure`}>{dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}</p>
       ))}
       <h1>Instructions</h1>
