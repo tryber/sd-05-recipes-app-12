@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types';
 import { RecipesContext } from '../../context/RecipesContext';
 
@@ -20,7 +21,25 @@ async function FHC(searchs, filteredText, setData) {
   }
 }
 
-function Inputs({ setText, setSearch, search, filteredText, setData }) {
+async function FDC(searchs, filteredText, setData) {
+  if (searchs === 'ingredient') {
+    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${filteredText}`);
+    const data = await response.json();
+    setData(data);
+  }
+  if (searchs === 'name') {
+    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${filteredText}`);
+    const data = await response.json();
+    setData(data);
+  }
+  if (searchs === 'firstLetter') {
+    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${filteredText}`);
+    const data = await response.json();
+    setData(data);
+  }
+}
+
+function Inputs({ setText, setSearch, search, filteredText, setData, pathName }) {
   return (
     <div >
       <input data-testid="search-input" type="text" onChange={(e) => setText(e.target.value)} />
@@ -39,12 +58,21 @@ function Inputs({ setText, setSearch, search, filteredText, setData }) {
         type="radio" id="firstLetter" name="radioInput"
         data-testid="first-letter-search-radio" onChange={(e) => setSearch(e.target.id)}
       />
+      {(pathName === '/comidas')&&   
       <button
         type="button"
         data-testid="exec-search-btn" onClick={() => FHC(search, filteredText, setData)}
       >
       Buscar
+      </button>}
+      {(pathName === '/bebidas') &&
+      <button
+        type="button"
+        data-testid="exec-search-btn" onClick={() => FDC(search, filteredText, setData)}
+      >
+      Buscar
       </button>
+}
     </div>
   );
 }
@@ -66,6 +94,8 @@ const SearchBar = () => {
   const [search, setSearch] = useState('name');
   const [filteredText, setText] = useState('');
   const { setData, toggle, categories, setCategories } = useContext(RecipesContext);
+  const history = useHistory();
+  const pathName = history.location.pathname;
 
   useEffect(() => {
     async function getCategories() {
@@ -78,7 +108,7 @@ const SearchBar = () => {
   }, [setCategories]);
 
   if (!toggle) {
-    const params = { setText, setSearch, FHC, search, filteredText, setData };
+    const params = { setText, setSearch, FHC, FDC, pathName, search, filteredText, setData };
     return (
       Inputs(params)
     );
