@@ -5,6 +5,7 @@ import { RecipesContext } from '../../context/RecipesContext';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import { verify, recommended } from '../../utils/utilities';
+// O aluno Felipe Vieira auxiliou na solução da tag iframe
 
 function Inputs({ id, dataDetail, rec, filtersKey }) {
   return (
@@ -41,7 +42,7 @@ function Inputs({ id, dataDetail, rec, filtersKey }) {
 }
 
 const DetalhesBebida = () => {
-  const { dataDetail, setDataDetail, ddrink, setDdrink } = useContext(RecipesContext);
+  const { dataDetail, setDataDetail, drink, setDrink } = useContext(RecipesContext);
   const history = useHistory();
   const pathName = history.location.pathname;
   const { id } = useParams();
@@ -49,12 +50,13 @@ const DetalhesBebida = () => {
     verify(pathName, id, setDataDetail);
   }, [setDataDetail, id, pathName]);
   useEffect(() => {
-    recommended(pathName, null, setDdrink);
-  }, [pathName, setDdrink]);
+    recommended(pathName, null, setDrink);
+  }, [pathName, setDrink]);
   if (dataDetail.length === 0) return <h1>loading...</h1>;
   const filtersKey = Object.keys(dataDetail).filter(
     (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
-  const rec = ddrink.slice(0, 6);
+  const rec = drink.slice(0, 6);
+
   const params = { id, dataDetail, rec, filtersKey };
   return (
     Inputs(params)

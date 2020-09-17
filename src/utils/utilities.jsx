@@ -10,7 +10,7 @@ export async function verify(pathName, id, setDataDetail) {
   }
 }
 
-export async function recommended(pathName, setMeal, setDdrink) {
+export async function recommended(pathName, setMeal, setDrink) {
   if (pathName.match(/comidas/)) {
     const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
     const data = await response.json();
@@ -19,6 +19,6 @@ export async function recommended(pathName, setMeal, setDdrink) {
   if (pathName.match(/bebidas/)) {
     const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
     const data = await response.json();
-    setDdrink(data.meals);
+    setDrink(data.meals);
   }
 }
