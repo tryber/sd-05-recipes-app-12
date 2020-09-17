@@ -6,7 +6,7 @@ import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import { verify, recommended } from '../../utils/utilities';
 
-function Input({ id, dataDetail, rec, filtersKey }) {
+function Inputs({ id, dataDetail, rec, filtersKey }) {
   return (
     <div>
       <img
@@ -57,12 +57,12 @@ const DetalhesBebida = () => {
   const rec = ddrink.slice(0, 6);
   const params = { id, dataDetail, rec, filtersKey };
   return (
-    Input(params)
+    Inputs(params)
   );
 };
 export default DetalhesBebida;
 
-Input.propTypes = {
+Inputs.propTypes = {
   dataDetail: PropTypes.arrayOf(PropTypes.object).isRequired,
   id: PropTypes.string.isRequired,
   rec: PropTypes.arrayOf(PropTypes.object).isRequired,

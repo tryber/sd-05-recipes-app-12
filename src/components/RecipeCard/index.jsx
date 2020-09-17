@@ -13,7 +13,7 @@ const RecipeCard = () => {
     }
     apiFetch();
   }, [setData]);
-  if (data.meals === undefined ) return <h1>Loading...</h1>;
+  if (data.meals === undefined) return <h1>Loading...</h1>;
   let test;
   if (data.meals === null) {
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
