@@ -39,7 +39,10 @@ const DetalhesComidaProgress = () => {
       <img src={whiteHeartIcon} data-testid="favorite-btn" alt="White Heart Icon" />
       <h1>Ingredients</h1>
       {filtersKeyOutra.map((filter, index) => (
-        <p data-testid={`${index}-ingredient-name-and-measure`}>{dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}</p>
+        <p>
+          <input type="checkbox" value="on" data-testid={`${index}-ingredient-step`} />
+          {dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}
+        </p>
       ))}
       <h1>Instructions</h1>
       <p data-testid="instructions">{dataDetail.strInstructions}</p>
