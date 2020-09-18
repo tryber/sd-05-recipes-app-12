@@ -21,17 +21,11 @@ const ReceitasFavoritas = () => {
     <div>
       <Header />
       <DoneAndFavRecipesHeader />
-    <RecipesCard 
-    data-testid={`${index}-horizontal-top-text`}
-    data-testid={`${index}-horizontal-share-btn`} 
-    data-testid={`${index}-horizontal-name`}
-    data-testid={`${index}-horizontal-done-date`}
-    data-testid={`${index}-${tagName}-horizontal-tag`}
-    />
+      <RecipesCard />
     
     {/* <img style={{maxWidth: '50px'}} src={imagesPath[imageName]} onClick={this.toggleImage} /> */}
-    <button src={blackHeartIcon}></button>
-    <button src={shareIcon}></button>
+      <button src={blackHeartIcon}></button>
+      <button src={shareIcon}></button>
     </div>
   );
 };
