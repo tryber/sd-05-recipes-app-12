@@ -15,7 +15,7 @@ const ReceitasFavoritas = () => {
     setFav(fav => ({fav: !fav}));
   };
 
-  getImageName = () => open ? blackHeartIcon : whiteHeartIcon;
+  getImageName = () => fav ? blackHeartIcon : whiteHeartIcon;
 
   return (
     <div>
