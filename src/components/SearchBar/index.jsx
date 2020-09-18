@@ -19,6 +19,34 @@ async function DrinkFetch(catFilter, setData) {
   }
 }
 
+async function FLetterDrink(searchs, filteredText, setData) {
+  if (searchs === 'firstLetter' && searchs.length > 1) {
+    try {
+      const response = await fetch(
+      `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${filteredText}`,
+    );
+      const data = await response.json();
+      setData(data);
+    } catch (error) {
+      alert('Sua busca deve conter somente 1 (um) caracter');
+      console.error(error);
+    }
+  }
+}
+
+async function FLetterFood(searchs, filteredText, setData) {
+  if (searchs === 'firstLetter' && searchs.length > 1) {
+    try {
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${filteredText}`);
+      const data = await response.json();
+      setData(data);
+    } catch (error) {
+      alert('Sua busca deve conter somente 1 (um) caracter');
+      console.error(error);
+    }
+  }
+}
+
 async function FHC(searchs, filteredText, setData) {
   if (searchs === 'ingredient') {
     const response = await fetch(
@@ -34,13 +62,7 @@ async function FHC(searchs, filteredText, setData) {
     const data = await response.json();
     setData(data);
   }
-  if (searchs === 'firstLetter') {
-    const response = await fetch(
-      `https://www.themealdb.com/api/json/v1/1/search.php?f=${filteredText}`,
-    );
-    const data = await response.json();
-    setData(data);
-  }
+  FLetterFood(searchs, filteredText, setData);
 }
 
 async function FDC(searchs, filteredText, setData) {
@@ -58,13 +80,7 @@ async function FDC(searchs, filteredText, setData) {
     const data = await response.json();
     setData(data);
   }
-  if (searchs === 'firstLetter') {
-    const response = await fetch(
-      `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${filteredText}`,
-    );
-    const data = await response.json();
-    setData(data);
-  }
+  FLetterDrink(searchs, filteredText, setData);
 }
 
 function Inputs({ setText, setSearch, search, filteredText, setData, pathName }) {

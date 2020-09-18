@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, Link } from 'react-router-dom';
 import { RecipesContext } from '../../context/RecipesContext';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
@@ -46,7 +46,9 @@ const DetalhesComidaProgress = () => {
       ))}
       <h1>Instructions</h1>
       <p data-testid="instructions">{dataDetail.strInstructions}</p>
+      <Link to="/receitas-feitas" onClick={()=>{}} >
       <button data-testid="finish-recipe-btn" type="button">Finalizar Receita</button>
+      </ Link>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { RecipesContext } from '../../context/RecipesContext';
 
 const DrinkCard = () => {
@@ -17,6 +17,8 @@ const DrinkCard = () => {
   if (data.drinks === null) {
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     test = [];
+  } else if (data.drinks.length === 1) {
+    return <Redirect to={`/bebidas/${data.drinks[0].idDrink}`} />;
   } else {
     test = data.drinks.slice(0, 12);
   }
