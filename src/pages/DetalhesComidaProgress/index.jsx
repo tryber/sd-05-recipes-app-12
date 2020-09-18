@@ -16,9 +16,9 @@ const DetalhesComidaProgress = () => {
         const datas = await responses.json();
         setDataDetail(datas.meals[0]);
       } else if (pathName === `/bebidas/${id}`) {
-        const responses = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
-        const datas = await responses.json();
-        setDataDetail(datas.drinks[0]);
+        const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+        const data = await response.json();
+        setDataDetail(data.drinks[0]);
       }
     }
     verify();
@@ -46,9 +46,9 @@ const DetalhesComidaProgress = () => {
       ))}
       <h1>Instructions</h1>
       <p data-testid="instructions">{dataDetail.strInstructions}</p>
-      <Link to="/receitas-feitas" onClick={()=>{}} >
-      <button data-testid="finish-recipe-btn" type="button">Finalizar Receita</button>
-      </ Link>
+      <Link to="/receitas-feitas" onClick={() => {}} >
+        <button data-testid="finish-recipe-btn" type="button">Finalizar Receita</button>
+      </Link>
     </div>
   );
 };
