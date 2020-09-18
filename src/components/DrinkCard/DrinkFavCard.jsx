@@ -7,7 +7,7 @@ const DrinkFavCard = () => {
   <>data-testid={`${index}-horizontal-name`}</>
   <> data-testid={`${index}-horizontal-done-date`} </>
   <> data-testid={`${index}-${tagName}-horizontal-tag`} </>
-  <img data-testid={`${index}-horizontal-share-btn`} src="" />
+  <img data-testid={`${index}-horizontal-share-btn`} src="" alt=""/>
 );
 }
 
