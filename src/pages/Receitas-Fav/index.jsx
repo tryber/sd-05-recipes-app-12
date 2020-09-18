@@ -8,24 +8,21 @@ import shareIcon from '../../images/shareIcon.svg';
 import Header from '../../components/Header';
 
 const ReceitasFavoritas = () => {
-
   const { fav, setFav } = useContext(RecipesContext);
-  
-  toggleImage = () => {
-    setFav(fav => ({fav: !fav}));
+  const toggleImage = () => {
+    setFav((fav) => { !fav });
   };
 
-  getImageName = () => fav ? blackHeartIcon : whiteHeartIcon;
+  const getImageName = () => fav ? blackHeartIcon : whiteHeartIcon;
 
   return (
     <div>
       <Header />
       <DoneAndFavRecipesHeader />
       <RecipesCard />
-    
     {/* <img style={{maxWidth: '50px'}} src={imagesPath[imageName]} onClick={this.toggleImage} /> */}
-      <button src={blackHeartIcon}></button>
-      <button src={shareIcon}></button>
+      <button src={blackHeartIcon} />
+      <button src={shareIcon} />
     </div>
   );
 };
