@@ -22,16 +22,16 @@ function render({ dataDetail, histories, id, checked, setChecked, filtersKeyOutr
         <div key={filter.strMeal}>
           <div>
             <label htmlFor={`meal${index + 1}`} className={`meal${index + 1}`} >
-            <input
-              type="checkbox" checked={hasLocalStorage(`meal${index + 1}`, id, histories)}
-              id={`meal${index + 1}`}
-              onChange={(e) =>
-                handleChange(e, id, checked, setChecked, histories, isChecked, isNotChecked)
-              }
-              data-testid={`${index}-ingredient-step`}
-            />
-            {dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}
-          </label>
+              <input
+                type="checkbox" checked={hasLocalStorage(`meal${index + 1}`, id, histories)}
+                id={`meal${index + 1}`}
+                onChange={(e) =>
+                  handleChange(e, id, checked, setChecked, histories, isChecked, isNotChecked)
+                }
+                data-testid={`${index}-ingredient-step`}
+              />
+              {dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}
+            </label>
           </div>
         </div>
       ))}
