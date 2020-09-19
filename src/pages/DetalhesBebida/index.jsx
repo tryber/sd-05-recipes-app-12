@@ -57,7 +57,6 @@ const DetalhesBebida = () => {
   const filtersKey = Object.keys(dataDetail).filter(
     (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
   const rec = drink.slice(0, 6);
-
   const params = { id, dataDetail, rec, filtersKey, histories };
   return (
     Inputs(params)

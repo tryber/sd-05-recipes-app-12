@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { RecipesContext } from '../../context/RecipesContext';
-import { isDisabled, hasLocalStorage, handleChange, isChecked, isNotChecked } from '../../utils/utilities';
+import { isDisabled, hasLocalStorage, handleChange, isChecked, isNotChecked, verify } from '../../utils/utilities';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 
-function render({ dataDetail, history, id, checked, setChecked, filtersKeyOutra }) {
+function render({ dataDetail, histories, id, checked, setChecked, filtersKeyOutra }) {
   return (
     <div>
       <img
@@ -19,13 +19,13 @@ function render({ dataDetail, history, id, checked, setChecked, filtersKeyOutra 
       <img src={whiteHeartIcon} data-testid="favorite-btn" alt="White Heart Icon" />
       <h1>Ingredients</h1>
       {filtersKeyOutra.map((filter, index) => (
-        <div key={`ingredient${index + 1}`}>
+        <div key={filter.strMeal}>
           <label htmlFor={`ingredient${index + 1}`} className={`ingredient${index + 1}`} >
             <input
-              type="checkbox" checked={hasLocalStorage(`ingredient${index + 1}`, id, history)}
+              type="checkbox" checked={hasLocalStorage(`ingredient${index + 1}`, id, histories)}
               id={`ingredient${index + 1}`}
               onChange={(e) =>
-                handleChange(e, id, checked, setChecked, history, isChecked, isNotChecked)
+                handleChange(e, id, checked, setChecked, histories, isChecked, isNotChecked)
               }
               data-testid={`${index}-ingredient-step`}
             />
@@ -46,36 +46,17 @@ const DetalhesComidaProgress = () => {
   const { dataDetail, setDataDetail } = useContext(RecipesContext);
   const [checked, setChecked] = useState([]);
   const history = useHistory();
+  const histories = history;
   const pathName = history.location.pathname;
   const { id } = useParams();
   useEffect(() => {
-    async function verify() {
-      if (pathName === `/comidas/${id}`) {
-        const responses = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
-        const datas = await responses.json();
-        setDataDetail(datas.meals[0]);
-      } else if (pathName === `/bebidas/${id}`) {
-        const responses = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
-        const datas = await responses.json();
-        setDataDetail(datas.drinks[0]);
-      }
-    }
-    verify();
+    verify(pathName, id, setDataDetail);
   }, [setDataDetail, id, pathName]);
 
   if (dataDetail.length === 0) return <h1>loading...</h1>;
   const filtersKeyOutra = Object.keys(dataDetail).filter(
     (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
-  const params = {
-    dataDetail,
-    shareIcon,
-    whiteHeartIcon,
-    history,
-    id,
-    checked,
-    setChecked,
-    filtersKeyOutra
-  };
+  const params = { dataDetail, shareIcon, histories, id, checked, setChecked, filtersKeyOutra, };
   return (
     render(params)
   );
@@ -89,4 +70,4 @@ render.propTypes = {
   id: PropTypes.string.isRequired,
   history: PropTypes.arrayOf(PropTypes.object).isRequired,
   dataDetail: PropTypes.arrayOf(PropTypes.object).isRequired,
-}
+};

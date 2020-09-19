@@ -23,18 +23,17 @@ export async function recommended(pathName, setMeal, setDrink) {
   }
 }
 
-export function hasLocalStorage(str, id, history) {
+export function hasLocalStorage(str, id, histories) {
   const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  if (storage && history.location.pathname.includes('comidas')) {
-    if (storage.meals[id]) {
+  if (storage && histories.location.pathname.includes('comidas')) {
+    if(storage.meals[id]) {
       const check = storage.meals[id].some((item) => item === str);
       return check;
     }
-  }
-  if (storage && history.location.pathname.includes('bebidas')) {
-    const check = storage.cocktails[id].some((item) => item === str);
-    return check;
-  }
+  } else if (storage && histories.location.pathname.includes('bebidas')) {
+      const check = storage.cocktails[id].some((item) => item === str);
+      return check;
+    }
   return false;
 }
 
@@ -63,8 +62,8 @@ export function isChecked(e, id, checked, setChecked, history) {
 }
 
 export function isNotChecked(e, id, checked, setChecked, history) {
-  const checkInput1 = document.getElementsByClassName(`${e.target.id}`)[0];
-  checkInput1.style.textDecoration = 'none';
+  const checkInput = document.getElementsByClassName(`${e.target.id}`)[0];
+  checkInput.style.textDecoration = 'none';
   const newArrayOfChecked = checked.filter((check) => check !== e.target.id);
   setChecked(newArrayOfChecked);
   const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -76,35 +75,36 @@ export function isNotChecked(e, id, checked, setChecked, history) {
   localStorage.setItem('inProgressRecipes', JSON.stringify(storage));
 }
 
-const savedList = {
-  cocktails: {},
-  meals: {},
-};
-
 export function saveToLocalStorage(id, histories) {
   const oldList = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  let savedList = {
+    cocktails: {},
+    meals: {},
+  };
   if (histories.location.pathname.includes('comidas')) {
     if (oldList) {
-      savedList.meals = { ...oldList.meals, [id]: [] };
+      savedList = { ...oldList, meals: { ...oldList.meals, [id] : [] }};
+      localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
+    } else {
+      savedList.meals[id] = [];
       localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
     }
-    savedList.meals[id] = [];
-    localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
   }
   if (histories.location.pathname.includes('bebidas')) {
     if (oldList) {
-      oldList.cocktails = { ...savedList.cocktails, [id]: [] };
-      localStorage.setItem('inProgressRecipes', JSON.stringify(oldList));
+      savedList = {...oldList, cocktails:{ ...oldList.cocktails, [id] : [] }};
+      localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
+    } else {
+      savedList.cocktails[id] = [];
+      localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
     }
-    savedList.cocktails[id] = [];
-    localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
   }
 }
 
-export function handleChange(e, id, checked, setChecked, history) {
+export function handleChange(e, id, checked, setChecked, histories) {
   if (e.target.checked) {
-    isChecked(e, id, checked, setChecked, history);
+    isChecked(e, id, checked, setChecked, histories);
   } else {
-    isNotChecked(e, id, checked, setChecked, history);
+    isNotChecked(e, id, checked, setChecked, histories);
   }
 }
