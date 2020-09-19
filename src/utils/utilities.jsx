@@ -30,7 +30,7 @@ export function hasLocalStorage(str, id, histories) {
       const check = storage.meals[id].some((item) => item === str);
       return check;
     }
-  } else if (storage && histories.location.pathname.includes('bebidas')) {
+  } else {
     const check = storage.cocktails[id].some((item) => item === str);
     return check;
   }
@@ -81,13 +81,13 @@ export function saveToLocalStorageDrinks(id) {
     cocktails: {},
     meals: {},
   };
-    if (oldList) {
-      savedList = { ...oldList, cocktails: { ...oldList.cocktails, [id]: [] } };
-      localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
-    } else {
-      savedList.cocktails[id] = [];
-      localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
-    }
+  if (oldList) {
+    savedList = { ...oldList, cocktails: { ...oldList.cocktails, [id]: [] } };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
+  } else {
+    savedList.cocktails[id] = [];
+    localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
+  }
 }
 
 export function saveToLocalStorageMeals(id) {
@@ -96,13 +96,13 @@ export function saveToLocalStorageMeals(id) {
     cocktails: {},
     meals: {},
   };
-    if (oldList) {
-      savedList = { ...oldList, meals: { ...oldList.meals, [id]: [] } };
-      localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
-    } else {
-      savedList.meals[id] = [];
-      localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
-    }
+  if (oldList) {
+    savedList = { ...oldList, meals: { ...oldList.meals, [id]: [] } };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
+  } else {
+    savedList.meals[id] = [];
+    localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
+  }
 }
 
 export function handleChange(e, id, checked, setChecked, histories) {

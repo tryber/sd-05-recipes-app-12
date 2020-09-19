@@ -68,5 +68,4 @@ Inputs.propTypes = {
   id: PropTypes.string.isRequired,
   rec: PropTypes.arrayOf(PropTypes.object).isRequired,
   filtersKey: PropTypes.arrayOf(PropTypes.object).isRequired,
-  histories: PropTypes.string.isRequired,
 };
