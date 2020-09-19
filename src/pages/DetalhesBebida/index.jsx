@@ -34,9 +34,9 @@ function Inputs({ id, dataDetail, rec, filtersKey }) {
           />
           <p data-testid={`${index}-recomendation-title`}>{recommend.strMeal}</p>
         </div>
+        </div>
       ))}
       <Link to={`/bebidas/${id}/progress`} onClick={() => saveToLocalStorageDrinks(id)}>
-      <Link to={`/bebidas/${id}/progress`}>
         <input type="button" data-testid="start-recipe-btn" value="Iniciar Receitas" />
       </Link>
     </div>
