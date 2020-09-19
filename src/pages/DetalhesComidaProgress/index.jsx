@@ -7,6 +7,30 @@ import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 
 function render({ dataDetail, histories, id, checked, setChecked, filtersKeyOutra }) {
+const DetalhesComidaProgress = () => {
+  const { dataDetail, setDataDetail } = useContext(RecipesContext);
+  const history = useHistory();
+  const pathName = history.location.pathname;
+  const { id } = useParams();
+  useEffect(() => {
+    async function verify() {
+      if (pathName === `/comidas/${id}`) {
+        const responses = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+        const datas = await responses.json();
+        setDataDetail(datas.meals[0]);
+      } else if (pathName === `/bebidas/${id}`) {
+        const responses = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+        const datas = await responses.json();
+        setDataDetail(datas.drinks[0]);
+      }
+    }
+    verify();
+  }, [setDataDetail, id, pathName]);
+
+  if (dataDetail.length === 0) return <h1>loading...</h1>;
+  const filtersKeyOutra = Object.keys(dataDetail).filter(
+    (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
+  
   return (
     <div>
       <img
@@ -32,6 +56,10 @@ function render({ dataDetail, histories, id, checked, setChecked, filtersKeyOutr
             {dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}
           </label>
         </div>
+        <p>
+          <input type="checkbox" value="on" data-testid={`${index}-ingredient-step`} />
+          {dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}
+        </p>
       ))}
       <h1>Instructions</h1>
       <p data-testid="instructions">{dataDetail.strInstructions}</p>
