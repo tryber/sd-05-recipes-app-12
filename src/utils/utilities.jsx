@@ -75,13 +75,27 @@ export function isNotChecked(e, id, checked, setChecked, history) {
   localStorage.setItem('inProgressRecipes', JSON.stringify(storage));
 }
 
-export function saveToLocalStorage(id, histories) {
+export function saveToLocalStorageDrinks(id) {
   const oldList = JSON.parse(localStorage.getItem('inProgressRecipes'));
   let savedList = {
     cocktails: {},
     meals: {},
   };
-  if (histories.location.pathname.includes('comidas')) {
+    if (oldList) {
+      savedList = { ...oldList, cocktails: { ...oldList.cocktails, [id]: [] } };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
+    } else {
+      savedList.cocktails[id] = [];
+      localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
+    }
+}
+
+export function saveToLocalStorageMeals(id) {
+  const oldList = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  let savedList = {
+    cocktails: {},
+    meals: {},
+  };
     if (oldList) {
       savedList = { ...oldList, meals: { ...oldList.meals, [id]: [] } };
       localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
@@ -89,15 +103,6 @@ export function saveToLocalStorage(id, histories) {
       savedList.meals[id] = [];
       localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
     }
-  } else if (histories.location.pathname.includes('bebidas')) {
-      if (oldList) {
-        savedList = { ...oldList, cocktails:{ ...oldList.cocktails, [id]: [] } };
-        localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
-      } else {
-        savedList.cocktails[id] = [];
-        localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
-      }
-  }
 }
 
 export function handleChange(e, id, checked, setChecked, histories) {

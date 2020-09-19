@@ -4,10 +4,10 @@ import { useHistory, useParams, Link } from 'react-router-dom';
 import { RecipesContext } from '../../context/RecipesContext';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
-import { verify, recommended, saveToLocalStorage } from '../../utils/utilities';
+import { verify, recommended, saveToLocalStorageMeals } from '../../utils/utilities';
 // O aluno Felipe Vieira auxiliou na solução da tag iframe
 
-function Input({ id, dataDetail, rec, filtersKey, histories }) {
+function Input({ id, dataDetail, rec, filtersKey }) {
   return (
     <div>
       <img
@@ -40,7 +40,7 @@ function Input({ id, dataDetail, rec, filtersKey, histories }) {
           <p data-testid={`${index}-recomendation-title`}>{recommend.strDrink}</p>
         </div>
       ))}
-      <Link to={`/comidas/${id}/progress`} onClick={() => saveToLocalStorage(id, histories)}>
+      <Link to={`/comidas/${id}/progress`} onClick={() => saveToLocalStorageMeals(id)}>
         <input type="button" data-testid="start-recipe-btn" value="Iniciar Receitas" />
       </Link>
     </div>
@@ -50,7 +50,6 @@ function Input({ id, dataDetail, rec, filtersKey, histories }) {
 const DetalhesComida = () => {
   const { dataDetail, setDataDetail, meal, setMeal } = useContext(RecipesContext);
   const history = useHistory();
-  const histories = history;
   const pathName = history.location.pathname;
   const { id } = useParams();
   useEffect(() => {
@@ -63,7 +62,7 @@ const DetalhesComida = () => {
   const filtersKey = Object.keys(dataDetail).filter(
     (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
   const rec = meal.slice(0, 6);
-  const params = { id, dataDetail, rec, filtersKey, histories };
+  const params = { id, dataDetail, rec, filtersKey };
   return (
     Input(params)
   );
