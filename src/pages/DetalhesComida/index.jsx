@@ -32,7 +32,7 @@ function Input({ id, dataDetail, rec, filtersKey, histories }) {
       />
       <h1>Recomendadas</h1>
       {rec.map((recommend, index) => (
-        <div key={`${index}-recomendation-card`} style={index < 2 ? { display: 'block' } : { display: 'none' }}>
+        <div key={recommend.strDrink} style={index < 2 ? { display: 'block' } : { display: 'none' }}>
           <img
             data-testid={`${index}-recomendation-card`} src={recommend.strDrinkThumb}
             width="200px" alt={recommend.strDrink}

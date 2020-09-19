@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { RecipesContext } from '../../context/RecipesContext';
 import { isDisabled, hasLocalStorage, handleChange, isChecked, isNotChecked } from '../../utils/utilities';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 
-function render({dataDetail, shareIcon, whiteHeartIcon, history, id, checked, setChecked, filtersKeyOutra}) {
+function render({ dataDetail, history, id, checked, setChecked, filtersKeyOutra }) {
   return (
     <div>
       <img
@@ -23,7 +24,9 @@ function render({dataDetail, shareIcon, whiteHeartIcon, history, id, checked, se
             <input
               type="checkbox" checked={hasLocalStorage(`ingredient${index + 1}`, id, history)}
               id={`ingredient${index + 1}`}
-              onChange={(e) => handleChange(e, id, checked, setChecked, history, isChecked, isNotChecked)}
+              onChange={(e) =>
+                handleChange(e, id, checked, setChecked, history, isChecked, isNotChecked)
+              }
               data-testid={`${index}-ingredient-step`}
             />
             {dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}
@@ -36,7 +39,7 @@ function render({dataDetail, shareIcon, whiteHeartIcon, history, id, checked, se
         Finalizar Receita
       </button>
     </div>
-  )
+  );
 }
 
 const DetalhesComidaProgress = () => {
@@ -63,9 +66,27 @@ const DetalhesComidaProgress = () => {
   if (dataDetail.length === 0) return <h1>loading...</h1>;
   const filtersKeyOutra = Object.keys(dataDetail).filter(
     (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
-  const params = {dataDetail, shareIcon, whiteHeartIcon, history, id, checked, setChecked, filtersKeyOutra};
+  const params = {
+    dataDetail,
+    shareIcon,
+    whiteHeartIcon,
+    history,
+    id,
+    checked,
+    setChecked,
+    filtersKeyOutra
+  };
   return (
     render(params)
-  )
+  );
 };
 export default DetalhesComidaProgress;
+
+render.propTypes = {
+  filtersKeyOutra: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setChecked: PropTypes.func.isRequired,
+  checked: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  history: PropTypes.arrayOf(PropTypes.object).isRequired,
+  dataDetail: PropTypes.arrayOf(PropTypes.object).isRequired,
+}
