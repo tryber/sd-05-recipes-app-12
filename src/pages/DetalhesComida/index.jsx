@@ -20,7 +20,7 @@ function Input({ id, dataDetail, rec, filtersKey, histories }) {
       <img src={whiteHeartIcon} data-testid="favorite-btn" alt="White Heart Icon" />
       <h1>Ingredients</h1>
       {filtersKey.map((filter, index) => (
-        <p key={`${index}-ingredient-name-and-measure`} data-testid={`${index}-ingredient-name-and-measure`}>{dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}</p>
+        <p key={filter.strMeal} data-testid={`${index}-ingredient-name-and-measure`}>{dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}</p>
       ))}
       <h1>Instructions</h1>
       <p data-testid="instructions">{dataDetail.strInstructions}</p>

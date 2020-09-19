@@ -19,11 +19,11 @@ function renderProgress({ dataDetail, histories, id, checked, setChecked, filter
       <img src={whiteHeartIcon} data-testid="favorite-btn" alt="White Heart Icon" />
       <h1>Ingredients</h1>
       {filtersKeyOutra.map((filter, index) => (
-        <div key={`ingredient${index + 1}`}>
-          <label htmlFor={`ingredient${index + 1}`} className={`ingredient${index + 1}`} >
+        <div key={`drink${index + 1}`}>
+          <label htmlFor={`drink${index + 1}`} className={`drink${index + 1}`} >
             <input
-              type="checkbox" checked={hasLocalStorage(`ingredient${index + 1}`, id, histories)}
-              id={`ingredient${index + 1}`}
+              type="checkbox" checked={hasLocalStorage(`drink${index + 1}`, id, histories)}
+              id={`drink${index + 1}`}
               onChange={(e) =>
                 handleChange(e, id, checked, setChecked, histories, isChecked, isNotChecked)
               }
@@ -70,6 +70,6 @@ renderProgress.propTypes = {
   setChecked: PropTypes.func.isRequired,
   checked: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  history: PropTypes.arrayOf(PropTypes.object).isRequired,
+  histories: PropTypes.arrayOf(PropTypes.object).isRequired,
   dataDetail: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

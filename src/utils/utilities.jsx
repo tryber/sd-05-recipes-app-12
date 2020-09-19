@@ -26,14 +26,14 @@ export async function recommended(pathName, setMeal, setDrink) {
 export function hasLocalStorage(str, id, histories) {
   const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   if (storage && histories.location.pathname.includes('comidas')) {
-    if(storage.meals[id]) {
+    if (storage.meals[id]) {
       const check = storage.meals[id].some((item) => item === str);
       return check;
     }
   } else if (storage && histories.location.pathname.includes('bebidas')) {
-      const check = storage.cocktails[id].some((item) => item === str);
-      return check;
-    }
+    const check = storage.cocktails[id].some((item) => item === str);
+    return check;
+  }
   return false;
 }
 
@@ -83,21 +83,22 @@ export function saveToLocalStorage(id, histories) {
   };
   if (histories.location.pathname.includes('comidas')) {
     if (oldList) {
-      savedList = { ...oldList, meals: { ...oldList.meals, [id] : [] }};
+      savedList = { ...oldList, meals: { ...oldList.meals, [id]: [] } };
       localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
-    } else {
+    } 
+    if (!oldList) {
       savedList.meals[id] = [];
       localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
     }
-  }
-  if (histories.location.pathname.includes('bebidas')) {
-    if (oldList) {
-      savedList = {...oldList, cocktails:{ ...oldList.cocktails, [id] : [] }};
-      localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
-    } else {
-      savedList.cocktails[id] = [];
-      localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
-    }
+  } else if (histories.location.pathname.includes('bebidas')) {
+      if (oldList) {
+        savedList = { ...oldList, cocktails:{ ...oldList.cocktails, [id]: [] } };
+        localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
+      } 
+      if (!oldList) {
+        savedList.cocktails[id] = [];
+        localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
+      }
   }
 }
 

@@ -20,10 +20,10 @@ function render({ dataDetail, histories, id, checked, setChecked, filtersKeyOutr
       <h1>Ingredients</h1>
       {filtersKeyOutra.map((filter, index) => (
         <div key={filter.strMeal}>
-          <label htmlFor={`ingredient${index + 1}`} className={`ingredient${index + 1}`} >
+          <label htmlFor={`meal${index + 1}`} className={`meal${index + 1}`} >
             <input
-              type="checkbox" checked={hasLocalStorage(`ingredient${index + 1}`, id, histories)}
-              id={`ingredient${index + 1}`}
+              type="checkbox" checked={hasLocalStorage(`meal${index + 1}`, id, histories)}
+              id={`meal${index + 1}`}
               onChange={(e) =>
                 handleChange(e, id, checked, setChecked, histories, isChecked, isNotChecked)
               }
@@ -56,7 +56,7 @@ const DetalhesComidaProgress = () => {
   if (dataDetail.length === 0) return <h1>loading...</h1>;
   const filtersKeyOutra = Object.keys(dataDetail).filter(
     (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
-  const params = { dataDetail, shareIcon, histories, id, checked, setChecked, filtersKeyOutra, };
+  const params = { dataDetail, shareIcon, histories, id, checked, setChecked, filtersKeyOutra };
   return (
     render(params)
   );
@@ -68,6 +68,6 @@ render.propTypes = {
   setChecked: PropTypes.func.isRequired,
   checked: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  history: PropTypes.arrayOf(PropTypes.object).isRequired,
+  histories: PropTypes.arrayOf(PropTypes.object).isRequired,
   dataDetail: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
