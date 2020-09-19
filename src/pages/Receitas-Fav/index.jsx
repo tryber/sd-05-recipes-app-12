@@ -1,6 +1,6 @@
 import React from 'react';
 import { useContext } from 'react';
-import RecipesFavCard from '../../components/DrinkCard/DrinkFavCard'
+import DrinkFavCard from '../../components/DrinkFavCard'
 import { RecipesContext } from '../../context/RecipesContext';
 import DoneAndFavoriteHeader from '../../components/DoneAndFavoriteHeader';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
@@ -8,7 +8,7 @@ import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import shareIcon from '../../images/shareIcon.svg';
 import Header from '../../components/Header';
 
-const ReceitasFavoritas = () => {
+const RecipesFav = () => {
   const { fav, setFav } = useContext(RecipesContext);
   // const toggleImage = () => {
   //   setFav((fav) => { !fav });
@@ -19,7 +19,7 @@ const ReceitasFavoritas = () => {
     <div>
       <Header />
       <DoneAndFavoriteHeader />
-      <RecipesFavCard />
+      <DrinkFavCard />
       {/* <img style={{maxWidth: '50px'}} src={imagesPath[imageName]}
       onClick={this.toggleImage} /> */}
       <button src={blackHeartIcon} />
@@ -28,4 +28,4 @@ const ReceitasFavoritas = () => {
   );
 };
 
-export default ReceitasFavoritas;
+export default RecipesFav;
