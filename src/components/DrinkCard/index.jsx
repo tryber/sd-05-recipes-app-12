@@ -18,7 +18,7 @@ const DrinkCard = () => {
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     test = [];
   } else if (data.drinks.length === 1) {
-      return <Redirect to={`/bebidas/${data.drinks[0].idDrink}`} />;
+    return <Redirect to={`/bebidas/${data.drinks[0].idDrink}`} />;
   } else {
     test = data.drinks.slice(0, 12);
   }

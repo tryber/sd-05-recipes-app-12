@@ -19,7 +19,7 @@ const RecipeCard = () => {
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     test = [];
   } else if (data.meals.length === 1 && goat !== 'Goat') {
-    return <Redirect to ={`/comidas/${data.meals[0].idMeal}`} />
+    return <Redirect to={`/comidas/${data.meals[0].idMeal}`} />;
   } else {
     test = data.meals.slice(0, 12);
   }

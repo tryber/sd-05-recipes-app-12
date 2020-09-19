@@ -50,7 +50,7 @@ async function DrinkFetch(catFilter, setData, goat, setGoat) {
   );
     const data = await response.json();
     setData(data);
-    setGoat('All')
+    setGoat('All');
   } else {
     const response = await fetch(
     `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${catFilter}`,
@@ -94,7 +94,7 @@ async function FDC(searchs, filteredText, setData) {
     const data = await response.json();
     setData(data);
   }
- FletterDrink(searchs, filteredText, setData);
+  FletterDrink(searchs, filteredText, setData);
 }
 
 function Inputs({ setText, setSearch, search, filteredText, setData, pathName }) {
