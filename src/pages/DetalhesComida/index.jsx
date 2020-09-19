@@ -4,10 +4,10 @@ import { useHistory, useParams, Link } from 'react-router-dom';
 import { RecipesContext } from '../../context/RecipesContext';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
-import { verify, recommended } from '../../utils/utilities';
+import { verify, recommended, saveToLocalStorage } from '../../utils/utilities';
 // O aluno Felipe Vieira auxiliou na solução da tag iframe
 
-function Input({ id, dataDetail, rec, filtersKey }) {
+function Input({ id, dataDetail, rec, filtersKey, histories }) {
   return (
     <div>
       <img
@@ -20,7 +20,7 @@ function Input({ id, dataDetail, rec, filtersKey }) {
       <img src={whiteHeartIcon} data-testid="favorite-btn" alt="White Heart Icon" />
       <h1>Ingredients</h1>
       {filtersKey.map((filter, index) => (
-        <p data-testid={`${index}-ingredient-name-and-measure`}>{dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}</p>
+        <p key={index} data-testid={`${index}-ingredient-name-and-measure`}>{dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}</p>
       ))}
       <h1>Instructions</h1>
       <p data-testid="instructions">{dataDetail.strInstructions}</p>
@@ -28,11 +28,10 @@ function Input({ id, dataDetail, rec, filtersKey }) {
       <iframe
         data-testid="video" title={dataDetail.strYoutube} width="200px"
         src={dataDetail.strYoutube && dataDetail.strYoutube.replace('watch?v=', 'embed/')}
-        frameBorder="0" allow="autoplay" allowFullScreen="true"
-      />
+        frameBorder="0" allow="autoplay" />
       <h1>Recomendadas</h1>
       {rec.map((recommend, index) => (
-        <div style={index < 2 ? { display: 'block' } : { display: 'none' }}>
+        <div key={index} style={index < 2 ? { display: 'block' } : { display: 'none' }}>
           <img
             data-testid={`${index}-recomendation-card`} src={recommend.strDrinkThumb}
             width="200px" alt={recommend.strDrink}
@@ -40,7 +39,7 @@ function Input({ id, dataDetail, rec, filtersKey }) {
           <p data-testid={`${index}-recomendation-title`}>{recommend.strDrink}</p>
         </div>
       ))}
-      <Link to={`/comidas/${id}/progress`}>
+      <Link to={`/comidas/${id}/progress`} onClick={() => saveToLocalStorage(id, histories)}>
         <input type="button" data-testid="start-recipe-btn" value="Iniciar Receitas" />
       </Link>
     </div>
@@ -50,6 +49,7 @@ function Input({ id, dataDetail, rec, filtersKey }) {
 const DetalhesComida = () => {
   const { dataDetail, setDataDetail, meal, setMeal } = useContext(RecipesContext);
   const history = useHistory();
+  const histories = history;
   const pathName = history.location.pathname;
   const { id } = useParams();
   useEffect(() => {
@@ -62,7 +62,7 @@ const DetalhesComida = () => {
   const filtersKey = Object.keys(dataDetail).filter(
     (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
   const rec = meal.slice(0, 6);
-  const params = { id, dataDetail, rec, filtersKey };
+  const params = { id, dataDetail, rec, filtersKey, histories };
   return (
     Input(params)
   );

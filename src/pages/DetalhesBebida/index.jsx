@@ -4,10 +4,10 @@ import { useHistory, useParams, Link } from 'react-router-dom';
 import { RecipesContext } from '../../context/RecipesContext';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
-import { verify, recommended } from '../../utils/utilities';
+import { verify, recommended, saveToLocalStorage } from '../../utils/utilities';
 // O aluno Felipe Vieira auxiliou na solução da tag iframe
 
-function Inputs({ id, dataDetail, rec, filtersKey }) {
+function Inputs({ id, dataDetail, rec, filtersKey, histories }) {
   return (
     <div>
       <img
@@ -26,7 +26,7 @@ function Inputs({ id, dataDetail, rec, filtersKey }) {
       <p data-testid="instructions">{dataDetail.strInstructions}</p>
       <h1>Recomendadas</h1>
       {rec.map((recommend, index) => (
-        <div style={index < 2 ? { display: 'block' } : { display: 'none' }}>
+        <div key={recommend.strMeal} style={index < 2 ? { display: 'block' } : { display: 'none' }}>
           <img
             data-testid={`${index}-recomendation-card`} src={recommend.strMealThumb}
             width="200px" alt={recommend.strMeal}
@@ -34,7 +34,7 @@ function Inputs({ id, dataDetail, rec, filtersKey }) {
           <p data-testid={`${index}-recomendation-title`}>{recommend.strMeal}</p>
         </div>
       ))}
-      <Link to={`/bebidas/${id}/progress`}>
+      <Link to={`/bebidas/${id}/progress`} onClick={() => saveToLocalStorage(id, histories)}>
         <input type="button" data-testid="start-recipe-btn" value="Iniciar Receitas" />
       </Link>
     </div>
@@ -44,6 +44,7 @@ function Inputs({ id, dataDetail, rec, filtersKey }) {
 const DetalhesBebida = () => {
   const { dataDetail, setDataDetail, drink, setDrink } = useContext(RecipesContext);
   const history = useHistory();
+  const histories = history;
   const pathName = history.location.pathname;
   const { id } = useParams();
   useEffect(() => {
@@ -57,7 +58,7 @@ const DetalhesBebida = () => {
     (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
   const rec = drink.slice(0, 6);
 
-  const params = { id, dataDetail, rec, filtersKey };
+  const params = { id, dataDetail, rec, filtersKey, histories };
   return (
     Inputs(params)
   );

@@ -1,11 +1,21 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { RecipesContext } from '../../context/RecipesContext';
+import { isDisabled, hasLocalStorage, isChecked, isNotChecked } from '../../utils/utilities';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 
+function handleChange(e, id, checked, setChecked, history) {
+  if( e.target.checked) {
+    isChecked(e, id, checked, setChecked, history);
+  } else {
+    isNotChecked(e, id, checked, setChecked, history);
+  };
+}
+
 const DetalhesComidaProgress = () => {
   const { dataDetail, setDataDetail } = useContext(RecipesContext);
+  const [checked, setChecked] = useState([]);
   const history = useHistory();
   const pathName = history.location.pathname;
   const { id } = useParams();
@@ -21,8 +31,8 @@ const DetalhesComidaProgress = () => {
         setDataDetail(datas.drinks[0]);
       }
     }
-    verify();
-  }, [setDataDetail, id, pathName]);
+  verify();
+}, [setDataDetail, id, pathName]);
 
   if (dataDetail.length === 0) return <h1>loading...</h1>;
   const filtersKeyOutra = Object.keys(dataDetail).filter(
@@ -38,15 +48,28 @@ const DetalhesComidaProgress = () => {
       <img src={shareIcon} data-testid="share-btn" alt="Share Icon" />
       <img src={whiteHeartIcon} data-testid="favorite-btn" alt="White Heart Icon" />
       <h1>Ingredients</h1>
-      {filtersKeyOutra.map((filter, index) => (
-        <p>
-          <input type="checkbox" value="on" data-testid={`${index}-ingredient-step`} />
-          {dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}
-        </p>
-      ))}
+        {filtersKeyOutra.map((filter, index) => (
+          <div key={index}>
+            <label htmlFor={`ingredient${index + 1}`} className={`ingredient${index + 1}`} >
+              <input
+                type="checkbox"
+                checked={hasLocalStorage(`ingredient${index + 1}`, id, history)}
+                id={`ingredient${index + 1}`}
+                onChange={(e) => handleChange(e, id, checked, setChecked, history)}
+                data-testid={`${index}-ingredient-step`} />
+              {dataDetail[filter]} - {dataDetail[`strMeasure${index + 1 }`]}
+            </label>
+          </div>
+        ))}
       <h1>Instructions</h1>
       <p data-testid="instructions">{dataDetail.strInstructions}</p>
-      <button data-testid="finish-recipe-btn" type="button">Finalizar Receita</button>
+      <button
+        data-testid="finish-recipe-btn"
+        disabled={isDisabled()}
+        type="button"
+      >
+        Finalizar Receita
+      </button>
     </div>
   );
 };
