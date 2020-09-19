@@ -21,7 +21,7 @@ function render({ dataDetail, histories, id, checked, setChecked, filtersKeyOutr
       {filtersKeyOutra.map((filter, index) => (
         <div key={filter.strMeal}>
           <div>
-          <label htmlFor={`meal${index + 1}`} className={`meal${index + 1}`} >
+            <label htmlFor={`meal${index + 1}`} className={`meal${index + 1}`} >
             <input
               type="checkbox" checked={hasLocalStorage(`meal${index + 1}`, id, histories)}
               id={`meal${index + 1}`}
@@ -72,4 +72,4 @@ render.propTypes = {
   id: PropTypes.string.isRequired,
   histories: PropTypes.arrayOf(PropTypes.object).isRequired,
   dataDetail: PropTypes.arrayOf(PropTypes.object).isRequired,
-}
+};
