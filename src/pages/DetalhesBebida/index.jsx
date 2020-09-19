@@ -1,13 +1,20 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory, useParams, Link } from 'react-router-dom';
+import shareFunctionDrink from 'clipboard-copy';
 import { RecipesContext } from '../../context/RecipesContext';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
-import { verify, recommended, saveToLocalStorageDrinks } from '../../utils/utilities';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import { verify, recommended, saveToLocalStorageDrinks, recipeInProgress, favoriteRecipe } from '../../utils/utilities';
 // O aluno Felipe Vieira auxiliou na solução da tag iframe
 
-function Inputs({ id, dataDetail, rec, filtersKey }) {
+function shaheLinkDrink (id) {
+  alert('Link copiado!');
+  shareFunctionDrink(`http://localhost:3000/bebidas/${id}`);
+}
+
+function Inputs({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, setLiked }) {
   return (
     <div>
       <img
@@ -16,8 +23,17 @@ function Inputs({ id, dataDetail, rec, filtersKey }) {
       />
       <h1 data-testid="recipe-title">{dataDetail.strDrink}</h1>
       <span data-testid="recipe-category">{dataDetail.strCategory}</span>
-      <img src={shareIcon} data-testid="share-btn" alt="Share Icon" />
-      <img src={whiteHeartIcon} data-testid="favorite-btn" alt="White Heart Icon" />
+      <input
+        type="image"
+        onclick={() => shaheLinkDrink(id)}
+        src={shareIcon} data-testid="share-btn" alt="Share Icon"
+      />
+      <input
+        type="image"
+        src={(liked) ? blackHeartIcon : whiteHeartIcon}
+        onClick={() => favoriteRecipe(liked, setLiked, dataDetail, isMeal)}
+        data-testid="favorite-btn" alt={(liked) ? "Black Heart Icon" : "White Heart Icon"}
+      />
       <h1>Ingredients</h1>
       {filtersKey.map((filter, index) => (
         <p data-testid={`${index}-ingredient-name-and-measure`}>{dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}</p>
@@ -37,28 +53,31 @@ function Inputs({ id, dataDetail, rec, filtersKey }) {
         </div>
       ))}
       <Link to={`/bebidas/${id}/in-progress`} onClick={() => saveToLocalStorageDrinks(id)}>
-        <input type="button" data-testid="start-recipe-btn" value="Iniciar Receitas" />
+        <input type="button" style={{position:'fixed', bottom:0}} data-testid="start-recipe-btn" value={(inProgress) ? "Continuar Receita" : "Iniciar Receita"} />
       </Link>
     </div>
   );
 }
 
 const DetalhesBebida = () => {
-  const { dataDetail, setDataDetail, drink, setDrink } = useContext(RecipesContext);
+  const { dataDetail, setDataDetail, drink, setDrink, setIsMeal, isMeal, liked, setLiked } = useContext(RecipesContext);
   const history = useHistory();
+  const histories = history;
   const pathName = history.location.pathname;
+  const [inProgress, setInProgress] = useState(false);
   const { id } = useParams();
   useEffect(() => {
-    verify(pathName, id, setDataDetail);
-  }, [setDataDetail, id, pathName]);
+    verify(pathName, id, setDataDetail, setIsMeal);
+  }, [setDataDetail, id, pathName, setIsMeal]);
   useEffect(() => {
     recommended(pathName, null, setDrink);
-  }, [pathName, setDrink]);
+    recipeInProgress(setInProgress, histories, id, inProgress)
+  }, [pathName, setDrink, histories, id, inProgress]);
   if (dataDetail.length === 0) return <h1>loading...</h1>;
   const filtersKey = Object.keys(dataDetail).filter(
     (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
   const rec = drink.slice(0, 6);
-  const params = { id, dataDetail, rec, filtersKey };
+  const params = { id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, setLiked };
   return (
     Inputs(params)
   );

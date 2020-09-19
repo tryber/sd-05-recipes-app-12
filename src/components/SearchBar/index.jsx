@@ -56,8 +56,8 @@ async function DrinkFetch(catFilter, setData, goat, setGoat) {
     `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${catFilter}`,
   );
     const data = await response.json();
-    setGoat(catFilter);
     setData(data);
+    setGoat(catFilter);
   }
 }
 
@@ -148,7 +148,7 @@ async function updateCategory(catFilter, setData, pathName, goat, setGoat) {
   if (pathName === '/comidas') {
     FoodCategory(catFilter, setData, goat, setGoat);
   } else {
-    DrinkFetch(catFilter, setData, pathName);
+    DrinkFetch(catFilter, setData, goat, setGoat);
   }
 }
 
