@@ -20,7 +20,7 @@ function Input({ id, dataDetail, rec, filtersKey, histories }) {
       <img src={whiteHeartIcon} data-testid="favorite-btn" alt="White Heart Icon" />
       <h1>Ingredients</h1>
       {filtersKey.map((filter, index) => (
-        <p key={index} data-testid={`${index}-ingredient-name-and-measure`}>{dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}</p>
+        <p key={`${index}-ingredient-name-and-measure`} data-testid={`${index}-ingredient-name-and-measure`}>{dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}</p>
       ))}
       <h1>Instructions</h1>
       <p data-testid="instructions">{dataDetail.strInstructions}</p>
@@ -28,10 +28,11 @@ function Input({ id, dataDetail, rec, filtersKey, histories }) {
       <iframe
         data-testid="video" title={dataDetail.strYoutube} width="200px"
         src={dataDetail.strYoutube && dataDetail.strYoutube.replace('watch?v=', 'embed/')}
-        frameBorder="0" allow="autoplay" />
+        frameBorder="0" allow="autoplay"
+      />
       <h1>Recomendadas</h1>
       {rec.map((recommend, index) => (
-        <div key={index} style={index < 2 ? { display: 'block' } : { display: 'none' }}>
+        <div key={`${index}-recomendation-card`} style={index < 2 ? { display: 'block' } : { display: 'none' }}>
           <img
             data-testid={`${index}-recomendation-card`} src={recommend.strDrinkThumb}
             width="200px" alt={recommend.strDrink}
@@ -74,4 +75,5 @@ Input.propTypes = {
   id: PropTypes.string.isRequired,
   rec: PropTypes.arrayOf(PropTypes.object).isRequired,
   filtersKey: PropTypes.arrayOf(PropTypes.object).isRequired,
+  histories: PropTypes.string.isRequired,
 };
