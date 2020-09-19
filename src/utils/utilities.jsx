@@ -85,8 +85,7 @@ export function saveToLocalStorage(id, histories) {
     if (oldList) {
       savedList = { ...oldList, meals: { ...oldList.meals, [id]: [] } };
       localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
-    } 
-    if (!oldList) {
+    } else {
       savedList.meals[id] = [];
       localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
     }
@@ -94,8 +93,7 @@ export function saveToLocalStorage(id, histories) {
       if (oldList) {
         savedList = { ...oldList, cocktails:{ ...oldList.cocktails, [id]: [] } };
         localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
-      } 
-      if (!oldList) {
+      } else {
         savedList.cocktails[id] = [];
         localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
       }
