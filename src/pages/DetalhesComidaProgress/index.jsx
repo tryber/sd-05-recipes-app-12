@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { RecipesContext } from '../../context/RecipesContext';
 import { isDisabled, hasLocalStorage, handleChange, isChecked, isNotChecked, verify } from '../../utils/utilities';
@@ -37,9 +37,11 @@ function render({ dataDetail, histories, id, checked, setChecked, filtersKeyOutr
       ))}
       <h1>Instructions</h1>
       <p data-testid="instructions">{dataDetail.strInstructions}</p>
-      <button data-testid="finish-recipe-btn" disabled={isDisabled()} type="button">
-        Finalizar Receita
-      </button>
+      <Link to="/receitas-feitas">
+        <button data-testid="finish-recipe-btn" disabled={isDisabled()} type="button">
+          Finalizar Receita
+        </button>
+      </Link>
     </div>
   );
 }

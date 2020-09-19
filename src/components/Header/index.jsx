@@ -17,10 +17,9 @@ const Header = () => {
   const url = useHistory();
   const pathName = url.location.pathname;
   const title = headerTitle(pathName);
-  const { toggle, setToggle, setTitle } = useContext(RecipesContext);
+  const { toggle, setToggle } = useContext(RecipesContext);
   const handleClick = () => {
     if (toggle === false) {
-      setTitle(title);
       setToggle(true);
     } else {
       setToggle(false);

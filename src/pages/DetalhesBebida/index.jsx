@@ -36,7 +36,7 @@ function Inputs({ id, dataDetail, rec, filtersKey }) {
           </div>
         </div>
       ))}
-      <Link to={`/bebidas/${id}/progress`} onClick={() => saveToLocalStorageDrinks(id)}>
+      <Link to={`/bebidas/${id}/in-progress`} onClick={() => saveToLocalStorageDrinks(id)}>
         <input type="button" data-testid="start-recipe-btn" value="Iniciar Receitas" />
       </Link>
     </div>

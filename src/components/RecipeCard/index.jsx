@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 // import index from './index';
 import { RecipesContext } from '../../context/RecipesContext';
 
 const RecipeCard = () => {
-  const { data, setData } = useContext(RecipesContext);
+  const { data, setData, goat } = useContext(RecipesContext);
   useEffect(() => {
     async function apiFetch() {
       const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
@@ -18,6 +18,8 @@ const RecipeCard = () => {
   if (data.meals === null) {
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     test = [];
+  } else if (data.meals.length === 1 && goat !== 'Goat') {
+    return <Redirect to ={`/comidas/${data.meals[0].idMeal}`} />
   } else {
     test = data.meals.slice(0, 12);
   }

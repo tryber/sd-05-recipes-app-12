@@ -24,10 +24,10 @@ const Routes = () => (
   <Switch>
     <Route exact path="/" component={Login} />
     <Route path="/perfil" component={Perfil} />
-    <Route path="/comidas/:id/progress" component={DetalhesComidaProgress} />
+    <Route path="/comidas/:id/in-progress" component={DetalhesComidaProgress} />
     <Route path="/comidas/:id/" component={DetalhesComida} />
     <Route path="/comidas" component={MainPage} />
-    <Route path="/bebidas/:id/progress" component={DetalhesBebidaProgress} />
+    <Route path="/bebidas/:id/in-progress" component={DetalhesBebidaProgress} />
     <Route path="/bebidas/:id" component={DetalhesBebida} />
     <Route path="/bebidas" component={Bebidas} />
     <Route

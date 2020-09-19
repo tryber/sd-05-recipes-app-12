@@ -24,12 +24,16 @@ function Input({ id, dataDetail, rec, filtersKey }) {
       ))}
       <h1>Instructions</h1>
       <p data-testid="instructions">{dataDetail.strInstructions}</p>
-      <h1>Vídeos</h1>
-      <iframe
-        data-testid="video" title={dataDetail.strYoutube} width="200px"
-        src={dataDetail.strYoutube && dataDetail.strYoutube.replace('watch?v=', 'embed/')}
-        frameBorder="0" allow="autoplay"
-      />
+      {dataDetail.strYoutube &&
+        <div>
+          <h1>Vídeos</h1>
+          <iframe
+            data-testid="video" title={dataDetail.strYoutube} width="200px"
+            src={dataDetail.strYoutube && dataDetail.strYoutube.replace('watch?v=', 'embed/')}
+            frameBorder="0" allow="autoplay"
+          />
+        </div>
+      }
       <h1>Recomendadas</h1>
       {rec.map((recommend, index) => (
         <div key={recommend.strDrink} style={index < 2 ? { display: 'block' } : { display: 'none' }}>
@@ -40,7 +44,7 @@ function Input({ id, dataDetail, rec, filtersKey }) {
           <p data-testid={`${index}-recomendation-title`}>{recommend.strDrink}</p>
         </div>
       ))}
-      <Link to={`/comidas/${id}/progress`} onClick={() => saveToLocalStorageMeals(id)}>
+      <Link to={`/comidas/${id}/in-progress`} onClick={() => saveToLocalStorageMeals(id)}>
         <input type="button" data-testid="start-recipe-btn" value="Iniciar Receitas" />
       </Link>
     </div>

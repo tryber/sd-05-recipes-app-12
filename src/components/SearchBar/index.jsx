@@ -3,18 +3,60 @@ import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { RecipesContext } from '../../context/RecipesContext';
 
-async function DrinkFetch(catFilter, setData) {
-  if (catFilter === 'All') {
+async function FoodCategory(catFilter, setData, goat, setGoat) {
+  if (catFilter === 'All' || catFilter === goat) {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    const data = await response.json();
+    setData(data);
+    setGoat('All');
+  } else {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${catFilter}`);
+    const data = await response.json();
+    setGoat(catFilter);
+    setData(data);
+  }
+}
+
+async function FletterDrink(searchs, filteredText, setData) {
+  if (searchs === 'firstLetter' && searchs.length > 1) {
+    try {
+      const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${filteredText}`);
+      const data = await response.json();
+      setData(data);
+    } catch (error) {
+      alert('Sua busca deve conter somente 1 (um) caracter');
+      console.error(error);
+    }
+  }
+}
+
+async function FletterFood(searchs, filteredText, setData) {
+  if (searchs === 'firstLetter' && searchs.length > 1) {
+    try {
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${filteredText}`);
+      const data = await response.json();
+      setData(data);
+    } catch (error) {
+      alert('Sua busca deve conter somente 1 (um) caracter');
+      console.error(error);
+    }
+  }
+}
+
+async function DrinkFetch(catFilter, setData, goat, setGoat) {
+  if (catFilter === 'All' || catFilter === goat) {
     const response = await fetch(
     'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
   );
     const data = await response.json();
     setData(data);
+    setGoat('All')
   } else {
     const response = await fetch(
     `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${catFilter}`,
   );
     const data = await response.json();
+    setGoat(catFilter);
     setData(data);
   }
 }
@@ -34,13 +76,7 @@ async function FHC(searchs, filteredText, setData) {
     const data = await response.json();
     setData(data);
   }
-  if (searchs === 'firstLetter') {
-    const response = await fetch(
-      `https://www.themealdb.com/api/json/v1/1/search.php?f=${filteredText}`,
-    );
-    const data = await response.json();
-    setData(data);
-  }
+  FletterFood(searchs, filteredText, setData);
 }
 
 async function FDC(searchs, filteredText, setData) {
@@ -58,13 +94,7 @@ async function FDC(searchs, filteredText, setData) {
     const data = await response.json();
     setData(data);
   }
-  if (searchs === 'firstLetter') {
-    const response = await fetch(
-      `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${filteredText}`,
-    );
-    const data = await response.json();
-    setData(data);
-  }
+ FletterDrink(searchs, filteredText, setData);
 }
 
 function Inputs({ setText, setSearch, search, filteredText, setData, pathName }) {
@@ -114,30 +144,19 @@ function Inputs({ setText, setSearch, search, filteredText, setData, pathName })
   );
 }
 
-async function updateCategory(catFilter, setData, pathName) {
+async function updateCategory(catFilter, setData, pathName, goat, setGoat) {
   if (pathName === '/comidas') {
-    if (catFilter === 'All') {
-      const response = await fetch(
-        'https://www.themealdb.com/api/json/v1/1/search.php?s=',
-      );
-      const data = await response.json();
-      setData(data);
-    } else {
-      const response = await fetch(
-        `https://www.themealdb.com/api/json/v1/1/filter.php?c=${catFilter}`,
-      );
-      const data = await response.json();
-      setData(data);
-    }
+    FoodCategory(catFilter, setData, goat, setGoat);
+  } else {
+    DrinkFetch(catFilter, setData, pathName);
   }
-  DrinkFetch(catFilter, setData, pathName);
 }
 
 // Criar Função para Bebidas
 const SearchBar = () => {
   const [search, setSearch] = useState('name');
   const [filteredText, setText] = useState('');
-  const { setData, toggle, categories, setCategories } = useContext(RecipesContext);
+  const { setData, toggle, categories, setCategories, goat, setGoat } = useContext(RecipesContext);
   const history = useHistory();
   const pathName = history.location.pathname;
 
@@ -167,7 +186,7 @@ const SearchBar = () => {
     <div>
       <button
         value="All" data-testid="All-category-filter"
-        onClick={(e) => updateCategory(e.target.value, setData, pathName)}
+        onClick={(e) => updateCategory(e.target.value, setData, pathName, goat, setGoat)}
       >
         All
       </button>
@@ -175,7 +194,7 @@ const SearchBar = () => {
         categories.map((category) => (
           <button
             data-testid={`${category.strCategory}-category-filter`} value={Object.values(category)}
-            onClick={(e) => updateCategory(e.target.value, setData, pathName)}
+            onClick={(e) => updateCategory(e.target.value, setData, pathName, goat, setGoat)}
           >
             {category.strCategory}
           </button>
