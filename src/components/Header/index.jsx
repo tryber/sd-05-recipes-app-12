@@ -9,7 +9,10 @@ import './styles.css';
 function ProfileContainer() {
   return (
     <Link to="/perfil">
-      <input className="profile-icon" data-testid="profile-top-btn" type="image" src={profileIcon} alt="user" />
+      <input
+        className="profile-icon" data-testid="profile-top-btn"
+        type="image" src={profileIcon} alt="user"
+      />
     </Link>
   );
 }
@@ -32,8 +35,8 @@ const Header = () => {
         <div className="header-box">
           <ProfileContainer />
           <h1 data-testid="page-title" >{title}</h1>
-          <input 
-            type='image'
+          <input
+            type="image"
             className="search-icon"
             src={searchIcon} alt="user"
             data-testid="search-top-btn"

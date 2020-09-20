@@ -1,17 +1,17 @@
 .category-box {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
 }
 
 .category-box button {
-  width: 100px;
+  background-color: #24997f;
   border: 0;
+  border-radius: 8px;
   color: white;
-  font-weight: bold;
+  font-weight: 700;
   margin: 5px;
   padding: 5px;
-  border-radius: 8px;
-  background-color: #24997F;
+  width: 100px;
 }

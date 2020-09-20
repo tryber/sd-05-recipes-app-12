@@ -1,16 +1,17 @@
 .header-box {
+  align-items: baseline;
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
 }
 
-.header-box h1 {
+h1 {
   color: #146354;
 }
 
 .profile-icon {
   margin-left: 10px;
 }
+
 .search-icon {
   margin-right: 10px;
 }

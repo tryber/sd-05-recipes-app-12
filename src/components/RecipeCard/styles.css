@@ -1,14 +1,13 @@
 .recipeCard {
-  display: flex;
-  justify-content: center;
   align-items: baseline;
+  display: flex;
   flex-wrap: wrap;
-  /* background-color: #24997F; */
+  justify-content: center;
 }
 
 .recipeCard a {
-  font-weight: bold;
-  color: #193C34;
+  color: #193c34;
+  font-weight: 700;
   text-decoration: none;
 }
 
@@ -18,11 +17,11 @@
 
 .eachItem {
   background: url('../../images/backgroundImage.svg') top no-repeat;
-  padding: 20px;
+  background-color: #fec0a0;
   border-radius: 10px;
-  margin: 5px;
   height: 100px;
-  background-color: #FEC0A0;
+  margin: 5px;
+  padding: 20px;
   text-align: center;
   width: 125px;
 }

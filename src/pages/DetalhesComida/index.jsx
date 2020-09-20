@@ -80,9 +80,9 @@ const DetalhesComida = () => {
     const storage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
     const keys = Object.values(storage);
     console.log(keys);
-    if(!storage) {
+    if (!storage) {
       console.error('nada pra mostrar');
-    } else if(storage) {
+    } else if (storage) {
       const isLiked = keys.some((item) => item.id === id);
       setLiked(isLiked);
     }
