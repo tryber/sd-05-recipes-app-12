@@ -1,0 +1,17 @@
+.category-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.category-box button {
+  width: 100px;
+  border: 0;
+  color: white;
+  font-weight: bold;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 8px;
+  background-color: #24997F;
+}

@@ -162,12 +162,14 @@ export function newFavorite(isMeal, dataDetail) {
   }
 }
 
-export function removeFavorite(isMeal, dataDetail) {
+export function removeFavorite(isMeal, dataDetail, setLiked) {
   const hasFavorite = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
   let removed;
   if (isMeal) {
+    setLiked(false);
     removed = hasFavorite.filter((item) => item.id !== dataDetail.idMeal);
   } else {
+    setLiked(false);
     removed = hasFavorite.filter((item) => item.id !== dataDetail.idDrink);
   }
   localStorage.setItem('favoriteRecipes', JSON.stringify(removed));
@@ -175,10 +177,10 @@ export function removeFavorite(isMeal, dataDetail) {
 
 export function favoriteRecipe(liked, setLiked, dataDetail, isMeal) {
   if (!liked) {
-    setLiked(true);
-    newFavorite(isMeal, dataDetail);
+    setLiked(true)
+    newFavorite(isMeal, dataDetail, setLiked);
   } else {
     setLiked(false);
-    removeFavorite(isMeal, dataDetail);
+    removeFavorite(isMeal, dataDetail, setLiked);
   }
 }

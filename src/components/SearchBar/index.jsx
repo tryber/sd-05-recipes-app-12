@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { RecipesContext } from '../../context/RecipesContext';
+import './styles.css';
 
 async function FoodCategory(catFilter, setData, goat, setGoat) {
   if (catFilter === 'All' || catFilter === goat) {
@@ -183,7 +184,7 @@ const SearchBar = () => {
     return Inputs(params);
   }
   return (
-    <div>
+    <div className="category-box">
       <button
         value="All" data-testid="All-category-filter"
         onClick={(e) => updateCategory(e.target.value, setData, pathName, goat, setGoat)}

@@ -29,12 +29,12 @@ function Input({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, set
         onClick={() => shaheLinkFood(id)}
         src={shareIcon} data-testid="share-btn" alt="Share Icon"
       />
-      <input
-        type="image"
-        src={liked ? blackHeartIcon : whiteHeartIcon}
-        onClick={() => favoriteRecipe(liked, setLiked, dataDetail, isMeal)}
-        data-testid="favorite-btn" alt="White Heart Icon"
-      />
+      <button onClick={() => favoriteRecipe(liked, setLiked, dataDetail, isMeal)}>
+        <img
+          src={liked ? blackHeartIcon : whiteHeartIcon}
+          data-testid="favorite-btn" alt="White Heart Icon"
+        />
+      </button>
       <h1>Ingredients</h1>
       {filtersKey.map((filter, index) => (
         <p key={filter.strMeal} data-testid={`${index}-ingredient-name-and-measure`}>{dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}</p>
@@ -68,7 +68,6 @@ function Input({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, set
   );
 }
 
-
 const DetalhesComida = () => {
   const { dataDetail, setDataDetail, meal, setMeal, isMeal, setIsMeal, liked, setLiked } = useContext(RecipesContext);
   const history = useHistory();
@@ -76,10 +75,18 @@ const DetalhesComida = () => {
   const [inProgress, setInProgress] = useState(false);
   const pathName = history.location.pathname;
   const { id } = useParams();
-  
   useEffect(() => {
+    const storage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    const keys = Object.values(storage);
+    console.log(keys);
+    if(!storage) {
+      console.error('nada pra mostrar');
+    } else if(storage) {
+      const isLiked = keys.some((item) => item.id === id);
+      setLiked(isLiked);
+    }
     verify(pathName, id, setDataDetail, setIsMeal);
-  }, [setDataDetail, id, pathName, setIsMeal]);
+  }, [setDataDetail, id, pathName, setIsMeal, setLiked]);
   useEffect(() => {
     recommended(pathName, setMeal);
     recipeInProgress(setInProgress, histories, id, inProgress);

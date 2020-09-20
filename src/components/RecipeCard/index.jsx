@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-// import index from './index';
 import { RecipesContext } from '../../context/RecipesContext';
+import './styles.css';
 
 const RecipeCard = () => {
   const { data, setData, goat } = useContext(RecipesContext);
@@ -24,17 +24,21 @@ const RecipeCard = () => {
     test = data.meals.slice(0, 12);
   }
   return (
-    <div>
+    <div className="recipeCard">
       {test.map((meal, index) => (
-        <Link to={`/comidas/${meal.idMeal}`}>
-          <div data-testid={`${index}-recipe-card`} key={meal.idMeal}>
-            <img
-              data-testid={`${index}-card-img`}
-              src={meal.strMealThumb}
-              alt={meal.strMeal}
-              width="200px"
-            />
-            <div data-testid={`${index}-card-name`}>{meal.strMeal}</div>
+        <Link to={`/comidas/${meal.idMeal}`} >
+          <div >
+            <div className="eachItem" data-testid={`${index}-recipe-card`} key={meal.idMeal}>
+              <img
+                className="card-img"
+                data-testid={`${index}-card-img`}
+                src={meal.strMealThumb}
+                alt={meal.strMeal}
+                width="70px"
+              />
+              <p data-testid={`${index}-card-name`}>{meal.strMeal}</p>
+
+            </div>
           </div>
         </Link>
       ))}
