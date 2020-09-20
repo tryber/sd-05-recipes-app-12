@@ -16,12 +16,6 @@ export const Explorar = () => (
   </div>
 );
 
-export const ExplorarComidas = () => (
-  <div>
-    <Header />
-    <Footer />
-  </div>
-);
 export const ExplorarComidasIngrediente = () => (
   <div>
     <Header />
@@ -29,12 +23,6 @@ export const ExplorarComidasIngrediente = () => (
   </div>
 );
 export const ExplorarOrigem = () => (
-  <div>
-    <Header />
-    <Footer />
-  </div>
-);
-export const ExplorarBebidas = () => (
   <div>
     <Header />
     <Footer />

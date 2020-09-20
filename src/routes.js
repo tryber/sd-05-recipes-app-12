@@ -11,12 +11,12 @@ import Bebidas from './pages/Bebidas';
 import {
   NotFound,
   Explorar,
-  ExplorarComidas,
   ExplorarComidasIngrediente,
   ExplorarOrigem,
-  ExplorarBebidas,
   ExplorarBebidasIngrediente,
 } from './pages/Explore';
+import ExplorarComidas from './pages/ExplorarComidas';
+import ExplorarBebidas from './pages/ExplorarBebidas';
 import ReceitasFavoritas from './pages/Receitas-Fav';
 import ReceitasFeitas from './pages/Receitas-Feitas';
 

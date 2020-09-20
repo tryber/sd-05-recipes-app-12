@@ -62,7 +62,7 @@ function Input({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, set
         </div>
       ))}
       <Link to={`/comidas/${id}/in-progress`} onClick={() => saveToLocalStorageMeals(id)}>
-        <input type="button" style={{ position: 'fixed', bottom: 0 }} data-testid="start-recipe-btn" value={(inProgress) ? 'Continuar Receita' : 'Iniciar Receita'} />
+        <button type="button" style={{ position: 'fixed', bottom: 0 }} data-testid="start-recipe-btn" value={(inProgress) ? 'Continuar Receita' : 'Iniciar Receita'} >{(inProgress) ? 'Continuar Receita' : 'Iniciar Receita'}</button>
       </Link>
     </div>
   );
