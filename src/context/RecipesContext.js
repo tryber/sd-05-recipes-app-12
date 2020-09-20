@@ -14,6 +14,8 @@ export const Provider = ({ children }) => {
   const [meal, setMeal] = useState([]);
   const [drink, setDrink] = useState([]);
   const [goat, setGoat] = useState('All');
+  const [isMeal, setIsMeal] = useState(true);
+  const [liked, setLiked] = useState(false);
   const context = {
     ingredient,
     setIngredient,
@@ -35,6 +37,10 @@ export const Provider = ({ children }) => {
     setDrink,
     goat,
     setGoat,
+    isMeal,
+    setIsMeal,
+    liked,
+    setLiked,
   };
 
   return (

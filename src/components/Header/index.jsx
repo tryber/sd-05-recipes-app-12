@@ -16,7 +16,6 @@ function ProfileContainer() {
 const Header = () => {
   const url = useHistory();
   const pathName = url.location.pathname;
-  console.log(pathName);
   const title = headerTitle(pathName);
   const { toggle, setToggle } = useContext(RecipesContext);
   const handleClick = () => {

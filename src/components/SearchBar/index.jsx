@@ -12,9 +12,7 @@ async function FoodCategory(catFilter, setData, goat, setGoat) {
     setData(data);
     setGoat('All');
   } else {
-    const response = await fetch(
-      `https://www.themealdb.com/api/json/v1/1/filter.php?c=${catFilter}`,
-    );
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${catFilter}`);
     const data = await response.json();
     setGoat(catFilter);
     setData(data);
@@ -37,6 +35,7 @@ async function DrinkFetch(catFilter, setData, goat, setGoat) {
     console.log(data);
     setGoat(catFilter);
     setData(data);
+    setGoat(catFilter);
   }
 }
 
