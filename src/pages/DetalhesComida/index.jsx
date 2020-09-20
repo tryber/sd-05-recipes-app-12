@@ -9,9 +9,11 @@ import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import { verify, recommended, saveToLocalStorageMeals, recipeInProgress, favoriteRecipe } from '../../utils/utilities';
 // O lindo aluno Felipe Vieira auxiliou na solução da tag iframe
 
-function shareLinkFood(id) {
-  shareFunctionFood(`http://localhost:3000/comidas/${id}`);
+function shareLinkFood() {
+  const url = window.location.href;
+  document.getElementById('copy').innerHTML = 'Link copiado!';
   alert('Link copiado!');
+  shareFunctionFood(url);
 }
 
 function Input({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, setLiked }) {
@@ -26,15 +28,15 @@ function Input({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, set
       <span data-testid="recipe-category">{dataDetail.strTags}</span>
       <input
         type="image"
-        onClick={() => shareLinkFood(id)}
+        id="copy"
+        onClick={() => shareLinkFood()}
         src={shareIcon} data-testid="share-btn" alt="Share Icon"
       />
-      <button onClick={() => favoriteRecipe(liked, setLiked, dataDetail, isMeal)}>
-        <img
-          src={liked ? blackHeartIcon : whiteHeartIcon}
-          data-testid="favorite-btn" alt="White Heart Icon"
-        />
-      </button>
+      <input
+        type="image" onClick={() => favoriteRecipe(liked, setLiked, dataDetail, isMeal)}
+        src={liked ? blackHeartIcon : whiteHeartIcon}
+        data-testid="favorite-btn" alt="white heart icon"
+      />
       <h1>Ingredients</h1>
       {filtersKey.map((filter, index) => (
         <p key={filter.strMeal} data-testid={`${index}-ingredient-name-and-measure`}>{dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}</p>
