@@ -1,10 +1,10 @@
 export async function verify(pathName, id, setDataDetail, setIsMeal) {
-  if (pathName === `/comidas/${id}`) {
+  if (pathName === `/comidas/${id}` || pathName === `/comidas/${id}/in-progress`) {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
     const data = await response.json();
     setDataDetail(data.meals[0]);
     setIsMeal(true);
-  } else if (pathName === `/bebidas/${id}`) {
+  } else if (pathName === `/bebidas/${id}` || pathName === `/bebidas/${id}/in-progress`) {
     const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
     const data = await response.json();
     setDataDetail(data.drinks[0]);
@@ -26,7 +26,7 @@ export async function recommended(pathName, setMeal, setDrink) {
 }
 
 export function hasLocalStorage(str, id, histories) {
-  const storage = JSON.parse(localStorage.getItem('inProgressRecipes')) || {meals:[], cocktails:[]};
+  const storage = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals: [], cocktails: [] };
   if (storage && histories.location.pathname.includes('comidas')) {
     if (storage.meals[id]) {
       const check = storage.meals[id].some((item) => item === str);
@@ -54,7 +54,7 @@ export function isChecked(e, id, checked, setChecked, history) {
   const checkInput = document.getElementsByClassName(`${e.target.id}`)[0];
   checkInput.style.textDecoration = 'line-through';
   setChecked([...checked, e.target.id]);
-  const storage = JSON.parse(localStorage.getItem('inProgressRecipes')) || {meals:[], cocktails:[]};
+  const storage = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals: [], cocktails: [] };
   if (history.location.pathname.includes('comidas')) {
     storage.meals[id] = [...checked, e.target.id];
   } else if (history.location.pathname.includes('bebidas')) {
@@ -68,7 +68,7 @@ export function isNotChecked(e, id, checked, setChecked, history) {
   checkInput.style.textDecoration = 'none';
   const newArrayOfChecked = checked.filter((check) => check !== e.target.id);
   setChecked(newArrayOfChecked);
-  const storage = JSON.parse(localStorage.getItem('inProgressRecipes')) || {meals:[], cocktails:[]};
+  const storage = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals: [], cocktails: [] };
   if (history.location.pathname.includes('comidas')) {
     storage.meals[id] = newArrayOfChecked;
   } else if (history.location.pathname.includes('bebidas')) {
@@ -78,7 +78,7 @@ export function isNotChecked(e, id, checked, setChecked, history) {
 }
 
 export function saveToLocalStorageDrinks(id) {
-  const oldList = JSON.parse(localStorage.getItem('inProgressRecipes')) || {meals:[], cocktails:[]};
+  const oldList = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals: [], cocktails: [] };
   let savedList = {
     cocktails: {},
     meals: {},
@@ -93,7 +93,7 @@ export function saveToLocalStorageDrinks(id) {
 }
 
 export function saveToLocalStorageMeals(id) {
-  const oldList = JSON.parse(localStorage.getItem('inProgressRecipes')) || {meals:[], cocktails:[]};
+  const oldList = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals: [], cocktails: [] };
   let savedList = {
     cocktails: {},
     meals: {},
@@ -116,8 +116,8 @@ export function handleChange(e, id, checked, setChecked, histories) {
 }
 
 export function recipeInProgress(setInProgress, histories, id) {
-  const storage = JSON.parse(localStorage.getItem('inProgressRecipes')) || {meals:[], cocktails:[]};
-  if(storage) {
+  const storage = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals: [], cocktails: [] };
+  if (storage) {
     if (histories.location.pathname.includes('comidas')) {
       const newAttr = Object.keys(storage.meals);
       setInProgress(newAttr.some((item) => item === id));
@@ -137,7 +137,7 @@ export function mealObj(dataDetail) {
     alcoholicOrNot: '',
     name: dataDetail.strMeal,
     image: dataDetail.strMealThumb,
-  }
+  };
 }
 
 export function drinkObj(dataDetail) {
@@ -149,7 +149,7 @@ export function drinkObj(dataDetail) {
     alcoholicOrNot: dataDetail.strAlcoholic,
     name: dataDetail.strDrink,
     image: dataDetail.strDrinkThumb,
-  }
+  };
 }
 
 export function newFavorite(isMeal, dataDetail) {

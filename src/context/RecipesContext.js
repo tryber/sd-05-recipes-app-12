@@ -39,7 +39,7 @@ export const Provider = ({ children }) => {
     setGoat,
     isMeal,
     setIsMeal,
-    liked, 
+    liked,
     setLiked,
   };
 

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { RecipesContext } from '../../context/RecipesContext';
 import './styles.css';
 

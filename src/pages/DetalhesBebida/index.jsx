@@ -9,9 +9,9 @@ import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import { verify, recommended, saveToLocalStorageDrinks, recipeInProgress, favoriteRecipe } from '../../utils/utilities';
 // O aluno Felipe Vieira auxiliou na solução da tag iframe
 
-function shaheLinkDrink (id) {
-  alert('Link copiado!');
+function shareLinkDrink(id) {
   shareFunctionDrink(`http://localhost:3000/bebidas/${id}`);
+  alert('Link copiado!');
 }
 
 function Inputs({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, setLiked }) {
@@ -23,16 +23,17 @@ function Inputs({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, se
       />
       <h1 data-testid="recipe-title">{dataDetail.strDrink}</h1>
       <span data-testid="recipe-category">{dataDetail.strCategory}</span>
+      <p data-testid="recipe-category">Esta bebida é alcoólica: {dataDetail.strAlcoholic}</p>
       <input
         type="image"
-        onclick={() => shaheLinkDrink(id)}
+        onClick={() => shareLinkDrink(id)}
         src={shareIcon} data-testid="share-btn" alt="Share Icon"
       />
       <input
         type="image"
         src={(liked) ? blackHeartIcon : whiteHeartIcon}
         onClick={() => favoriteRecipe(liked, setLiked, dataDetail, isMeal)}
-        data-testid="favorite-btn" alt={(liked) ? "Black Heart Icon" : "White Heart Icon"}
+        data-testid="favorite-btn" alt={(liked) ? 'Black Heart Icon' : 'White Heart Icon'}
       />
       <h1>Ingredients</h1>
       {filtersKey.map((filter, index) => (
@@ -53,14 +54,15 @@ function Inputs({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, se
         </div>
       ))}
       <Link to={`/bebidas/${id}/in-progress`} onClick={() => saveToLocalStorageDrinks(id)}>
-        <input type="button" style={{position:'fixed', bottom:0}} data-testid="start-recipe-btn" value={(inProgress) ? "Continuar Receita" : "Iniciar Receita"} />
+        <button type="button" style={{ position: 'fixed', bottom: 0 }} data-testid="start-recipe-btn" value={(inProgress) ? 'Continuar Receita' : 'Iniciar Receita'} >{(inProgress) ? 'Continuar Receita' : 'Iniciar Receita'}</button>
       </Link>
     </div>
   );
 }
 
 const DetalhesBebida = () => {
-  const { dataDetail, setDataDetail, drink, setDrink, setIsMeal, isMeal, liked, setLiked } = useContext(RecipesContext);
+  const { dataDetail, setDataDetail, drink, setDrink, setIsMeal, isMeal,
+    liked, setLiked } = useContext(RecipesContext);
   const history = useHistory();
   const histories = history;
   const pathName = history.location.pathname;
@@ -71,7 +73,7 @@ const DetalhesBebida = () => {
   }, [setDataDetail, id, pathName, setIsMeal]);
   useEffect(() => {
     recommended(pathName, null, setDrink);
-    recipeInProgress(setInProgress, histories, id, inProgress)
+    recipeInProgress(setInProgress, histories, id, inProgress);
   }, [pathName, setDrink, histories, id, inProgress]);
   if (dataDetail.length === 0) return <h1>loading...</h1>;
   const filtersKey = Object.keys(dataDetail).filter(
@@ -87,6 +89,10 @@ export default DetalhesBebida;
 Inputs.propTypes = {
   dataDetail: PropTypes.arrayOf(PropTypes.object).isRequired,
   id: PropTypes.string.isRequired,
+  isMeal: PropTypes.string.isRequired,
+  inProgress: PropTypes.string.isRequired,
+  liked: PropTypes.string.isRequired,
+  setLiked: PropTypes.func.isRequired,
   rec: PropTypes.arrayOf(PropTypes.object).isRequired,
   filtersKey: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

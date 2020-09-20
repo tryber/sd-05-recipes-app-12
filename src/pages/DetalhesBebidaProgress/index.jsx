@@ -15,6 +15,7 @@ function renderProgress({ dataDetail, histories, id, checked, setChecked, filter
       />
       <h1 data-testid="recipe-title">{dataDetail.strDrink}</h1>
       <span data-testid="recipe-category">{dataDetail.strCategory}</span>
+      <span data-testid="recipe-category">{dataDetail.strTags}</span>
       <img src={shareIcon} data-testid="share-btn" alt="Share Icon" />
       <img src={whiteHeartIcon} data-testid="favorite-btn" alt="White Heart Icon" />
       <h1>Ingredients</h1>
@@ -45,15 +46,15 @@ function renderProgress({ dataDetail, histories, id, checked, setChecked, filter
 }
 
 const DetalhesBebidaProgress = () => {
-  const { dataDetail, setDataDetail } = useContext(RecipesContext);
+  const { dataDetail, setDataDetail, setIsMeal } = useContext(RecipesContext);
   const [checked, setChecked] = useState([]);
   const history = useHistory();
   const histories = history;
   const pathName = history.location.pathname;
   const { id } = useParams();
   useEffect(() => {
-    verify(pathName, id, setDataDetail);
-  }, [setDataDetail, id, pathName]);
+    verify(pathName, id, setDataDetail, setIsMeal);
+  }, [setDataDetail, id, pathName, setIsMeal]);
 
   if (dataDetail.length === 0) return <h1>loading...</h1>;
   const filtersKeyOutra = Object.keys(dataDetail).filter(

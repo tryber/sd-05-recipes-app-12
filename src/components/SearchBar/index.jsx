@@ -6,7 +6,9 @@ import './styles.css';
 
 async function FoodCategory(catFilter, setData, goat, setGoat) {
   if (catFilter === 'All' || catFilter === goat) {
-    const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    const response = await fetch(
+        'https://www.themealdb.com/api/json/v1/1/search.php?s=',
+      );
     const data = await response.json();
     setData(data);
     setGoat('All');
@@ -15,32 +17,6 @@ async function FoodCategory(catFilter, setData, goat, setGoat) {
     const data = await response.json();
     setGoat(catFilter);
     setData(data);
-  }
-}
-
-async function FletterDrink(searchs, filteredText, setData) {
-  if (searchs === 'firstLetter' && searchs.length > 1) {
-    try {
-      const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${filteredText}`);
-      const data = await response.json();
-      setData(data);
-    } catch (error) {
-      alert('Sua busca deve conter somente 1 (um) caracter');
-      console.error(error);
-    }
-  }
-}
-
-async function FletterFood(searchs, filteredText, setData) {
-  if (searchs === 'firstLetter' && searchs.length > 1) {
-    try {
-      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${filteredText}`);
-      const data = await response.json();
-      setData(data);
-    } catch (error) {
-      alert('Sua busca deve conter somente 1 (um) caracter');
-      console.error(error);
-    }
   }
 }
 
@@ -57,8 +33,38 @@ async function DrinkFetch(catFilter, setData, goat, setGoat) {
     `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${catFilter}`,
   );
     const data = await response.json();
+    console.log(data);
+    setGoat(catFilter);
     setData(data);
     setGoat(catFilter);
+  }
+}
+
+async function FLetterDrink(searchs, filteredText, setData) {
+  if (searchs === 'firstLetter' && searchs.length > 1) {
+    try {
+      const response = await fetch(
+      `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${filteredText}`,
+    );
+      const data = await response.json();
+      setData(data);
+    } catch (error) {
+      alert('Sua busca deve conter somente 1 (um) caracter');
+      console.error(error);
+    }
+  }
+}
+
+async function FLetterFood(searchs, filteredText, setData) {
+  if (searchs === 'firstLetter' && searchs.length > 1) {
+    try {
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${filteredText}`);
+      const data = await response.json();
+      setData(data);
+    } catch (error) {
+      alert('Sua busca deve conter somente 1 (um) caracter');
+      console.error(error);
+    }
   }
 }
 
@@ -77,7 +83,7 @@ async function FHC(searchs, filteredText, setData) {
     const data = await response.json();
     setData(data);
   }
-  FletterFood(searchs, filteredText, setData);
+  FLetterFood(searchs, filteredText, setData);
 }
 
 async function FDC(searchs, filteredText, setData) {
@@ -95,7 +101,7 @@ async function FDC(searchs, filteredText, setData) {
     const data = await response.json();
     setData(data);
   }
-  FletterDrink(searchs, filteredText, setData);
+  FLetterDrink(searchs, filteredText, setData);
 }
 
 function Inputs({ setText, setSearch, search, filteredText, setData, pathName }) {

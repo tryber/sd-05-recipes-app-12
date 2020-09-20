@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
+import Footer from '../../components/FooterMenu';
 
 const Perfil = () => {
   const email = window.localStorage.getItem('user');
@@ -20,6 +21,7 @@ const Perfil = () => {
       <Link to="/" onClick={() => { window.localStorage.clear(); }}>
         <button data-testid="profile-logout-btn">Sair</button>
       </Link>
+      <Footer />
     </div>
   );
 };

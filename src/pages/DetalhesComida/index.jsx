@@ -9,9 +9,9 @@ import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import { verify, recommended, saveToLocalStorageMeals, recipeInProgress, favoriteRecipe } from '../../utils/utilities';
 // O lindo aluno Felipe Vieira auxiliou na solução da tag iframe
 
-function shaheLinkFood (id) {
-  alert('Link copiado!');
+function shareLinkFood(id) {
   shareFunctionFood(`http://localhost:3000/comidas/${id}`);
+  alert('Link copiado!');
 }
 
 function Input({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, setLiked }) {
@@ -25,8 +25,8 @@ function Input({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, set
       <span data-testid="recipe-category">{dataDetail.strCategory}</span>
       <span data-testid="recipe-category">{dataDetail.strTags}</span>
       <input
-        type='image'
-        onClick={() => shaheLinkFood(id)}
+        type="image"
+        onClick={() => shareLinkFood(id)}
         src={shareIcon} data-testid="share-btn" alt="Share Icon"
       />
       <button onClick={() => favoriteRecipe(liked, setLiked, dataDetail, isMeal)}>
@@ -62,14 +62,15 @@ function Input({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, set
         </div>
       ))}
       <Link to={`/comidas/${id}/in-progress`} onClick={() => saveToLocalStorageMeals(id)}>
-        <input type="button" style={{position:'fixed', bottom:0}} data-testid="start-recipe-btn" value={(inProgress) ? "Continuar Receita" : "Iniciar Receita"} />
+        <button type="button" style={{ position: 'fixed', bottom: 0 }} data-testid="start-recipe-btn" value={(inProgress) ? 'Continuar Receita' : 'Iniciar Receita'} >{(inProgress) ? 'Continuar Receita' : 'Iniciar Receita'}</button>
       </Link>
     </div>
   );
 }
 
 const DetalhesComida = () => {
-  const { dataDetail, setDataDetail, meal, setMeal, isMeal, setIsMeal, liked, setLiked } = useContext(RecipesContext);
+  const { dataDetail, setDataDetail, meal, setMeal, isMeal, setIsMeal, liked,
+    setLiked } = useContext(RecipesContext);
   const history = useHistory();
   const histories = history;
   const [inProgress, setInProgress] = useState(false);
@@ -95,9 +96,9 @@ const DetalhesComida = () => {
   const filtersKey = Object.keys(dataDetail).filter(
     (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
   const rec = meal.slice(0, 6);
-  const params = { id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, setLiked };
+  const param = { id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, setLiked };
   return (
-    Input(params)
+    Input(param)
   );
 };
 export default DetalhesComida;
@@ -105,6 +106,10 @@ export default DetalhesComida;
 Input.propTypes = {
   dataDetail: PropTypes.arrayOf(PropTypes.object).isRequired,
   id: PropTypes.string.isRequired,
+  isMeal: PropTypes.string.isRequired,
+  inProgress: PropTypes.string.isRequired,
+  liked: PropTypes.string.isRequired,
+  setLiked: PropTypes.func.isRequired,
   rec: PropTypes.arrayOf(PropTypes.object).isRequired,
   filtersKey: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

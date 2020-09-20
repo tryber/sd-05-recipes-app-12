@@ -15,6 +15,7 @@ function render({ dataDetail, histories, id, checked, setChecked, filtersKeyOutr
       />
       <h1 data-testid="recipe-title">{dataDetail.strMeal}</h1>
       <span data-testid="recipe-category">{dataDetail.strCategory}</span>
+      <span data-testid="recipe-category">{dataDetail.strTags}</span>
       <img src={shareIcon} data-testid="share-btn" alt="Share Icon" />
       <img src={whiteHeartIcon} data-testid="favorite-btn" alt="White Heart Icon" />
       <h1>Ingredients</h1>
@@ -47,20 +48,22 @@ function render({ dataDetail, histories, id, checked, setChecked, filtersKeyOutr
 }
 
 const DetalhesComidaProgress = () => {
-  const { dataDetail, setDataDetail } = useContext(RecipesContext);
+  const { dataDetail, setDataDetail, setIsMeal, isMeal } = useContext(RecipesContext);
   const [checked, setChecked] = useState([]);
   const history = useHistory();
   const histories = history;
   const pathName = history.location.pathname;
   const { id } = useParams();
   useEffect(() => {
-    verify(pathName, id, setDataDetail);
-  }, [setDataDetail, id, pathName]);
+    verify(pathName, id, setDataDetail, setIsMeal);
+  }, [setDataDetail, id, pathName, setIsMeal]);
 
   if (dataDetail.length === 0) return <h1>loading...</h1>;
   const filtersKeyOutra = Object.keys(dataDetail).filter(
     (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
-  const params = { dataDetail, shareIcon, histories, id, checked, setChecked, filtersKeyOutra };
+  const params = {
+    dataDetail, shareIcon, histories, id, checked, setChecked, filtersKeyOutra, isMeal,
+  };
   return (
     render(params)
   );
