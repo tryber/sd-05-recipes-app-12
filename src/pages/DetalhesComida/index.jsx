@@ -11,9 +11,11 @@ import { verify, recommended, saveToLocalStorageMeals, recipeInProgress, favorit
 import './styles.css';
 // O lindo aluno Felipe Vieira auxiliou na solução da tag iframe
 
-function shareLinkFood(id) {
-  shareFunctionFood(`http://localhost:3000/comidas/${id}`);
+function shareLinkFood() {
+  const url = window.location.href;
+  document.getElementById('copy').innerHTML = 'Link copiado!';
   alert('Link copiado!');
+  shareFunctionFood(url);
 }
 
 function Input({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, setLiked }) {
@@ -38,7 +40,8 @@ function Input({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, set
       <input
         className="share-btn"
         type="image"
-        onClick={() => shareLinkFood(id)}
+        id="copy"
+        onClick={() => shareLinkFood()}
         src={shareIcon} data-testid="share-btn" alt="Share Icon"
       />
       <input

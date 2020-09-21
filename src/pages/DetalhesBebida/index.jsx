@@ -10,9 +10,11 @@ import { verify, recommended, saveToLocalStorageDrinks, recipeInProgress, favori
 import './styles.css';
 // O aluno Felipe Vieira auxiliou na solução da tag iframe
 
-function shareLinkDrink(id) {
-  shareFunctionDrink(`http://localhost:3000/bebidas/${id}`);
+function shareLinkDrink() {
+  const url = window.location.href;
+  document.getElementById('copy').innerHTML = 'Link copiado!';
   alert('Link copiado!');
+  shareFunctionDrink(url);
 }
 
 function Inputs({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, setLiked }) {
@@ -42,7 +44,8 @@ function Inputs({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, se
       <input
         className="share-btn"
         type="image"
-        onClick={() => shareLinkDrink(id)}
+        id="copy"
+        onClick={() => shareLinkDrink()}
         src={shareIcon} data-testid="share-btn" alt="Share Icon"
       />
       <input
@@ -92,8 +95,17 @@ const DetalhesBebida = () => {
   const [inProgress, setInProgress] = useState(false);
   const { id } = useParams();
   useEffect(() => {
+    const storages = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    const keys = Object.values(storages);
+    console.log(keys);
+    if (!storages) {
+      console.error('nada pra mostrar');
+    } else if (storages) {
+      const isLiked = keys.some((item) => item.id === id);
+      setLiked(isLiked);
+    }
     verify(pathName, id, setDataDetail, setIsMeal);
-  }, [setDataDetail, id, pathName, setIsMeal]);
+  }, [setDataDetail, id, pathName, setIsMeal, setLiked]);
   useEffect(() => {
     recommended(pathName, null, setDrink);
     recipeInProgress(setInProgress, histories, id, inProgress);
