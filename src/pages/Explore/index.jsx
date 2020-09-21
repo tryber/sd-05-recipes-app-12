@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/FooterMenu';
 
-export const Explorar = () => (
+const Explorar = () => (
   <div>
     <Header />
     <Link to="/explorar/comidas">
@@ -16,22 +16,4 @@ export const Explorar = () => (
   </div>
 );
 
-export const ExplorarComidasIngrediente = () => (
-  <div>
-    <Header />
-    <Footer />
-  </div>
-);
-export const ExplorarOrigem = () => (
-  <div>
-    <Header />
-    <Footer />
-  </div>
-);
-export const ExplorarBebidasIngrediente = () => (
-  <div>
-    <Header />
-    <Footer />
-  </div>
-);
-export const NotFound = () => <div>Oi</div>;
+export default Explorar;
