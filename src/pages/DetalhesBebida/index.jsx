@@ -25,9 +25,19 @@ function Inputs({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, se
       />
       <h1 data-testid="recipe-title" className="recipe-title">{dataDetail.strDrink}</h1>
       <div className="recipe-category-box">
-        <span data-testid="recipe-category" className="recipe-category">{dataDetail.strCategory}</span>
+        <span
+          data-testid="recipe-category"
+          className="recipe-category"
+        >
+          {dataDetail.strCategory}
+        </span>
         <span className="recipe-hifen"> - </span>
-        <span data-testid="recipe-category" className="recipe-tags">Esta bebida é alcoólica: {dataDetail.strAlcoholic}</span>
+        <span
+          data-testid="recipe-category"
+          className="recipe-tags"
+        >
+          Esta bebida é alcoólica: {dataDetail.strAlcoholic}
+        </span>
       </div>
       <input
         className="share-btn"
@@ -54,15 +64,15 @@ function Inputs({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, se
       </div>
       <h1 className="recipe-recommend-title">Recomendadas</h1>
       <div className="recipe-recommend-card">
-      {rec.map((recommend, index) => (
-        <div key={recommend.strMeal} style={index < 2 ? { display: '' } : { display: 'none' }}>
-          <div className="each-item-food" style={index < 2 ? { display: 'block' } : { display: 'none' }}>
-            <img
-              data-testid={`${index}-recomendation-card`} src={recommend.strMealThumb}
-              width="70px" alt={recommend.strMeal} className="card-img"
-            />
-            <p data-testid={`${index}-recomendation-title`}>{recommend.strMeal}</p>
-          </div>
+        {rec.map((recommend, index) => (
+          <div key={recommend.strMeal} style={index < 2 ? { display: '' } : { display: 'none' }}>
+            <div className="each-item-food" style={index < 2 ? { display: 'block' } : { display: 'none' }}>
+              <img
+                data-testid={`${index}-recomendation-card`} src={recommend.strMealThumb}
+                width="70px" alt={recommend.strMeal} className="card-img"
+              />
+              <p data-testid={`${index}-recomendation-title`}>{recommend.strMeal}</p>
+            </div>
         </div>
       ))}
       </div>

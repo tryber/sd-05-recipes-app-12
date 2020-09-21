@@ -1,58 +1,56 @@
-
 .bg-login {
+  background: url('../../images/frying-pan3.png') top right no-repeat, url('../../images/backgroundLogin.svg') top right no-repeat;
   position: absolute;
   width: 100%;
-  background: url('../../images/frying-pan3.png')top right no-repeat, url('../../images/backgroundLogin.svg')top right no-repeat;
-  
 }
 
 .box-login {
-  font-size: 1.3rem;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  font-size: 1.3rem;
   margin-top: 400px;
 }
 
-.box-login h1 {
+.box-login-title {
   color: #146354;
 }
 
 .box-login input {
-  font-size: 1.2rem;
-  width: 300px;
-  height: 25px;
+  border: 2px solid #fec0a0;
   border-radius: 8px;
-  border: 2px solid #FEC0A0;
-  padding-left: 10px;
+  font-size: 1.2rem;
+  height: 25px;
   margin-bottom: 5px;
+  padding-left: 10px;
+  width: 300px;
 }
 
 .box-login span {
+  color: #24997f;
   display: block;
-  margin-top: -20px;
-  margin-bottom: 10px;
-  text-align: left;
-  color: #24997F;
   font-size: 1.1rem;
-}
-
-.box-login button:disabled {
-  color: white;
-  font-size: 1.2rem;
-  width: 315px;
-  height: 30px;
-  border-radius: 8px;
-  background-color: #FEC0A0;
-  border: none;
+  margin-bottom: 10px;
+  margin-top: -20px;
+  text-align: left;
 }
 
 .box-login button {
+  background-color: #fd8061;
+  border: none;
+  border-radius: 8px;
   color: white;
   font-size: 1.2rem;
-  width: 315px;
   height: 30px;
-  border-radius: 8px;
-  background-color: #FD8061;
+  width: 315px;
+}
+
+.box-login button:disabled {
+  background-color: #fec0a0 ;
   border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1.2rem;
+  height: 30px;
+  width: 315px;
 }

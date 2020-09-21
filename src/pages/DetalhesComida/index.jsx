@@ -8,7 +8,7 @@ import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import loading from '../../images/loader.gif';
 import { verify, recommended, saveToLocalStorageMeals, recipeInProgress, favoriteRecipe } from '../../utils/utilities';
-import './styles.css'
+import './styles.css';
 // O lindo aluno Felipe Vieira auxiliou na solução da tag iframe
 
 function shareLinkFood(id) {
@@ -26,7 +26,12 @@ function Input({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, set
       />
       <h1 data-testid="recipe-title" className="recipe-title">{dataDetail.strMeal}</h1>
       <div className="recipe-category-box">
-        <span data-testid="recipe-category" className="recipe-category">{dataDetail.strCategory}</span>
+        <span 
+          data-testid="recipe-category"
+          className="recipe-category"
+        >
+          {dataDetail.strCategory}
+        </span>
         <span className="recipe-hifen"> - </span>
         <span data-testid="recipe-category" className="recipe-tags">{dataDetail.strTags}</span>
       </div>
@@ -36,13 +41,13 @@ function Input({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, set
         onClick={() => shareLinkFood(id)}
         src={shareIcon} data-testid="share-btn" alt="Share Icon"
       />
-        <input
-          className="like-btn"
-          type="image"
-          onClick={() => favoriteRecipe(liked, setLiked, dataDetail, isMeal)}
-          src={liked ? blackHeartIcon : whiteHeartIcon}
-          data-testid="favorite-btn" alt="White Heart Icon"
-        />
+      <input
+        className="like-btn"
+        type="image"
+        onClick={() => favoriteRecipe(liked, setLiked, dataDetail, isMeal)}
+        src={liked ? blackHeartIcon : whiteHeartIcon}
+        data-testid="favorite-btn" alt="White Heart Icon"
+      />
       <h1 className="recipe-ingredients-title">Ingredients</h1>
       <div className="recipe-ingredients">
         {filtersKey.map((filter, index) => (
@@ -96,9 +101,9 @@ const DetalhesComida = () => {
     const storage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
     const keys = Object.values(storage);
     console.log(keys);
-    if(!storage) {
+    if (!storage) {
       console.error('nada pra mostrar');
-    } else if(storage) {
+    } else if (storage) {
       const isLiked = keys.some((item) => item.id === id);
       setLiked(isLiked);
     }
@@ -108,7 +113,7 @@ const DetalhesComida = () => {
     recommended(pathName, setMeal);
     recipeInProgress(setInProgress, histories, id, inProgress);
   }, [pathName, setMeal, histories, id, inProgress]);
-  if (dataDetail.length === 0) return <img src={loading} alt="loader"/>;
+  if (dataDetail.length === 0) return <img src={loading} alt="loader" />;
   const filtersKey = Object.keys(dataDetail).filter(
     (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
   const rec = meal.slice(0, 6);

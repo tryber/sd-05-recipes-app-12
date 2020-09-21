@@ -177,7 +177,7 @@ export function removeFavorite(isMeal, dataDetail, setLiked) {
 
 export function favoriteRecipe(liked, setLiked, dataDetail, isMeal) {
   if (!liked) {
-    setLiked(true)
+    setLiked(true);
     newFavorite(isMeal, dataDetail, setLiked);
   } else {
     setLiked(false);

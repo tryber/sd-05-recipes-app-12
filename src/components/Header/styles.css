@@ -1,22 +1,21 @@
 .header-box {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 -2px 7px 0 rgba(0, 0, 0, 0.79);
+  display: flex;
   height: 60px;
+  justify-content: space-between;
   margin-bottom: 10px;
-  -webkit-box-shadow: 0px -2px 7px 0px rgba(0,0,0,0.79);
-  -moz-box-shadow: 0px -2px 7px 0px rgba(0,0,0,0.79);
-  box-shadow: 0px -2px 7px 0px rgba(0,0,0,0.79);
-  border-radius: 0px 0px 8px 8px;
 }
 
-.header-box h1 {
+.header-title {
   color: #146354;
 }
 
 .profile-icon {
   margin-left: 10px;
 }
+
 .search-icon {
   margin-right: 10px;
 }

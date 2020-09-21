@@ -21,7 +21,7 @@ const Login = () => {
   return (
     <div className="bg-login">
       <div className="box-login">
-        <h1>Login</h1>
+        <h1 className="box-login-title">Login</h1>
         <span>Find your favorite recipes</span>
         <input
           data-testid="email-input"

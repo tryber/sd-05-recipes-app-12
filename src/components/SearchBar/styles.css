@@ -1,60 +1,60 @@
 .category-box {
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
 }
 
 .category-box button {
-  width: 150px;
   border: 0;
+  border-radius: 8px;
+  background-color: #24997f;
   color: white;
-  font-weight: bold;
+  font-weight: 700;
   margin: 5px;
   padding: 5px;
-  border-radius: 8px;
-  background-color: #24997F;
+  width: 150px;
 }
 
 .box-search {
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 
 .box-search button {
-  width: 300px;
-  height: 30px;
   border: none;
+  background-color: #24997f;
   border-radius: 8px;
-  background-color: #24997F;
   color: white;
   font-size: 1.3rem;
+  height: 30px;
   margin-bottom: 10px;
+  width: 300px;
 }
 
 .search-radio-input {
+  align-items: baseline;
   display: flex;
   flex-direction: column;
-  align-items: baseline;
 }
 
 .radio-input {
-  margin-top: 8px;
   margin-bottom: 8px;
+  margin-top: 8px;
 }
 
 .label-radio-input {
-  font-size: 1.1rem;
-  font-weight: bold;
   color: #146354;
+  font-size: 1.1rem;
+  font-weight: 700;
 }
 
 .search-input {
-  width: 300px;
-  height: 30px;
+  border: 1px solid #24997f;
   border-radius: 8px;
-  border: 1px solid #24997F;
+  height: 30px;
   text-align: center;
+  width: 300px;
 }

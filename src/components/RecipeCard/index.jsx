@@ -14,7 +14,7 @@ const RecipeCard = () => {
     }
     apiFetch();
   }, [setData]);
-  if (data.meals === undefined) return <img src={loading} alt="loader" />
+  if (data.meals === undefined) return <img src={loading} alt="loader" />;
   let test;
   if (data.meals === null) {
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
