@@ -6,9 +6,9 @@
 }
 
 .category-box button {
+  background-color: #24997f;
   border: 0;
   border-radius: 8px;
-  background-color: #24997f;
   color: white;
   font-weight: 700;
   margin: 5px;
@@ -24,8 +24,8 @@
 }
 
 .box-search button {
-  border: none;
   background-color: #24997f;
+  border: none;
   border-radius: 8px;
   color: white;
   font-size: 1.3rem;

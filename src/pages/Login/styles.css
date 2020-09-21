@@ -46,7 +46,7 @@
 }
 
 .box-login button:disabled {
-  background-color: #fec0a0 ;
+  background-color: #fec0a0;
   border: none;
   border-radius: 8px;
   color: white;

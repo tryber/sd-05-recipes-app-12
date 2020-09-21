@@ -78,9 +78,9 @@ body {
 }
 
 .recipe-video-title {
-  text-align: center;
   color: #146354;
   font-size: 1.4rem;
+  text-align: center;
 }
 
 .recipe-instructions {
@@ -93,8 +93,8 @@ body {
   line-height: 20px;
   margin: 0 11px;
   padding: 11px;
-  text-indent: 2em;
   text-align: justify;
+  text-indent: 2em;
 }
 
 .recipe-video {

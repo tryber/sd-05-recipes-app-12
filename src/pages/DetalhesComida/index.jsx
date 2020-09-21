@@ -26,7 +26,7 @@ function Input({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, set
       />
       <h1 data-testid="recipe-title" className="recipe-title">{dataDetail.strMeal}</h1>
       <div className="recipe-category-box">
-        <span 
+        <span
           data-testid="recipe-category"
           className="recipe-category"
         >

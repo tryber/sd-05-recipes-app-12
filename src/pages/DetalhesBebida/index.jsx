@@ -73,7 +73,7 @@ function Inputs({ id, dataDetail, rec, filtersKey, inProgress, isMeal, liked, se
               />
               <p data-testid={`${index}-recomendation-title`}>{recommend.strMeal}</p>
             </div>
-        </div>
+          </div>
       ))}
       </div>
       <Link to={`/bebidas/${id}/in-progress`} onClick={() => saveToLocalStorageDrinks(id)}>
