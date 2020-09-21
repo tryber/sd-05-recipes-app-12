@@ -1,0 +1,21 @@
+* {
+  font-family: Archivo, sans-serif;
+}
+.recipe-photo {
+  width: 100vw;
+}
+
+.each-item-food {
+  background: url('../../images/backgroundImage.svg') top no-repeat;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 5px;
+  height: 100px;
+  background-color: #FEC0A0;
+  -webkit-box-shadow: 4px 4px 4px 0px rgba(0,0,0,0.32);
+  -moz-box-shadow: 4px 4px 4px 0px rgba(0,0,0,0.32);
+  box-shadow: 4px 4px 4px 0px rgba(0,0,0,0.32);
+  text-align: center;
+  width: 125px;
+  color: white;
+}

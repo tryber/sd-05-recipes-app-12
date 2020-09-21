@@ -16,18 +16,21 @@
   border-radius: 50%;
 }
 
-.eachItem {
+.each-item {
   background: url('../../images/backgroundImage.svg') top no-repeat;
   padding: 20px;
   border-radius: 10px;
   margin: 5px;
   height: 100px;
   background-color: #FEC0A0;
+  -webkit-box-shadow: 4px 4px 4px 0px rgba(0,0,0,0.32);
+  -moz-box-shadow: 4px 4px 4px 0px rgba(0,0,0,0.32);
+  box-shadow: 4px 4px 4px 0px rgba(0,0,0,0.32);
   text-align: center;
   width: 125px;
 }
 
-.eachItem p {
+.each-item-food p {
   max-width: 25ch;
   overflow: hidden;
   text-overflow: ellipsis;

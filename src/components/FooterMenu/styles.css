@@ -1,0 +1,33 @@
+body {
+  margin-bottom: 80px;
+}
+
+.footer {
+  width: 100%;
+}
+
+.footer-box {
+  background-color: #59DBB7;
+  margin-top: 10px;
+  -webkit-box-shadow: 0px -2px 7px 0px rgba(0,0,0,0.79);
+  -moz-box-shadow: 0px -2px 7px 0px rgba(0,0,0,0.79);
+  box-shadow: 0px -2px 7px 0px rgba(0,0,0,0.79);
+  padding: 15px;
+  border-radius: 8px 8px 0px 0px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.btn-drink img {
+  width: 30px;
+}
+
+.btn-explore img {
+  width: 30px;
+}
+
+.btn-meal img {
+  width: 30px;
+
+}
