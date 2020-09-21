@@ -20,7 +20,7 @@ export async function getIngredientsFilter(pathName, ingredient, setIngredient, 
     setData(data);
     return data;
   }
-  return false
+  return false;
 }
 
 export async function recommended(pathName, setMeal, setDrink) {
