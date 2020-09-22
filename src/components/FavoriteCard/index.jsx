@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import shareFunctionFood from 'clipboard-copy';
 import { RecipesContext } from '../../context/RecipesContext';
 import shareIcon from '../../images/shareIcon.svg';
-import {removeFavorite } from '../../utils/utilities';
+import { removeFavorite } from '../../utils/utilities';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 
@@ -49,7 +49,6 @@ function render({ liked, setLiked, isMeal, done, setDone }) {
           onClick={() => handleClickDrinkFavorite(setDone)}
         />
       </div>
-      
       <br />
       {done.map((data, index) => (
         <div>
@@ -63,7 +62,7 @@ function render({ liked, setLiked, isMeal, done, setDone }) {
             type="image" data-testid={`${index}-horizontal-share-btn`} alt="Share Icon"
             id="copy"
             onClick={() => shareLinkFood()}
-            src={shareIcon} 
+            src={shareIcon}
           />
           <input
             type="image" onClick={() => removeFavorite(isMeal, data, setLiked)}
@@ -92,7 +91,7 @@ const FavoriteCard = () => {
       const isLiked = keys.some((item) => item.id === id);
       setLiked(isLiked);
     }
-  }, [id, setLiked])
+  }, [id, setLiked]);
 
   if (dataDetail.length === undefined) return <h1>loading...</h1>;
   const filtersKeyOutra = Object.keys(dataDetail).filter(
@@ -119,10 +118,9 @@ const FavoriteCard = () => {
 export default FavoriteCard;
 
 render.propTypes = {
-  dataDetail: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setDone: PropTypes.func.isRequired,
+  done: PropTypes.arrayOf(PropTypes.object).isRequired,
   liked: PropTypes.string.isRequired,
   setLiked: PropTypes.func.isRequired,
   isMeal: PropTypes.string.isRequired,
-  index: PropTypes.string.isRequired,
-  favorites: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
