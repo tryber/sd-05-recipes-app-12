@@ -16,6 +16,8 @@ export const Provider = ({ children }) => {
   const [goat, setGoat] = useState('All');
   const [isMeal, setIsMeal] = useState(true);
   const [liked, setLiked] = useState(false);
+  const [favorite, setFavorite] = useState(false);
+  const [done, setDone] = useState([]);
   const context = {
     ingredient,
     setIngredient,
@@ -41,11 +43,16 @@ export const Provider = ({ children }) => {
     setIsMeal,
     liked,
     setLiked,
+    favorite,
+    setFavorite,
+    done,
+    setDone,
   };
 
   return (
     <RecipesContext.Provider value={context}>
       {children}
+      {console.log(dataDetail)}
     </RecipesContext.Provider>
   );
 };
