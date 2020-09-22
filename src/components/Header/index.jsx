@@ -8,12 +8,14 @@ import './styles.css';
 
 function ProfileContainer() {
   return (
-    <Link to="/perfil">
-      <input
-        className="profile-icon"
-        data-testid="profile-top-btn" type="image" src={profileIcon} alt="user"
-      />
-    </Link>
+    <div classNameheader>
+      <Link to="/perfil">
+        <input
+          className="profile-icon"
+          data-testid="profile-top-btn" type="image" src={profileIcon} alt="user"
+        />
+      </Link>
+    </div>
   );
 }
 
@@ -34,7 +36,7 @@ const Header = () => {
       {(pathName === '/explorar/comidas/area' || pathName === '/comidas' || pathName === '/bebidas') ?
         <div className="header-box">
           <ProfileContainer />
-          <h1 data-testid="page-title" >{title}</h1>
+          <h1 data-testid="page-title" className="header-title" >{title}</h1>
           <input
             type="image"
             className="search-icon"
@@ -44,9 +46,10 @@ const Header = () => {
           />
         </div>
       :
-        <div>
+        <div className="header-box">
           <ProfileContainer />
           <h1 className="header-title" data-testid="page-title" >{title}</h1>
+          <span></span>
         </div>
       }
     </div>
