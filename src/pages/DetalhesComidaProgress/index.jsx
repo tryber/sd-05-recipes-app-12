@@ -15,7 +15,7 @@ function shareLinkFood(id) {
   shareFunctionFood(`http://localhost:3000/comidas/${id}`);
 }
 
-function render({ dataDetail, histories, id, isChecked, isNotChecked, filtersKeyOutra, isMeal, liked, setLiked, inProgress, setInProgress, isDone, setIsDone }) {
+function render({ handleChangeParams, dataDetail, id, filtersKeyOutra, isMeal, liked, setLiked, inProgress,  isDone }) {
   return (
     <div className="recipe-detals-box">
       <img
@@ -41,7 +41,8 @@ function render({ dataDetail, histories, id, isChecked, isNotChecked, filtersKey
         type="image"
         onClick={() => favoriteRecipe(liked, setLiked, dataDetail, isMeal)}
         src={liked ? blackHeartIcon : whiteHeartIcon}
-        data-testid="favorite-btn" alt="White Heart Icon"
+        data-testid="favorite-btn"
+        alt="White Heart Icon"
       />
       <h1 className="recipe-ingredients-title">Ingredients</h1>
       <div className="recipe-ingredients">
@@ -52,8 +53,8 @@ function render({ dataDetail, histories, id, isChecked, isNotChecked, filtersKey
                 <input
                   type="checkbox" checked={inProgress.meals[id].some((item) => item === `meal${index + 1}`)}
                   id={`meal${index + 1}`} className="check-ingredients"
-                  onChange={(e) =>
-                    handleChange(e, id, histories, isChecked, isNotChecked, setInProgress, setIsDone)
+                  onChange={() =>
+                    handleChange(handleChangeParams)
                   }
                 />
                 {dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}
@@ -67,7 +68,12 @@ function render({ dataDetail, histories, id, isChecked, isNotChecked, filtersKey
         <p data-testid="instructions">{dataDetail.strInstructions}</p>
       </div>
       <Link to="/receitas-feitas">
-        <button className="recipe-button" data-testid="finish-recipe-btn" disabled={!isDone} type="button">
+        <button
+          className="recipe-button"
+          data-testid="finish-recipe-btn"
+          disabled={!isDone}
+          type="button"
+        >
           Finalizar Receita
         </button>
       </Link>
@@ -76,7 +82,16 @@ function render({ dataDetail, histories, id, isChecked, isNotChecked, filtersKey
 }
 
 const DetalhesComidaProgress = () => {
-  const { dataDetail, setDataDetail, setIsMeal, isMeal, setLiked, liked, isDone, setIsDone } = useContext(RecipesContext);
+  const {
+    dataDetail,
+    setDataDetail,
+    setIsMeal,
+    isMeal,
+    setLiked,
+    liked,
+    isDone,
+    setIsDone
+  } = useContext(RecipesContext);
   const [inProgress, setInProgress] = useState({});
   const history = useHistory();
   const histories = history;
@@ -84,7 +99,7 @@ const DetalhesComidaProgress = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    const inProgressStorage = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals:{ [id]:[] }, cocktails:{ [id]:[] } };
+    const inProgressStorage = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals: { [id]: [] }, cocktails: { [id]: [] } };
     const storage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
     setInProgress(inProgressStorage);
     const keys = Object.values(storage);
@@ -101,8 +116,10 @@ const DetalhesComidaProgress = () => {
   if (dataDetail.length === 0) return <h1>loading...</h1>;
   const filtersKeyOutra = Object.keys(dataDetail).filter(
     (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
+  const handleChangeParams = { id, histories, isChecked, isNotChecked, setInProgress, setIsDone}
   const params = {
-    dataDetail, histories, id, isChecked, isNotChecked, filtersKeyOutra, isMeal, liked, setLiked, inProgress, setInProgress, isDone, setIsDone
+    dataDetail, histories, id, isChecked, isNotChecked, filtersKeyOutra, isMeal, liked, setLiked, inProgress, setInProgress, isDone, 
+    setIsDone, handleChangeParams,
   };
   return (
     render(params)
@@ -112,8 +129,6 @@ export default DetalhesComidaProgress;
 
 render.propTypes = {
   filtersKeyOutra: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setChecked: PropTypes.func.isRequired,
-  checked: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   histories: PropTypes.arrayOf(PropTypes.object).isRequired,
   dataDetail: PropTypes.arrayOf(PropTypes.object).isRequired,

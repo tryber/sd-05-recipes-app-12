@@ -61,7 +61,7 @@
 
 .recipe-button:disabled {
   align-items: center;
-  background-color: #E1F9F2;
+  background-color: #e1f9f2;
   border: none;
   border-radius: 8px;
   box-shadow: 0 -2px 7px 0 rgba(0, 0, 0, 0.79);
