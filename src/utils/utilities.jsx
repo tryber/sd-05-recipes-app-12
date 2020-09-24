@@ -55,17 +55,17 @@ export function isDisabled(setIsDone) {
   const allInputs = document.querySelectorAll('input[type=checkbox]');
   allInputs.forEach((input) => (input.checked ? (checked += 1) : 0));
   if (checked > 0 && checked === allInputs.length) {
-   return setIsDone(true);
+    return setIsDone(true);
   }
   return setIsDone(false);
 }
 
 export function isChecked(e, id, history, setInProgress, setIsDone) {
-  const storage = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals:{ [id]:[] }, cocktails:{ [id]:[] } };
+  const storage = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals: { [id]: [] }, cocktails: { [id]: [] } };
   const checkInput = document.getElementsByClassName(`${e.target.id}`)[0];
   checkInput.style.textDecoration = 'line-through';
   if (history.location.pathname.includes('comidas')) {
-  storage.meals[id] = [...storage.meals[id], e.target.id];
+    storage.meals[id] = [...storage.meals[id], e.target.id];
   } else if (history.location.pathname.includes('bebidas')) {
     storage.cocktails[id] = [...storage.cocktails[id], e.target.id];
   }
@@ -75,7 +75,7 @@ export function isChecked(e, id, history, setInProgress, setIsDone) {
 }
 
 export function isNotChecked(e, id, history, setInProgress, setIsDone) {
-  const storage = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals:{ [id]:[] }, cocktails:{ [id]:[] } };
+  const storage = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals: { [id]: [] }, cocktails: { [id]: [] } };
   const checkInput = document.getElementsByClassName(`${e.target.id}`)[0];
   checkInput.style.textDecoration = 'none';
   if (history.location.pathname.includes('comidas')) {
@@ -91,7 +91,7 @@ export function isNotChecked(e, id, history, setInProgress, setIsDone) {
 }
 
 export function saveToLocalStorageDrinks(id) {
-  const oldList = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals:{ [id]:[] }, cocktails:{ [id]:[] } };
+  const oldList = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals: { [id]: [] }, cocktails: { [id]: [] } };
   let savedList = {
     cocktails: {},
     meals: {},
@@ -106,7 +106,7 @@ export function saveToLocalStorageDrinks(id) {
 }
 
 export function saveToLocalStorageMeals(id) {
-  const oldList = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals:{ [id]:[] }, cocktails:{ [id]:[] } };
+  const oldList = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals: { [id]: [] }, cocktails: { [id]: [] } };
   let savedList = {
     cocktails: {},
     meals: {},
@@ -129,7 +129,7 @@ export function handleChange(e, id, histories, isChecked, isNotChecked, setInPro
 }
 
 export function recipeInProgress(setInProgress, histories, id) {
-  const storage = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals:{ [id]:[] }, cocktails:{ [id]:[] } };
+  const storage = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals: { [id]: [] }, cocktails: { [id]: [] } };
   if (storage) {
     if (histories.location.pathname.includes('comidas')) {
       const newAttr = Object.keys(storage.meals);
