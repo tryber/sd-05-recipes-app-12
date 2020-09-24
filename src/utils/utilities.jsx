@@ -165,6 +165,7 @@ export function newFavorite(isMeal, dataDetail) {
 export function removeFavorite(isMeal, dataDetail, setLiked) {
   const hasFavorite = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
   let removed;
+  // console.log(dataDetail)
   if (isMeal) {
     setLiked(false);
     removed = hasFavorite.filter((item) => item.id !== dataDetail.idMeal);

@@ -81,7 +81,6 @@ const DetalhesComida = () => {
   useEffect(() => {
     const storage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
     const keys = Object.values(storage);
-    console.log(keys);
     if (!storage) {
       console.error('nada pra mostrar');
     } else if (storage) {
