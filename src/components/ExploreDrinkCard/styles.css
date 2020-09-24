@@ -49,19 +49,19 @@
   background-color: #59dbb7;
   border: none;
   border-radius: 8px;
+  bottom: 0;
   box-shadow: 0 -2px 7px 0 rgba(0, 0, 0, 0.79);
   color: white;
   font-size: 1.1rem;
   margin-top: 10px;
   padding: 15px;
   position: fixed;
-  bottom: 0;
   width: 100%;
 }
 
 .recipe-button:disabled {
   align-items: center;
-  background-color: #E1F9F2;
+  background-color: #e1f9f2;
   border: none;
   border-radius: 8px;
   box-shadow: 0 -2px 7px 0 rgba(0, 0, 0, 0.79);
