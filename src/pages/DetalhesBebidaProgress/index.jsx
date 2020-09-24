@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { RecipesContext } from '../../context/RecipesContext';
 import { isDisabled, hasLocalStorage, handleChange, isChecked, isNotChecked, verify } from '../../utils/utilities';
@@ -20,33 +20,35 @@ function renderProgress({ dataDetail, histories, id, checked, setChecked, filter
       <img src={whiteHeartIcon} data-testid="favorite-btn" alt="White Heart Icon" />
       <h1>Ingredients</h1>
       {filtersKeyOutra.map((filter, index) => (
-        <div key={`drink${index + 1}`}>
-          <label htmlFor={`drink${index + 1}`} className={`drink${index + 1}`} >
-            <input
-              type="checkbox" checked={hasLocalStorage(`drink${index + 1}`, id, histories)}
-              id={`drink${index + 1}`}
-              onChange={(e) =>
+        <div key={filter.strDrink}>
+          <div>
+            <label htmlFor={`drink${index + 1}`} className={`drink${index + 1}`} >
+              <input
+                type="checkbox" checked={hasLocalStorage(`drink${index + 1}`, id, histories)}
+                id={`drink${index + 1}`}
+                onChange={(e) =>
                 handleChange(e, id, checked, setChecked, histories, isChecked, isNotChecked)
               }
-              data-testid={`${index}-ingredient-step`}
-            />
-            {dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}
-          </label>
+                data-testid={`${index}-ingredient-step`}
+              />
+              {dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}
+            </label>
+          </div>
         </div>
       ))}
       <h1>Instructions</h1>
       <p data-testid="instructions">{dataDetail.strInstructions}</p>
-      <button
-        data-testid="finish-recipe-btn" disabled={isDisabled()} type="button"
-      >
-        Finalizar Receita
-      </button>
+      <Link to="/receitas-feitas">
+        <button data-testid="finish-recipe-btn" disabled={isDisabled()} type="button">
+          Finalizar Receita
+        </button>
+      </Link>
     </div>
   );
 }
 
 const DetalhesBebidaProgress = () => {
-  const { dataDetail, setDataDetail, setIsMeal } = useContext(RecipesContext);
+  const { dataDetail, setDataDetail, setIsMeal, isMeal } = useContext(RecipesContext);
   const [checked, setChecked] = useState([]);
   const history = useHistory();
   const histories = history;
@@ -59,7 +61,9 @@ const DetalhesBebidaProgress = () => {
   if (dataDetail.length === 0) return <h1>loading...</h1>;
   const filtersKeyOutra = Object.keys(dataDetail).filter(
     (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
-  const params = { dataDetail, histories, id, checked, setChecked, filtersKeyOutra };
+  const params = {
+    dataDetail, shareIcon, histories, id, checked, setChecked, filtersKeyOutra, isMeal,
+  };
   return (
     renderProgress(params)
   );

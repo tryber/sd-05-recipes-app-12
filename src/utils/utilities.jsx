@@ -12,6 +12,17 @@ export async function verify(pathName, id, setDataDetail, setIsMeal) {
   }
 }
 
+export async function getIngredientsFilter(pathName, ingredient, setIngredient, setData) {
+  if (pathName.match(/comidas/)) {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`);
+    const data = await response.json();
+    setIngredient(ingredient);
+    setData(data);
+    return data;
+  }
+  return false;
+}
+
 export async function recommended(pathName, setMeal, setDrink) {
   if (pathName.match(/comidas/)) {
     const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
@@ -32,7 +43,7 @@ export function hasLocalStorage(str, id, histories) {
       const check = storage.meals[id].some((item) => item === str);
       return check;
     }
-  } else {
+  } else if (storage.cocktails[id]) {
     const check = storage.cocktails[id].some((item) => item === str);
     return check;
   }
