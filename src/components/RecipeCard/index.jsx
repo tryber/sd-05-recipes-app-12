@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { RecipesContext } from '../../context/RecipesContext';
+import loading from '../../images/loader.gif';
 import './styles.css';
 
 const RecipeCard = () => {
@@ -15,7 +16,7 @@ const RecipeCard = () => {
     }
     apiFetch();
   }, [setData]);
-  if (data.meals === undefined) return <h1>Loading...</h1>;
+  if (data.meals === undefined) return <img src={loading} alt="loader" />;
   let test;
   if (data.meals === null) {
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
@@ -29,18 +30,15 @@ const RecipeCard = () => {
     <div className="recipeCard">
       {test.map((meal, index) => (
         <Link to={`/comidas/${meal.idMeal}`} >
-          <div >
-            <div className="eachItem" data-testid={`${index}-recipe-card`} key={meal.idMeal}>
-              <img
-                className="card-img"
-                data-testid={`${index}-card-img`}
-                src={meal.strMealThumb}
-                alt={meal.strMeal}
-                width="70px"
-              />
-              <p data-testid={`${index}-card-name`}>{meal.strMeal}</p>
-
-            </div>
+          <div className="each-item" data-testid={`${index}-recipe-card`} key={meal.idMeal}>
+            <img
+              className="card-img"
+              data-testid={`${index}-card-img`}
+              src={meal.strMealThumb}
+              alt={meal.strMeal}
+              width="70px"
+            />
+            <p data-testid={`${index}-card-name`}>{meal.strMeal}</p>
           </div>
         </Link>
       ))}

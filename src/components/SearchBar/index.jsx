@@ -106,36 +106,45 @@ async function FDC(searchs, filteredText, setData) {
 
 function Inputs({ setText, setSearch, search, filteredText, setData, pathName }) {
   return (
-    <div>
+    <div className="box-search">
       <input
         data-testid="search-input"
+        className="search-input"
         type="text"
         onChange={(e) => setText(e.target.value)}
       />
-      <label htmlFor="ingredient">Ingredient</label>
-      <input
-        type="radio"
-        id="ingredient"
-        name="radioInput"
-        data-testid="ingredient-search-radio"
-        onClick={(e) => setSearch(e.target.id)}
-      />
-      <label htmlFor="name">Name</label>
-      <input
-        type="radio"
-        id="name"
-        name="radioInput"
-        data-testid="name-search-radio"
-        onChange={(e) => setSearch(e.target.id)}
-      />
-      <label htmlFor="firstLetter">First Letter</label>
-      <input
-        type="radio"
-        id="firstLetter"
-        name="radioInput"
-        data-testid="first-letter-search-radio"
-        onChange={(e) => setSearch(e.target.id)}
-      />
+      <div className="search-radio-input">
+        <div className="radio-input">
+          <label className="label-radio-input" htmlFor="ingredient">Ingredient</label>
+          <input
+            type="radio"
+            id="ingredient"
+            name="radioInput"
+            data-testid="ingredient-search-radio"
+            onClick={(e) => setSearch(e.target.id)}
+          />
+        </div>
+        <div className="radio-input">
+          <label className="label-radio-input" htmlFor="name">Name</label>
+          <input
+            type="radio"
+            id="name"
+            name="radioInput"
+            data-testid="name-search-radio"
+            onChange={(e) => setSearch(e.target.id)}
+          />
+        </div>
+        <div className="radio-input">
+          <label className="label-radio-input" htmlFor="firstLetter">First Letter</label>
+          <input
+            type="radio"
+            id="firstLetter"
+            name="radioInput"
+            data-testid="first-letter-search-radio"
+            onChange={(e) => setSearch(e.target.id)}
+          />
+        </div>
+      </div>
       <button
         type="button"
         data-testid="exec-search-btn"

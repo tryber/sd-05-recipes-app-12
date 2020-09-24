@@ -34,7 +34,7 @@ const ExploreRecipeCard = () => {
       {test.map((meal, index) => (
         <Link to={'/comidas'} onClick={() => getIngredientsFilter(pathName, meal.strIngredient, setData)} >
           <div >
-            <div className="eachItem" data-testid={`${index}-ingredient-card`} key={meal.idMeal}>
+            <div className="each-item" data-testid={`${index}-ingredient-card`} key={meal.idMeal}>
               <img
                 className="card-img"
                 data-testid={`${index}-card-img`}

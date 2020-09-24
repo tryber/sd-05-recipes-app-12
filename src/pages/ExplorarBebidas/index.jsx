@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/FooterMenu';
+import './styles.css';
 
 async function Random() {
   const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php');
@@ -20,12 +21,14 @@ export const ExplorarBebidas = () => {
   return (
     <div>
       <Header />
-      <Link to="/explorar/bebidas/ingredientes">
-        <button data-testid="explore-by-ingredient">Por Ingredientes</button>
-      </Link>
-      <Link to={`/bebidas/${id}`}>
-        <button data-testid="explore-surprise">Me Surpreenda!</button>
-      </Link>
+      <div className="explore-box">
+        <Link to="/explorar/bebidas/ingredientes">
+          <button data-testid="explore-by-ingredient">Por Ingredientes</button>
+        </Link>
+        <Link to={`/bebidas/${id}`}>
+          <button data-testid="explore-surprise">Me Surpreenda!</button>
+        </Link>
+      </div>
       <Footer />
     </div>
   );

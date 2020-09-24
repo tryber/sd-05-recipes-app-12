@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Redirect, Link } from 'react-router-dom';
 import { RecipesContext } from '../../context/RecipesContext';
 import { getIngredientsFilter } from '../../utils/utilities';
+import './styles.css';
 
 
 const ExploreDrinkCard = () => {
@@ -37,7 +38,7 @@ const ExploreDrinkCard = () => {
           onClick={() => getIngredientsFilter(pathName, drink.strIngredient1, setData)}
         >
           <div >
-            <div className="eachItem" data-testid={`${index}-ingredient-card`} key={drink.idDrink}>
+            <div className="each-item" data-testid={`${index}-ingredient-card`} key={drink.idDrink}>
               <img
                 className="card-img"
                 data-testid={`${index}-card-img`}

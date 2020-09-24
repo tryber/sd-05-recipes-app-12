@@ -1,6 +1,5 @@
 .bg-login {
-  background: url('../../images/frying-pan3.png') top right no-repeat,
-    url('../../images/backgroundLogin.svg') top right no-repeat;
+  background: url('../../images/frying-pan3.png') top right no-repeat, url('../../images/backgroundLogin.svg') top right no-repeat;
   position: absolute;
   width: 100%;
 }
@@ -13,7 +12,7 @@
   margin-top: 400px;
 }
 
-h1 {
+.box-login-title {
   color: #146354;
 }
 
