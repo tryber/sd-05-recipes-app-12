@@ -9,7 +9,7 @@ const Perfil = () => {
   return (
     <div>
       <Header />
-      <div style={{textAlign:"center"}}>
+      <div style={{ textAlign: 'center' }}>
         { (title) &&
           <h2 data-testid="profile-email">{title.email}</h2>
         }

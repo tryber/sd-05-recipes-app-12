@@ -44,7 +44,7 @@ export const Provider = ({ children }) => {
     setIsMeal,
     liked,
     setLiked,
-    isDone, 
+    isDone,
     setIsDone,
     favorite,
     setFavorite,

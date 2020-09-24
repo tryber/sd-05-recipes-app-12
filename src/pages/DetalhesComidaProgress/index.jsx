@@ -15,17 +15,20 @@ function shareLinkFood(id) {
   shareFunctionFood(`http://localhost:3000/comidas/${id}`);
 }
 
-function render({ handleChangeParams, dataDetail, id, filtersKeyOutra, isMeal, liked, setLiked, inProgress,  isDone }) {
+function render({ handleChangeParams, dataDetail, id, filtersKeyOutra,
+  isMeal, liked, setLiked, inProgress, isDone }) {
   return (
     <div className="recipe-detals-box">
       <img
         className="recipe-photo"
         data-testid="recipe-photo" src={dataDetail.strMealThumb}
         alt={dataDetail.strMeal}
-        />
+      />
       <h1 className="recipe-title" data-testid="recipe-title">{dataDetail.strMeal}</h1>
       <div className="recipe-category-box">
-        <span className="recipe-category" data-testid="recipe-category">{dataDetail.strCategory}</span>
+        <span className="recipe-category" data-testid="recipe-category">
+          {dataDetail.strCategory}
+        </span>
         <span className="recipe-hifen"> - </span>
         <span className="recipe-tags" data-testid="recipe-category">{dataDetail.strTags}</span>
       </div>
@@ -36,7 +39,7 @@ function render({ handleChangeParams, dataDetail, id, filtersKeyOutra, isMeal, l
         onClick={() => shareLinkFood(id)}
         src={shareIcon} data-testid="share-btn" alt="Share Icon"
       />
-       <input
+      <input
         className="like-btn"
         type="image"
         onClick={() => favoriteRecipe(liked, setLiked, dataDetail, isMeal)}
@@ -83,21 +86,13 @@ function render({ handleChangeParams, dataDetail, id, filtersKeyOutra, isMeal, l
 
 const DetalhesComidaProgress = () => {
   const {
-    dataDetail,
-    setDataDetail,
-    setIsMeal,
-    isMeal,
-    setLiked,
-    liked,
-    isDone,
-    setIsDone
+    dataDetail, setDataDetail, setIsMeal, isMeal, setLiked, liked, isDone, setIsDone,
   } = useContext(RecipesContext);
   const [inProgress, setInProgress] = useState({});
   const history = useHistory();
   const histories = history;
   const pathName = history.location.pathname;
   const { id } = useParams();
-
   useEffect(() => {
     const inProgressStorage = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals: { [id]: [] }, cocktails: { [id]: [] } };
     const storage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
@@ -112,24 +107,41 @@ const DetalhesComidaProgress = () => {
     isDisabled(setIsDone);
     verify(pathName, id, setDataDetail, setIsMeal);
   }, [setDataDetail, id, pathName, setIsMeal, setLiked, setInProgress, setIsDone]);
-
   if (dataDetail.length === 0) return <h1>loading...</h1>;
   const filtersKeyOutra = Object.keys(dataDetail).filter(
     (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
-  const handleChangeParams = { id, histories, isChecked, isNotChecked, setInProgress, setIsDone}
-  const params = {
-    dataDetail, histories, id, isChecked, isNotChecked, filtersKeyOutra, isMeal, liked, setLiked, inProgress, setInProgress, isDone, 
-    setIsDone, handleChangeParams,
+  const handleChangeParams = {
+    id, histories, isChecked, isNotChecked, setInProgress, setIsDone,
   };
-  return (
-    render(params)
-  );
+  const params = {
+    dataDetail,
+    histories,
+    id,
+    isChecked,
+    isNotChecked,
+    filtersKeyOutra,
+    isMeal,
+    liked,
+    setLiked,
+    inProgress,
+    setInProgress,
+    isDone,
+    setIsDone,
+    handleChangeParams,
+  };
+  return (render(params));
 };
 export default DetalhesComidaProgress;
 
 render.propTypes = {
   filtersKeyOutra: PropTypes.arrayOf(PropTypes.object).isRequired,
   id: PropTypes.string.isRequired,
-  histories: PropTypes.arrayOf(PropTypes.object).isRequired,
+  // histories: PropTypes.arrayOf(PropTypes.object).isRequired,
   dataDetail: PropTypes.arrayOf(PropTypes.object).isRequired,
+  isDone: PropTypes.arrayOf(PropTypes.object).isRequired,
+  inProgress: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setLiked: PropTypes.func.isRequired,
+  liked: PropTypes.arrayOf(PropTypes.object).isRequired,
+  isMeal: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleChangeParams: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
