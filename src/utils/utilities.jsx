@@ -119,8 +119,11 @@ export function saveToLocalStorageMeals(id) {
     localStorage.setItem('inProgressRecipes', JSON.stringify(savedList));
   }
 }
+
+// const params = { e, id, histories, isChecked, isNotChecked, setInProgress, setIsDone }
+
 // handleChange que utiliza essa função.
-export function handleChange(e, id, histories, isChecked, isNotChecked, setInProgress, setIsDone) {
+export function handleChange(e, id, histories, setInProgress, setIsDone, isChecked, isNotChecked) {
   if (e.target.checked) {
     isChecked(e, id, histories, setInProgress, setIsDone);
   } else {

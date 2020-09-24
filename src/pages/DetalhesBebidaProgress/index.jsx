@@ -18,7 +18,6 @@ function shareLinkDrink(id) {
 function renderProgress({
   dataDetail, histories, id, isChecked, isNotChecked, filtersKeyOutra,
   isMeal, liked, setLiked, inProgress, setInProgress, isDone, setIsDone }) {
-  console.log(inProgress);
   return (
     <div className="recipe-detals-box">
       <img
@@ -74,7 +73,7 @@ function renderProgress({
       </div>
       <Link to="/receitas-feitas">
         <button
-          className="recipe-button" data-testid="finish-recipe-btn" disabled={!isDone} type="button"
+          data-testid="finish-recipe-btn" className="recipe-button" disabled={!isDone} type="button"
         >
           Finalizar Receita
         </button>
@@ -111,17 +110,17 @@ const DetalhesBebidaProgress = () => {
   const filtersKeyOutra = Object.keys(dataDetail).filter(
     (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
   const params = {
-    dataDetail,
-    histories,
-    id,
-    isChecked,
     isNotChecked,
     filtersKeyOutra,
     isMeal,
     liked,
     setLiked,
+    isChecked,
+    id,
+    histories,
     inProgress,
     setInProgress,
+    dataDetail,
     isDone,
     setIsDone,
   };
