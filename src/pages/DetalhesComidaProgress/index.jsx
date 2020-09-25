@@ -3,7 +3,7 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareFunctionFood from 'clipboard-copy';
 import { RecipesContext } from '../../context/RecipesContext';
-import { isDisabled, handleChange, isChecked, isNotChecked, verify, favoriteRecipe } from '../../utils/utilities';
+import { isDisabled, handleChange, verify, favoriteRecipe } from '../../utils/utilities';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
@@ -15,8 +15,9 @@ function shareLinkFood(id) {
   shareFunctionFood(`http://localhost:3000/comidas/${id}`);
 }
 
-function render({ handleChangeParams, dataDetail, id, filtersKeyOutra,
-  isMeal, liked, setLiked, inProgress, isDone }) {
+function render({
+  dataDetail, histories, id, filtersKeyOutra,
+  isMeal, liked, setLiked, inProgress, setInProgress, isDone, setIsDone }) {
   return (
     <div className="recipe-detals-box">
       <img
@@ -56,8 +57,8 @@ function render({ handleChangeParams, dataDetail, id, filtersKeyOutra,
                 <input
                   type="checkbox" checked={inProgress.meals[id].some((item) => item === `meal${index + 1}`)}
                   id={`meal${index + 1}`} className="check-ingredients"
-                  onChange={() =>
-                    handleChange(handleChangeParams)
+                  onChange={(e) =>
+                    handleChange(e, id, histories, setInProgress, setIsDone)
                   }
                 />
                 {dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}
@@ -85,9 +86,8 @@ function render({ handleChangeParams, dataDetail, id, filtersKeyOutra,
 }
 
 const DetalhesComidaProgress = () => {
-  const {
-    dataDetail, setDataDetail, setIsMeal, isMeal, setLiked, liked, isDone, setIsDone,
-  } = useContext(RecipesContext);
+  const { dataDetail, setDataDetail, setIsMeal, isMeal,
+    setLiked, liked, isDone, setIsDone } = useContext(RecipesContext);
   const [inProgress, setInProgress] = useState({});
   const history = useHistory();
   const histories = history;
@@ -110,15 +110,13 @@ const DetalhesComidaProgress = () => {
   if (dataDetail.length === 0) return <h1>loading...</h1>;
   const filtersKeyOutra = Object.keys(dataDetail).filter(
     (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
-  const handleChangeParams = {
+  /* const handleChangeParams = {
     id, histories, isChecked, isNotChecked, setInProgress, setIsDone,
-  };
+  }; */
   const params = {
     dataDetail,
     histories,
     id,
-    isChecked,
-    isNotChecked,
     filtersKeyOutra,
     isMeal,
     liked,
@@ -127,7 +125,7 @@ const DetalhesComidaProgress = () => {
     setInProgress,
     isDone,
     setIsDone,
-    handleChangeParams,
+    // handleChangeParams,
   };
   return (render(params));
 };
@@ -136,12 +134,14 @@ export default DetalhesComidaProgress;
 render.propTypes = {
   filtersKeyOutra: PropTypes.arrayOf(PropTypes.object).isRequired,
   id: PropTypes.string.isRequired,
-  // histories: PropTypes.arrayOf(PropTypes.object).isRequired,
+  histories: PropTypes.arrayOf(PropTypes.object).isRequired,
   dataDetail: PropTypes.arrayOf(PropTypes.object).isRequired,
   isDone: PropTypes.arrayOf(PropTypes.object).isRequired,
   inProgress: PropTypes.arrayOf(PropTypes.object).isRequired,
   setLiked: PropTypes.func.isRequired,
   liked: PropTypes.arrayOf(PropTypes.object).isRequired,
   isMeal: PropTypes.arrayOf(PropTypes.object).isRequired,
-  handleChangeParams: PropTypes.arrayOf(PropTypes.object).isRequired,
+  // handleChangeParams: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setIsDone: PropTypes.func.isRequired,
+  setInProgress: PropTypes.func.isRequired,
 };
