@@ -120,10 +120,8 @@ export function saveToLocalStorageMeals(id) {
   }
 }
 
-// const params = { e, id, histories, isChecked, isNotChecked, setInProgress, setIsDone }
-
 // handleChange que utiliza essa função.
-export function handleChange(e, id, histories, setInProgress, setIsDone, isChecked, isNotChecked) {
+export function handleChange(e, id, histories, isChecked, isNotChecked, setInProgress, setIsDone) {
   if (e.target.checked) {
     isChecked(e, id, histories, setInProgress, setIsDone);
   } else {
