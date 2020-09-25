@@ -16,8 +16,8 @@ function shareLinkFood(id) {
 }
 
 function render({
-  dataDetail, histories, id, filtersKeyOutra,
-  isMeal, liked, setLiked, inProgress, setInProgress, isDone, setIsDone }) {
+  dataDetail, histories, id, setInProgress, isDone, setIsDone,
+  filtersKeyOutra, isMeal, liked, setLiked, inProgress }) {
   return (
     <div className="recipe-detals-box">
       <img
