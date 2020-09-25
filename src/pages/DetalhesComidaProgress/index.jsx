@@ -40,11 +40,11 @@ function render({ handleChangeParams, dataDetail, id, filtersKeyOutra,
         src={shareIcon} data-testid="share-btn" alt="Share Icon"
       />
       <input
-        className="like-btn"
         type="image"
+        className="like-btn"
+        data-testid="favorite-btn"
         onClick={() => favoriteRecipe(liked, setLiked, dataDetail, isMeal)}
         src={liked ? blackHeartIcon : whiteHeartIcon}
-        data-testid="favorite-btn"
         alt="White Heart Icon"
       />
       <h1 className="recipe-ingredients-title">Ingredients</h1>

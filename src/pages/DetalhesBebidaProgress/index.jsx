@@ -41,11 +41,11 @@ function renderProgress({
         src={shareIcon} data-testid="share-btn" alt="Share Icon"
       />
       <input
+        data-testid="favorite-btn" alt="White Heart Icon"
+        onClick={() => favoriteRecipe(liked, setLiked, dataDetail, isMeal)}
         className="like-btn"
         type="image"
-        onClick={() => favoriteRecipe(liked, setLiked, dataDetail, isMeal)}
         src={liked ? blackHeartIcon : whiteHeartIcon}
-        data-testid="favorite-btn" alt="White Heart Icon"
       />
       <h1 className="recipe-ingredients-title">Ingredients</h1>
       <div className="recipe-ingredients">
@@ -94,8 +94,8 @@ const DetalhesBebidaProgress = () => {
   useEffect(() => {
     const inProgressStorage = JSON.parse(localStorage.getItem('inProgressRecipes')) || { meals: { [id]: [] }, cocktails: { [id]: [] } };
     const storage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-    setInProgress(inProgressStorage);
     const keys = Object.values(storage);
+    setInProgress(inProgressStorage);
     if (!storage) {
       console.error('nada pra mostrar');
     } else if (storage) {
