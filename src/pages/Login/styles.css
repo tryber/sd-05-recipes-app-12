@@ -1,0 +1,56 @@
+.bg-login {
+  background: url('../../images/frying-pan3.png') top right no-repeat, url('../../images/backgroundLogin.svg') top right no-repeat;
+  position: absolute;
+  width: 100%;
+}
+
+.box-login {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.3rem;
+  margin-top: 400px;
+}
+
+.box-login-title {
+  color: #146354;
+}
+
+.box-login input {
+  border: 2px solid #fec0a0;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  height: 25px;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  width: 300px;
+}
+
+.box-login span {
+  color: #24997f;
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  margin-top: -20px;
+  text-align: left;
+}
+
+.box-login button {
+  background-color: #fd8061;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1.2rem;
+  height: 30px;
+  width: 315px;
+}
+
+.box-login button:disabled {
+  background-color: #fec0a0;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1.2rem;
+  height: 30px;
+  width: 315px;
+}

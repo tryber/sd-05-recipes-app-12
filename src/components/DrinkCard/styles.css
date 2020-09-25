@@ -1,0 +1,23 @@
+.recipeCard {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.recipeCard a {
+  color: #193c34;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.card-img {
+  border-radius: 50%;
+}
+
+.each-item p {
+  max-width: 25ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -8,26 +8,24 @@ import DetalhesComida from './pages/DetalhesComida';
 import DetalhesBebida from './pages/DetalhesBebida';
 import Perfil from './pages/Profile';
 import Bebidas from './pages/Bebidas';
-import {
-  NotFound,
-  Explorar,
-  ExplorarComidas,
-  ExplorarComidasIngrediente,
-  ExplorarOrigem,
-  ExplorarBebidas,
-  ExplorarBebidasIngrediente,
-} from './pages/Explore';
+import Explorar from './pages/Explore';
+import ExplorarOrigem from './pages/ExplorarOrigem';
+import ExplorarComidas from './pages/ExplorarComidas';
+import ExplorarComidasIngrediente from './pages/ExplorarIngredienteComida';
+import ExplorarBebidas from './pages/ExplorarBebidas';
+import ExplorarBebidasIngrediente from './pages/ExplorarIngredientesBebida';
 import ReceitasFavoritas from './pages/Receitas-Fav';
 import ReceitasFeitas from './pages/Receitas-Feitas';
+import NotFound from './pages/NotFound';
 
 const Routes = () => (
   <Switch>
     <Route exact path="/" component={Login} />
     <Route path="/perfil" component={Perfil} />
-    <Route path="/comidas/:id/progress" component={DetalhesComidaProgress} />
+    <Route path="/comidas/:id/in-progress" component={DetalhesComidaProgress} />
     <Route path="/comidas/:id/" component={DetalhesComida} />
     <Route path="/comidas" component={MainPage} />
-    <Route path="/bebidas/:id/progress" component={DetalhesBebidaProgress} />
+    <Route path="/bebidas/:id/in-progress" component={DetalhesBebidaProgress} />
     <Route path="/bebidas/:id" component={DetalhesBebida} />
     <Route path="/bebidas" component={Bebidas} />
     <Route

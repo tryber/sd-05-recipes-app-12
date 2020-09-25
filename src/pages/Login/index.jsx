@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import './styles.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -18,33 +19,36 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <input
-        data-testid="email-input"
-        type="email"
-        placeholder="Email"
-        onChange={(event) => {
-          setEmail(event.target.value);
-        }}
-      />
-      <input
-        data-testid="password-input"
-        type="password"
-        placeholder="Senha"
-        onChange={(event) => {
-          setPass(event.target.value);
-        }}
-      />
-      <Link to="/comidas" onClick={() => setToken()}>
-        <button
-          type="button"
-          data-testid="login-submit-btn"
-          disabled={Verify()}
-        >
-          Entrar
-        </button>
-      </Link>
+    <div className="bg-login">
+      <div className="box-login">
+        <h1 className="box-login-title">Login</h1>
+        <span>Find your favorite recipes</span>
+        <input
+          data-testid="email-input"
+          type="email"
+          placeholder="Email"
+          onChange={(event) => {
+            setEmail(event.target.value);
+          }}
+        />
+        <input
+          data-testid="password-input"
+          type="password"
+          placeholder="Senha"
+          onChange={(event) => {
+            setPass(event.target.value);
+          }}
+        />
+        <Link to="/comidas" onClick={() => setToken()}>
+          <button
+            type="button"
+            data-testid="login-submit-btn"
+            disabled={Verify()}
+          >
+            Entrar
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };

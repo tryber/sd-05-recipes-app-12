@@ -1,0 +1,15 @@
+.explore-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.explore-box button {
+  background-color: #24997f;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  height: 50px;
+  margin-bottom: 10px;
+  width: 150px;
+}
