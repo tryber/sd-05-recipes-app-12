@@ -3,7 +3,7 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareFunctionFood from 'clipboard-copy';
 import { RecipesContext } from '../../context/RecipesContext';
-import { isDisabled, handleChange, isChecked, isNotChecked, verify, favoriteRecipe } from '../../utils/utilities';
+import { isDisabled, handleChange, verify, favoriteRecipe } from '../../utils/utilities';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
@@ -16,7 +16,7 @@ function shareLinkDrink(id) {
 }
 
 function renderProgress({
-  dataDetail, histories, id, isChecked, isNotChecked, filtersKeyOutra,
+  dataDetail, histories, id, filtersKeyOutra,
   isMeal, liked, setLiked, inProgress, setInProgress, isDone, setIsDone }) {
   return (
     <div className="recipe-detals-box">
@@ -57,8 +57,7 @@ function renderProgress({
                   type="checkbox" checked={inProgress.cocktails[id].some((item) => item === `drink${index + 1}`)}
                   id={`drink${index + 1}`} className="check-ingredients"
                   onChange={(e) =>
-                    handleChange(e, id, histories, isChecked, isNotChecked, setInProgress,
-                      setIsDone)
+                    handleChange(e, id, histories, setInProgress, setIsDone)
                   }
                 />
                 {dataDetail[filter]} - {dataDetail[`strMeasure${index + 1}`]}
@@ -110,12 +109,10 @@ const DetalhesBebidaProgress = () => {
   const filtersKeyOutra = Object.keys(dataDetail).filter(
     (key) => key.includes('strIngredient') && dataDetail[key] !== null && dataDetail[key] !== '');
   const params = {
-    isNotChecked,
     filtersKeyOutra,
     isMeal,
     liked,
     setLiked,
-    isChecked,
     id,
     histories,
     inProgress,
@@ -137,8 +134,6 @@ renderProgress.propTypes = {
   id: PropTypes.string.isRequired,
   histories: PropTypes.arrayOf(PropTypes.object).isRequired,
   dataDetail: PropTypes.arrayOf(PropTypes.object).isRequired,
-  isChecked: PropTypes.arrayOf(PropTypes.object).isRequired,
-  isNotChecked: PropTypes.arrayOf(PropTypes.object).isRequired,
   isMeal: PropTypes.arrayOf(PropTypes.object).isRequired,
   liked: PropTypes.arrayOf(PropTypes.object).isRequired,
   setLiked: PropTypes.func.isRequired,
